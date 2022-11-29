@@ -2,6 +2,45 @@
 {% load static %}
 {% block content %}
 
-<p>This is the index</p>
+
+
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+ 
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css" integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="anonymous">
+    <title>{% block title %} {% endblock %} </title>
+  </head>
+  <body style = "background-image: url('/static/img/food.jpg'); background-size: cover;">
+
+    <!--<video autoplay muted loop id="myVideo">
+        <source src="/static/img/video.mp4" type="video/mp4">
+      </video>
+    -->
+
+    <nav class="navbar navbar-expand-lg navbar-light bg-light" style ='background-color: transparent !important; display: block;'>
+        
+        <div>
+            <div style = 'width: 60%; float: left;'>
+                <a class="navbar-brand" href={% url 'daily'%} style='font-weight: bold; font-size: 20px; color: white;' >Kidney Health</a>
+            </div>
+            <div style='float:right !important; width 30%;'>
+                <a class="navbar-brand" href={% url 'login'%} style='color: white;' >Login</a>
+            </div>
+        </div>
+
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+      
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul class="navbar-nav mr-auto">
+    </nav>
+
+<h1> login functionality here</h1>
+</body>
 
 {% endblock %}
+
