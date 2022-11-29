@@ -1,7 +1,5 @@
 from django.urls import path
-from .views import dailyPageView, indexPageView, weeklyPageView, monthlyPageView, searchResultsPageView
-from .views import viewUserInfoPageView, addLabsPageView,accountCreationPageView,deleteUserPageView
-from .views import errorPageView, loginPageView, searchPageView, updateUserInfoPageView, viewLabsPageView
+from tracking.views import dailyPageView, indexPageView, weeklyPageView, monthlyPageView, searchResultsPageView, viewUserInfoPageView, addLabsPageView,accountCreationPageView,deleteUserPageView, errorPageView, loginPageView, searchPageView, updateUserInfoPageView, viewLabsPageView
 
 urlpatterns = [
     path('daily/', dailyPageView, name = 'daily'),
@@ -12,7 +10,6 @@ urlpatterns = [
     path('createAccount/', accountCreationPageView, name = 'createAccount'),
     path('deleteUser/', deleteUserPageView, name = 'deleteUser'),
     path('error/', errorPageView, name = 'error'),
-    path('login/', loginPageView, name = 'login'),
     path('search/', searchPageView, name = 'search'),
     path('updateUserInfo/', updateUserInfoPageView, name = 'updateUserInfo'),
     path('viewLabs/', viewLabsPageView, name = 'viewLabs'),

@@ -44,9 +44,12 @@
         </div>
     </nav>
     <div class = "container">
-
+      {% if user.is_authenticated %}
         {% block content %}
         {% endblock %}
+      {% else %}
+        <a href="{% url 'login' %}">Login</a>
+      {% endif %}
     </div>
     <!-- Optional JavaScript; choose one of the two! -->
  
