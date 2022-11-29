@@ -1,3 +1,4 @@
+{% load static %}
 <!doctype html>
 <html lang="en">
   <head>
@@ -7,12 +8,12 @@
  
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css" integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="anonymous">
- 
+    <link href="{% static 'css/style.css' %}" rel="stylesheet" />
     <title>{% block title %} {% endblock %} </title>
   </head>
   <body>
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-        <a class="navbar-brand" href="#">Kidney Health</a>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <a class="navbar-brand" href="{% url 'daily' %}" >Kidney Health</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
         </button>
@@ -26,22 +27,23 @@
               <a class="nav-link dropdown-toggle" href="{% url 'daily' %}" role="button" data-toggle="dropdown" aria-expanded="false">
                 Progress
               </a>
-              <div class="dropdown-menu">
+              <!--<div class="dropdown-menu">
                 <a class="dropdown-item" href="{% url 'daily' %}">Daily</a>
                 <a class="dropdown-item" href="{% url 'weekly' %}">Weekly</a>
-                <div class="dropdown-divider"></div>
                 <a class="dropdown-item" href="{% url 'monthly' %}">Monthly</a>
-              </div>
+              </div>-->
             </li>
           </ul>
-          <form class="form-inline my-2 my-lg-0">
-            <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-            <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-          </form>
           
-          <a class="navbar-brand" href="{% url 'userInfo' %}">
+          <a class="nav-link dropdown-toggle" href="{% url 'userInfo' %}" role="button" data-toggle="dropdown" aria-expanded="false">
             <img src="https://www.vhv.rs/dpng/d/509-5096621_login-register-vector-user-icon-png-transparent-png.png" width="30" height="30" alt="">
           </a>
+          <div class="dropdown-menu" style = "float: right;">
+            <a class="dropdown-item" href="{% url 'userInfo' %}">My Info</a>
+            <a class="dropdown-item" href="{% url 'viewLabs' %}">My Past Labs</a>
+            <a class="dropdown-item" href="{% url 'addLabs' %}">Submit Lab</a>
+          </div>
+           
         
         </div>
       </nav>
