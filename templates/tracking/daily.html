@@ -10,6 +10,20 @@
     {% block title %} Daily Progress {% endblock %}
 </head>
 <body>
+
+    <ul class="nav justify-content-center">
+        <li class="nav-item">
+          <a class="nav-link active" aria-current="page" href={%url 'daily' %}>Today</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href={% url 'weekly' %}>Weekly</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href={% url 'monthly' %}>Monthly</a>
+        </li>
+
+      </ul>
+
 <h1> daily </h1>
 <body>
     
