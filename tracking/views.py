@@ -69,3 +69,6 @@ def viewLabsPageView(request):
 
 def addLabsPageView(request):
     return render(request, 'tracking/addLabs.html')
+
+def errorPageView(request):
+    return render(request, 'tracking/error.html')
