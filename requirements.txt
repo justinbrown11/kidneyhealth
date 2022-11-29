@@ -1,0 +1,5 @@
+Django
+requests
+psycopg2
+pillow
+django-environ

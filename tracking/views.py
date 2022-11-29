@@ -13,3 +13,30 @@ def weeklyPageView(request):
 
 def monthlyPageView(request):
     return render(request,'tracking/monthly.html')
+
+def loginPageView(request):
+    return render(request,'tracking/login.html')
+
+def accountCreationPageView(request):
+    return render(request, 'tracking/createAccount.html')
+
+def viewUserInfoPageView(request):
+    return render(request, 'tracking/userInfo.html')
+
+def updateUserInfoPageView(request):
+    return render(request, 'tracking/updateUserInfo.html')
+
+def deleteUserPageView(request):
+    return render(request, 'tracking/deleteUser.html')
+
+def searchPageView(request):
+    return render(request, 'tracking/search.html')
+
+def searchPageView(request):
+    return render(request, 'tracking/search.html')
+
+def viewLabsPageView(request):
+    return render(request, 'tracking/viewLabs.html')
+
+def addLabsPageView(request):
+    return render(request, 'tracking/addLabs.html')
