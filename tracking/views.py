@@ -32,9 +32,6 @@ def deleteUserPageView(request):
 def searchPageView(request):
     return render(request, 'tracking/search.html')
 
-def searchPageView(request):
-    return render(request, 'tracking/search.html')
-
 def viewLabsPageView(request):
     return render(request, 'tracking/viewLabs.html')
 
