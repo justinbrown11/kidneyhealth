@@ -11,6 +11,7 @@
     <form name="form" method="post" action="{% url 'viewLabs' %}">
       <fieldset style="width: 0px">
         <br />
+        {% csrf_token %}
         <label for="potassium">Potassium Level:</label>
         <input type="number" name="potassium" id="potassium" />
         <br /><br />
