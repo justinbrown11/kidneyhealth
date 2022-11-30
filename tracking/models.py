@@ -40,13 +40,13 @@ class Profile(models.Model):
 class Lab(models.Model):
     user_ID = models.ForeignKey(User, on_delete=models.CASCADE)
     lab_date = models.DateField(default=date.today, blank=True)
-    blood_pressure = models.DecimalField(max_digits=3, decimal_places=2)
-    potassium_level = models.DecimalField(max_digits=3, decimal_places=2)
-    phosphorous_level = models.DecimalField(max_digits=3, decimal_places=2)
-    sodium_level = models.DecimalField(max_digits=3, decimal_places=2)
-    creatinine_level = models.DecimalField(max_digits=3, decimal_places=2)
-    albumin_level = models.DecimalField(max_digits=3, decimal_places=2)
-    blood_sugar_level = models.DecimalField(max_digits=3, decimal_places=2)
+    blood_pressure = models.DecimalField(max_digits=5, decimal_places=2)
+    potassium_level = models.DecimalField(max_digits=5, decimal_places=2)
+    phosphorous_level = models.DecimalField(max_digits=5, decimal_places=2)
+    sodium_level = models.DecimalField(max_digits=5, decimal_places=2)
+    creatinine_level = models.DecimalField(max_digits=5, decimal_places=2)
+    albumin_level = models.DecimalField(max_digits=5, decimal_places=2)
+    blood_sugar_level = models.DecimalField(max_digits=5, decimal_places=2)
 
     def __str__(self) -> str:
         return self.date
