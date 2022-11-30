@@ -9,8 +9,13 @@
     {% block title %} search results {% endblock %}
 </head>
 <body>
+
+    <form action=''>
     {% for food in foods %}
-        <p>{{ food.description }}</p>
+        <label> {{ food.description }} </label>
+        <input name="food" value = f"{{ food.fcdId }},{{ food.description }}" type ='radio'>
     {% endfor %}
+        <button type='submit'>Save Food</button>
+    <form>
 </body>
 </html>

@@ -10,7 +10,11 @@
     {% block title %} search {% endblock %}
 </head>
 <body>
-<h1> search </h1>
+    <form action="{% url 'searchFoodQuery'%}">
+            <label> Search Food Name: </label>
+            <input name="query" type ='text'>
+            <button type='submit'>Search</button>
+        <form>
 <body>
     
 {% endblock %}

@@ -72,3 +72,6 @@ def addLabsPageView(request):
 
 def errorPageView(request):
     return render(request, 'tracking/error.html')
+
+def tipsPageView(request):
+    return render(request, 'tracking/tips.html')
