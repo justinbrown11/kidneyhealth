@@ -1,4 +1,4 @@
-{% extends 'base.html' %} {% load static %} {% block content %}
+{% extends 'base.html' %} {% load crispy_forms_tags %} {% block content %}
 
 <html lang="en">
   <head>
@@ -11,77 +11,75 @@
     <h4>Add Data</h4>
     <hr />
     <form method="POST">
-      {% csrf_token %} {{ form }}
+      {% csrf_token %} {{ form|crispy }}
       <input class="btn btn-success btn-block" type="submit" value="Add" />
     </form>
   </div>
   <body>
     <canvas id="myChart" width="800" height="450"></canvas>
     <script>
-      const ctx = document.getElementById("myChart").getContext("2d");
-      const myChart = new Chart(ctx, {
-        type: "line",
-        data: {
-          labels: [{% for data in data %} '{{data.lab_date}}', {% endfor %}],
-          datasets: [
-            {
-              label: "Potassium Level Trends",
-              data: [{% for data in data %} {{data.potassium_level}}, {% endfor %}],
-              borderColor: "rgba(255, 99, 132, 0.5)",
-              pointBackgroundColor: "rgba(255, 99, 132, 1)",
-            },
-            {
-              label: "Phosphorus Level Trends",
-              data: [{% for data in data %} {{data.phosphorous_level}}, {% endfor %}],
-              borderColor: "rgba(54, 162, 235, 0.5)",
-              pointBackgroundColor: "rgba(54, 162, 235, 1)",
-            },
-            {
-              label: "Sodium Level Trends",
-              data: [{% for data in data %} {{data.sodium_level}}, {% endfor %}],
-              borderColor: "rgba(255, 206, 86, 0.5)",
-              pointBackgroundColor: "rgba(255, 206, 86, 1)",
-            },
-            {
-              label: "Creatinine Level Trends",
-              data: [{% for data in data %} {{data.creatinine_level}}, {% endfor %}],
-              borderColor: "rgba(75, 192, 192, 0.5)",
-              pointBackgroundColor: "rgba(75, 192, 192, 1)",
-            },
-            {
-              label: "Albumin Level Trends",
-              data: [{% for data in data %} {{data.albumin_level}}, {% endfor %}],
-              borderColor: "rgba(153, 102, 255, 0.5)",
-              pointBackgroundColor: "rgba(153, 102, 255, 1)",
-            },
-            {
-              label: "Blood Sugar Level Trends",
-              data: [{% for data in data %} {{data.blood_sugar_level}}, {% endfor %}],
-              borderColor: "rgba(255, 159, 64, 0.5)",
-              pointBackgroundColor: "rgba(255, 159, 64, 1)",
-            },
-          ],
-        },
-        options: {
-          scales: {
-            yAxes: [
-              {
-                ticks: {
-                  min: 0,
+          const ctx = document.getElementById("myChart").getContext("2d");
+          const myChart = new Chart(ctx, {
+            type: "line",
+            data: {
+              labels: [{% for data in data %} '{{data.lab_date}}', {% endfor %}],
+              datasets: [
+                {
+                  label: "Potassium Level Trends",
+                  data: [{% for data in data %} {{data.potassium_level}}, {% endfor %}],
+                  borderColor: "rgba(255, 99, 132, 0.5)",
+                  pointBackgroundColor: "rgba(255, 99, 132, 1)",
                 },
+                {
+                  label: "Phosphorus Level Trends",
+                  data: [{% for data in data %} {{data.phosphorous_level}}, {% endfor %}],
+                  borderColor: "rgba(54, 162, 235, 0.5)",
+                  pointBackgroundColor: "rgba(54, 162, 235, 1)",
+                },
+                {
+                  label: "Sodium Level Trends",
+                  data: [{% for data in data %} {{data.sodium_level}}, {% endfor %}],
+                  borderColor: "rgba(255, 206, 86, 0.5)",
+                  pointBackgroundColor: "rgba(255, 206, 86, 1)",
+                },
+                {
+                  label: "Creatinine Level Trends",
+                  data: [{% for data in data %} {{data.creatinine_level}}, {% endfor %}],
+                  borderColor: "rgba(75, 192, 192, 0.5)",
+                  pointBackgroundColor: "rgba(75, 192, 192, 1)",
+                },
+                {
+                  label: "Albumin Level Trends",
+                  data: [{% for data in data %} {{data.albumin_level}}, {% endfor %}],
+                  borderColor: "rgba(153, 102, 255, 0.5)",
+                  pointBackgroundColor: "rgba(153, 102, 255, 1)",
+                },
+                {
+                  label: "Blood Sugar Level Trends",
+                  data: [{% for data in data %} {{data.blood_sugar_level}}, {% endfor %}],
+                  borderColor: "rgba(255, 159, 64, 0.5)",
+                  pointBackgroundColor: "rgba(255, 159, 64, 1)",
+                },
+              ],
+            },
+            options: {
+              scales: {
+                yAxes: [
+                  {
+                    ticks: {
+                      min: 0,
+                    },
+                  },
+                ],
               },
-            ],
-          },
-        },
-      });
+            },
+          });
+          document.getElementById("id_user_ID").style.display = "none";
+      var datetime = document.getElementById("id_lab_date");
+      datetime.setAttribute("type", "date");
     </script>
     <body>
       {% endblock %}
     </body>
   </body>
 </html>
-<script>
-  document.getElementById("id_user_ID").style.display = "none";
-  var datetime = document.getElementById("id_lab_date");
-  datetime.setAttribute("type", "date");
-</script>
