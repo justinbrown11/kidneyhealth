@@ -143,6 +143,6 @@ STATICFILE_DIRS = [os.path.join(BASE_DIR, 'kidneyhealth/static')]
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-LOGIN_REDIRECT_URL = "/"
+LOGIN_REDIRECT_URL = "/daily"
 
 CRISPY_TEMPLATE_PACK = 'bootstrap4'

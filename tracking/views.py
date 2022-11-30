@@ -48,9 +48,6 @@ def weeklyPageView(request):
 def monthlyPageView(request):
     return render(request, 'tracking/monthly.html')
 
-def loginPageView(request):
-    return render(request, 'tracking/login.html')
-
 def accountCreationPageView(request):
     return render(request, 'tracking/createAccount.html')
 
