@@ -89,7 +89,10 @@
         {% block content %} 
         {% endblock %} 
       {% else%}
-      <a href="{% url 'login' %}">Login</a>
+        <script>
+          let url = "/login";
+          window.location.href = url;
+        </script>
       {% endif %}
     </div>
     <!-- Optional JavaScript; choose one of the two! -->
