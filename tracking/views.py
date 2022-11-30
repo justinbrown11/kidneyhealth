@@ -24,10 +24,25 @@ def dailyPageView(request):
 
     # Set water level
     context = {
-        "currentWaterLevel": float(today[0]['water_intake_liters'])
+        "currentWaterLevel": float(today[0]['water_intake_liters'] if len(today) > 0 else 0)
     }
 
     return render(request, 'tracking/daily.html', context)
+
+
+def updateWaterLevel(request):
+
+    # Grab body from request
+    body = dict(request.POST.items())
+
+    # Grab today's entry for the user
+    today = DailyEntry.objects.filter(entry_date=date.today(), user__id=request.user.id)[0]
+
+    # Update water level
+    today.water_intake_liters = float(body['water'])
+    today.save()
+
+    return redirect('/daily')
 
 def searchResultsPageView(request):
     """
@@ -152,8 +167,6 @@ def saveCustomFood(request):
     try:
         # Grab body from request
         body = dict(request.POST.items())
-
-        print(body)
 
         # Add new food        
         newFood = Food(

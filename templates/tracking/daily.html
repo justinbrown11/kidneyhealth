@@ -55,14 +55,14 @@
       <h5>Update Today's Water</h5>
       <br>
       <div style='display: inline;'>
-              <form action=''>
+              <form action="{% url 'updateWater' %}" method='POST'>
+                {% csrf_token %}
                   <label> Enter water intake in liters:</label>
                   <br>
                   <input name="water" step='0.01' type = 'number' value={{ currentWaterLevel }}>
                   <br><br>
                   <button type ='submit' class = "button-17"> Submit </button>
               </form>
-
     </div>
       <br><br>
       <div>
