@@ -10,7 +10,33 @@
     <h4>Add Data</h4>
     <hr />
     <form method="POST">
-      {% csrf_token %} {{ form|crispy }}
+      {% csrf_token %}
+      {{ form.user|as_crispy_field }}
+      <div class="form-row">
+        <div class="form-group col-md-2 mb-0">
+          {{ form.lab_date|as_crispy_field }}
+        </div>
+        <div class="form-group col-md-2 mb-0">
+          {{ form.blood_pressure|as_crispy_field }}
+        </div>
+        <div class="form-group col-md-2 mb-0">
+          {{ form.potassium_level|as_crispy_field }}
+        </div>
+        <div class="form-group col-md-2 mb-0">
+          {{ form.phosphorous_level|as_crispy_field }}
+        </div>
+        <div class="form-group col-md-2 mb-0">
+          {{ form.sodium_level|as_crispy_field }}
+        </div>
+        <div class="form-group col-md-2 mb-0">
+          {{ form.creatinine_level|as_crispy_field }}
+        </div>
+        <div class="form-group col-md-2 mb-0">
+          {{ form.albumin_level|as_crispy_field }}
+        </div>
+        <div class="form-group col-md-2 mb-0">
+          {{ form.blood_sugar_level|as_crispy_field }}
+        </div>
       <input class="btn btn-success btn-block" type="submit" value="Add" />
     </form>
   </div>
@@ -77,6 +103,7 @@
       var datetime = document.getElementById("id_lab_date");
       datetime.setAttribute("type", "date");
     </script>
+    <br />
     <body>
       {% endblock %}
     </body>
