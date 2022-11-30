@@ -3,12 +3,12 @@
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
- 
+    <link href="{% static 'css/style.css' %}" rel="stylesheet"/>
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css" integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="anonymous">
     <title>{% block title %} {% endblock %} </title>
   </head>
-  <body style = "background-image: url('/static/img/food.jpg'); background-size: cover;">
+  <body style = "background-image: url('/static/img/betterfood.png'); background-size: cover;">
 
     <!--<video autoplay muted loop id="myVideo">
         <source src="/static/img/video.mp4" type="video/mp4">
@@ -36,6 +36,6 @@
     <div style="width: 33%; margin-left: 150px; margin-top: 200px;">
     <h1 style="color: white;font-size: 50px; font-weight: bold;">TRACK YOUR WAY TO KIDNEY HEALTH</h1>
     <p style = 'color: white; font-weight:bold'> Our mission is to help you achieve and maintain kidney health through diet tracking. </p>
+    <a href={% url 'login' %}><button class="button-17" role="button" >Login</button></a>
     </div>
 </body>
-
