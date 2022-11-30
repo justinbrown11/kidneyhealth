@@ -176,7 +176,7 @@ def weeklyPageView(request):
 def monthlyPageView(request):
     return render(request, 'tracking/monthly.html')
 
-def accountCreationPageView(request):
+def register(request):
     if request.method == 'POST':
         form = ExtendedUserCreationForm(request.POST)
         profile_form = ProfileForm(request.POST)
@@ -187,21 +187,21 @@ def accountCreationPageView(request):
             profile = profile_form.save(commit=False)
             profile.user = user
 
-            profile.save
+            profile.save()
 
-            username = form.cleaned_data('username')
-            password = form.cleaned_data('password1')
+            username = form.cleaned_data.get('username')
+            password = form.cleaned_data.get('password1')
             user = authenticate(username=username, password=password)
             login(request, user)
 
-            return redirect('')
+            return redirect('/daily')
 
-        else: 
-            form = ExtendedUserCreationForm()
-            profile_form = ProfileForm()
+    else: 
+        form = ExtendedUserCreationForm()
+        profile_form = ProfileForm()
 
-        context = {'form' : form, 'profile_form' : profile_form}
-        return render(request, 'tracking/createAccount.html', context)
+    context = {'form' : form, 'profile_form' : profile_form}
+    return render(request, 'tracking/register.html', context)
 
 def viewUserInfoPageView(request):
     return render(request, 'tracking/userInfo.html')
