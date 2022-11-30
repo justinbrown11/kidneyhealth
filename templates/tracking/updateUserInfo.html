@@ -7,8 +7,12 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="{% static 'css/style.css' %}" rel="stylesheet" />
     {% block title %} user info {% endblock %}
 </head>
+<div
+      style="width: 20%; margin: auto; text-align: center; padding-top: 40px"
+    >
 <body>
     <body>
         <p>
@@ -48,14 +52,6 @@
                   value="{{user.profile.phone}}"
                 />
                 <br /><br />
-                <label for="birth_date">Birthdate:</label>
-                <input
-                  type="date"
-                  name="birth_date"
-                  id="birth_date"
-                  value="{{user.profile.birth_date}}"
-                />
-                <br /><br />
                 <label for="weight">Weight:</label>
                 <input
                   type="number"
@@ -72,37 +68,14 @@
                   value="{{user.profile.height}}"
                 />
                 <br /><br />
-                <label for="comorbidity">Comorbidity:</label>
-                <input
-                  type="text"
-                  name="comorbidity"
-                  id="comorbidity"
-                  value="{{user.profile.comorbidity_ID}}"
-                />
-                <br /><br />
-                <label for="race">Race:</label>
-                <input
-                  type="text"
-                  name="race"
-                  id="race"
-                  value="{{user.profile.race_ID}}"
-                />
-                <br /><br />
-                <label for="height">Gender:</label>
-                <input
-                  type="text"
-                  name="gender"
-                  id="gender"
-                  value="{{user.profile.gender_ID}}"
-                />
-                <br /><br />
               
-                <button type="submit">Update</button>
+                <button class="button-17" style="margin: 10px" type="submit">Update</button>
               </form>
         </p>
     
           <body>
 <body>
+</div>
     
 {% endblock %}
 
