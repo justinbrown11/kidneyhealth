@@ -1,5 +1,6 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, login
+from django.contrib.auth.models import User
 from .models import Lab, Food, DailyEntry, Profile
 from .forms import LabForm, ExtendedUserCreationForm, ProfileForm
 import requests
@@ -8,9 +9,6 @@ from datetime import date
 
 # Set env
 env = environ.Env()
-
-# Import functions
-from .functions.searchFood import searchFood
 
 # Create your views here.
 
@@ -84,19 +82,14 @@ def searchFoodResultsPageView(request):
         # Grab query param from request
         query = request.GET.__getitem__("query")
 
-        # Search food
-        data = searchFood(query)
-
-        # Check for error
-        if (data['result'] == 1):
-            raise Exception("Error occured searching food")
+        
 
         # Set context
         context = {
-            "foods": data['data']['foods']
+            "foods": data['foods']
         }
 
-        return render(request, 'tracking/searchResults.html', context)
+        return render(request, 'tracking/foodApiSearchResults.html', context)
 
     except Exception as e:
         # Log error
@@ -141,8 +134,6 @@ def saveAPIFood(request):
                 elif (nutrient['nutrient']['name'] == 'Sodium, Na'):
                     sodium = float(nutrient['amount'])
 
-            print(protein,phosphorus,potassium,sodium)
-
             # Add new food        
             newFood = Food(
                 food_description=outcome['description'], 
@@ -175,6 +166,9 @@ def saveAPIFood(request):
             # Add new food        
             newFood = Food(
                 food_description=outcome['description'], 
+                brand_name='', 
+                serving_size=0, 
+                serving_size_unit='',
                 protein_g=protein,
                 phosphorus_mg=phosphorus,
                 potassium_mg=potassium,
@@ -263,23 +257,29 @@ def viewUserInfoPageView(request):
 
 def updateUserInfoPageView(request):
     if request.method == 'POST':
-        user = request.POST['user']
-        user = Profile.objects.get(user=user)
 
-        user.email = request.POST['email']
-        user.first_name = request.POST['first_name']
-        user.last_name = request.POST['last_name']
-        user.profile.phone = request.POST['first_name']
-        user.profile.birth_date = request.POST['birthdate']
-        user.profile.weight = request.POST['weight']
-        user.profile.height = request.POST['height']
-        user.profile.comorbidity_ID = request.POST['comorbidity']
-        user.profile.race_ID = request.POST['race']
-        user.profile.gender_ID = request.POST['gender']
+        # Grab body from request
+        body = dict(request.POST.items())
+
+        # Grab today's entry for the user
+        user = User.objects.get(id=request.user.id)
+        profile = Profile.objects.get(user__id=request.user.id)
+
+        user.email = body['email']
+        user.first_name = body['first_name']
+        user.last_name = body['last_name']
+        profile.phone = body['phone']
+        profile.birth_date = body['birth_date']
+        profile.weight = float(body['weight'])
+        profile.height = float(body['height'])
 
         user.save()
+        profile.save()
 
-    return render(request, 'tracking/updateUserInfo.html')
+        return redirect('/userInfo')
+
+    else:
+        return render(request, 'tracking/updateUserInfo.html')
 
 def deleteUserPageView(request):
     return render(request, 'tracking/deleteUser.html')

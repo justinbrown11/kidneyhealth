@@ -12,7 +12,7 @@
 <body>
     <body>
         <p>
-            <form name="form" , method="post" action="{% url 'userInfo' %}">
+            <form name="form" , method="post" action="{% url 'updateUserInfo' %}">
                 {% csrf_token %}
                 <input type="hidden" id="user" , name="user" value="{{user}}" />
                 <label for="email">Email: </label>
@@ -48,11 +48,11 @@
                   value="{{user.profile.phone}}"
                 />
                 <br /><br />
-                <label for="birthdate">Birthdate:</label>
+                <label for="birth_date">Birthdate:</label>
                 <input
-                  type="datetime"
-                  name="birthdate"
-                  id="birthdate"
+                  type="date"
+                  name="birth_date"
+                  id="birth_date"
                   value="{{user.profile.birth_date}}"
                 />
                 <br /><br />

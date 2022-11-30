@@ -19,9 +19,9 @@
         <h3>Birthdate: {{user.profile.birth_date}}</h3>
         <h3>Weight: {{user.profile.weight}}</h3>
         <h3>Height: {{user.profile.height}}</h3>
-        <h3>Comorbidity: {{user.profile.comorbidity_ID}}</h3>
-        <h3>Race: {{user.profile.race_ID}}</h3>
-        <h3>Gender: {{user.profile.gender_ID}}</h3>
+        <h3>Comorbidity: {{user.profile.comorbidity}}</h3>
+        <h3>Race: {{user.profile.race}}</h3>
+        <h3>Gender: {{user.profile.gender}}</h3>
         {% endif %}
     </p>
     <a href={% url 'updateUserInfo' %}> Update Account Info
