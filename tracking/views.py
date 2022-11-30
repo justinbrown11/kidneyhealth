@@ -181,14 +181,27 @@ def accountCreationPageView(request):
         form = ExtendedUserCreationForm(request.POST)
         profile_form = ProfileForm(request.POST)
 
-        if form.is_valid():
-            form.save()
+        if form.is_valid() and profile_form.is_valid():
+            user = form.save()
+
+            profile = profile_form.save(commit=False)
+            profile.user = user
+
+            profile.save
 
             username = form.cleaned_data('username')
             password = form.cleaned_data('password1')
             user = authenticate(username=username, password=password)
             login(request, user)
-        return render(request, 'tracking/createAccount.html')
+
+            return redirect('')
+
+        else: 
+            form = ExtendedUserCreationForm()
+            profile_form = ProfileForm()
+
+        context = {'form' : form, 'profile_form' : profile_form}
+        return render(request, 'tracking/createAccount.html', context)
 
 def viewUserInfoPageView(request):
     return render(request, 'tracking/userInfo.html')
