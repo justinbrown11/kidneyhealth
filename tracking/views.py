@@ -1,5 +1,6 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from .models import Lab
+from .forms import LabForm
 
 # Import functions
 from .functions.searchFood import searchFood
@@ -67,9 +68,18 @@ def searchPageView(request):
 
 def viewLabsPageView(request):
     data = Lab.objects.all()
+    if request.method == 'POST':
+        form = LabForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('/viewLabs')
+    else:
+        form = LabForm()
     context = {
         'data': data,
+        'form': form,
     }
+
     return render(request, 'tracking/viewLabs.html', context)
 
 def addLabsPageView(request):
