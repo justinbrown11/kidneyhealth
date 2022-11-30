@@ -7,10 +7,12 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="{% static 'css/rings.css' %}" rel="stylesheet" />
+    <script src="{% static 'js/rings.js' %}"></script>
     {% block title %} Daily Progress {% endblock %}
 </head>
 <body>
-
+  <h1> daily </h1>
     <ul class="nav justify-content-center">
         <li class="nav-item">
           <a class="nav-link active" aria-current="page" href={%url 'daily' %}>Today</a>
@@ -24,7 +26,150 @@
 
       </ul>
 
-<h1> daily </h1>
+      <div id="SodiumRing" class="lbBar label-center" data-preset="circle" data-value="0">Sodium</div>
+      <br><br><br>
+      <div id="ProteinRing" class="ldBar label-center" data-preset="circle" data-value="0">Protein</div>
+      <br><br><br>
+      <div id="WaterRing" class="ldBar label-center" data-preset="circle" data-value="0">Water</div>
+      <br><br><br>
+      <div id="PotassiumRing" class="ldBar label-center" data-preset="circle" data-value="0">Potassium</div>
+      <br><br><br>
+      <div id="PhosRing" class="ldBar label-center" data-preset="circle" data-value="0">Phosphorus</div>
+  
+      <script>
+          // sample values to test functionality
+          let sodiumPct = 50;
+          let proteinPct = 75;
+          let waterPctF = 99;
+          let kPct = 20;
+          let phosPct = 150;
+  
+          // scripts to write the load bars
+          var sodiumBar = new ldBar("#SodiumRing");
+          var bar1 = document.getElementById('SodiumRing').ldBar;
+          sodiumBar.set(sodiumPct);
+  
+          var proteinBar = new ldBar("#ProteinRing");
+          var bar2 = document.getElementById('ProteinRing').ldBar;
+          proteinBar.set(proteinPct);
+  
+          var waterBar = new ldBar("#WaterRing");
+          var bar3 = document.getElementById('WaterRing').ldBar;
+          waterBar.set(waterPctF);
+  
+          var kBar = new ldBar("#PotassiumRing");
+          var bar4 = document.getElementById('PotassiumRing').ldBar;
+          kBar.set(kPct);
+  
+          var phosBar = new ldBar("#PhosRing");
+          var bar5 = document.getElementById('PhosRing').ldBar;
+          phosBar.set(phosPct);
+          
+      </script>
+      <script>
+          // Constants for daily recommended amounts
+          const sodiumMin = 1495;
+          const sodiumMax = 2300;
+          const protein = 0.6;
+          const water = 3.7;
+          const kMin = 2500;
+          const kMax = 3000;
+          const phosMin = 800;
+          const phosMax = 1000;
+  
+          // // input variables for user data
+          // let mySodium = parseInt(document.getElementById("SodiumValue").innerHTML);
+          // let myProtein = parseInt(document.getElementById("ProteinValue").innerHTML);
+          // let myWater = parseInt(document.getElementById("WaterValue").innerHTML);
+          // let myK = parseInt(document.getElementById("PotassiumValue").innerHTML);
+          // let myPhos = parseInt(document.getElementById("PhosValue").innerHTML);
+          // let gender = '';
+  
+          var mySodium = 2500;
+          var myProtein = .6;
+          var myWater = 2.7;
+          var myK = 2700;
+          var myPhos = 700;
+  
+          // calculate current percentage
+          // let sodiumPct = (mySodium / sodiumMax) * 100;
+          // let proteinPct = (myProtein / protein) * 100;
+          // let waterPctF= (myWater / water) * 100;
+          // // for now, default to female let waterPctM = (myWater / waterMale) * 100;
+          // let kPct = (myK / kMax) * 100;
+          // let phosPct = (myPhos / phosMax) * 100;
+  
+          // Sodium
+          if (mySodium < sodiumMin) {
+              document.getElementById("#SodiumRing").style.stroke = 'gold';
+              alert("Nice! Keep your sodium below 2300 to stay in range for today");
+          }
+          else if (mySodium > sodiumMax) {
+              document.getElementById("#SodiumRing").style.stroke = 'red';
+              alert("Oops! Your sodium intake is above the recommended range. Try to limit sodium for the rest of the day and tomorrow");
+          }
+          else if (mySodium > sodiumMin && mySodium < sodiumMax) {
+              document.getElementById("#SodiumRing").style.stroke = 'green';
+              alert("Careful! Your sodium levels are at the daily limit. Try to limit sodium for the rest of the day");
+          }
+  
+          // Protein
+          if (myProtein < protein) {
+              document.getElementById("ProteinRing").style.stroke = 'gold';
+              alert("Keep it up! Try to get a little more protein today");
+          }
+          else if (myProtein > protein) {
+              document.getElementById("ProteinRing").style.stroke = 'red';
+              alert("Uh oh! Your protein intake is a little high for today. Try to limit protein for the rest of the day and tomorrow");
+          }
+          else {
+              document.getElementById("ProteinRing").style.stroke = 'green';
+              alert("Good eating! Your protein level is exactly where it should be for today!")
+          }
+  
+          // Water
+          if (myWater < water) {
+              document.getElementById("WaterRing").style.stroke = 'red';
+              alert("Keep drinking! More water will help your kidneys!");
+          }
+          else if (myWater > water) {
+              document.getElementById("WaterRing").style.stroke = 'green';
+              alert("Wow! Great job drinking enough water today. Keep it up!");
+          }
+          else {
+              document.getElementById("WaterRing").style.stroke = 'gold';
+              alert("Great work! You've had just enough water for today");
+          }
+      
+          // Potassium
+          if (myK < kMin) {
+              document.getElementById("PotassiumRing").style.stroke = 'gold';
+              alert("Looks like your potassium is a little low. If you're trying to keep it low, no worries!");
+          } 
+          else if (myK > kMax) {
+              document.getElementById("PotassiumRing").style.stroke = 'red';
+              alert("Careful! Your potassium levels are high for today. Try to limit potassium for the rest of the day and tomorrow");
+          }
+          else if (myK > kMin && myK < kMax) {
+              document.getElementById("PotassiumRing").style.stroke = 'green';
+              alert("Well done! Your potassium is within the healthy range");
+          }
+  
+          // Phosphorus
+          if (myPhos < phosMin) {
+              document.getElementById("PhosRing").style.stroke = 'gold';
+              alert("Hey! Try to get a little more phosphorus today to get to a healthy range!");
+          } 
+          else if (myPhos > phosMax) {
+              document.getElementById("PhosRing").style.stroke = 'red';
+              alert("Hmm, looks like you had a little too much phosphorus today. Try to limit phosphorus for the rest of today and tomorrow");
+          }
+          else if (myPhos > phosMin && myPhos < phosMax) {
+              document.getElementById("PhosRing").style.stroke = 'green';
+              alert("Look at you! Great job keeping phosphorus in a healthy range");
+          }
+      </script>
+
 <body>
     
 {% endblock %}
