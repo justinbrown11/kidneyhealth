@@ -189,3 +189,6 @@ def errorPageView(request):
 
 def tipsPageView(request):
     return render(request, 'tracking/tips.html')
+
+def customFoodPageView(request):
+    return render(request, 'tracking/customFood.html')
