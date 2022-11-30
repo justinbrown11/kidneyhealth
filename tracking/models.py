@@ -1,8 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import User
 from datetime import date
-from django.db.models.signals import post_save
-from django.dispatch import receiver
 
 # Create your models here.
 
@@ -53,50 +51,38 @@ class Lab(models.Model):
     class Meta:
         db_table = "lab"
 
-class DailyEntry(models.Model):
-    user_ID = models.ForeignKey(User, on_delete=models.CASCADE)
-    entry_date = models.DateField(default=date.today, blank=True)
-
-    def __str__(self) -> str:
-        return self.entry_date
-    class Meta:
-        db_table = "daily_entry"
-
-class MealType(models.Model):
-    meal_type_description = models.CharField(max_length=10)
-
-    def __str__(self) -> str:
-        return self.meal_type_description
-    class Meta:
-        db_table = "meal_type"
-
-class Meal(models.Model):
-    entry_ID = models.ForeignKey(DailyEntry, on_delete=models.CASCADE)
-    meal_type_ID = models.ForeignKey(MealType, on_delete=models.DO_NOTHING)
-    meal_number = models.IntegerField()
-
-    def __str__(self) -> str:
-        return super().__str__()
-    class Meta:
-        db_table = "meal"
-
 class Food(models.Model):
-    food_ID = models.BigIntegerField(primary_key=True)
     food_description = models.CharField(max_length=50)
+    brand_name = models.CharField(max_length=40)
+    serving_size = models.DecimalField(max_digits=6, decimal_places=2)
+    serving_size_unit = models.CharField(max_length=2)
+    protien_g = models.DecimalField(max_digits=6, decimal_places=2)
+    phosphorus_mg = models.DecimalField(max_digits=6, decimal_places=2)
+    potassium_mg = models.DecimalField(max_digits=6, decimal_places=2)
+    sodium_mg = models.DecimalField(max_digits=6, decimal_places=2)
 
     def __str__(self) -> str:
         return self.food_description
     class Meta:
         db_table = "food"
 
+class DailyEntry(models.Model):
+    user_ID = models.ForeignKey(User, on_delete=models.CASCADE)
+    entry_date = models.DateField(default=date.today, blank=True)
+    water_intake_liters = models.DecimalField(max_digits=4, decimal_places=2)
+    foods = models.ManyToManyField(Food, through='FoodHistory')
+
+    def __str__(self) -> str:
+        return self.entry_date
+    class Meta:
+        db_table = "daily_entry"
+
 class FoodHistory(models.Model):
-    meal_ID = models.ForeignKey(Meal, on_delete=models.CASCADE)
+    entry_ID = models.ForeignKey(DailyEntry, on_delete=models.CASCADE)
     food_ID = models.ForeignKey(Food, on_delete=models.CASCADE)
-    quantity = models.DecimalField(max_digits=2, decimal_places=2)
+    quantity = models.DecimalField(max_digits=4, decimal_places=2)
 
     def __str__(self) -> str:
         return super().__str__()
-
     class Meta:
         db_table = "food_history"
-        unique_together = (('meal_ID', 'food_ID'))
