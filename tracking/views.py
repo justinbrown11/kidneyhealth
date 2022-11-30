@@ -73,15 +73,17 @@ def saveAPIFood(request):
             sodium = 0.00
 
             # Loop through nutrients
-            for food in outcome['footNutrients']:
-                if (food['nutrient']['name'] == 'Protein'):
-                    protien = float(food['amount'])
-                elif (food['nutrient']['name'] == 'Phosphorus, P'):
-                    phosphorus = float(food['amount'])
-                elif (food['nutrient']['name'] == 'Potassium, K'):
-                    potassium = float(food['amount'])
-                elif (food['nutrient']['name'] == 'Sodium, NA'):
-                    sodium = float(food['amount'])
+            for nutrient in outcome['foodNutrients']:
+                if (nutrient['nutrient']['name'] == 'Protein'):
+                    protien = float(nutrient['amount'])
+                elif (nutrient['nutrient']['name'] == 'Phosphorus, P'):
+                    phosphorus = float(nutrient['amount'])
+                elif (nutrient['nutrient']['name'] == 'Potassium, K'):
+                    potassium = float(nutrient['amount'])
+                elif (nutrient['nutrient']['name'] == 'Sodium, Na'):
+                    sodium = float(nutrient['amount'])
+
+            print(protien,phosphorus,potassium,sodium)
 
             # Add new food        
             newFood = Food(
@@ -102,15 +104,15 @@ def saveAPIFood(request):
             sodium = 0.00
 
             # Loop through nutrients
-            for food in outcome['footNutrients']:
-                if (food['nutrient']['name'] == 'Protein'):
-                    protien = float(food['amount'])
-                elif (food['nutrient']['name'] == 'Phosphorus, P'):
-                    phosphorus = float(food['amount'])
-                elif (food['nutrient']['name'] == 'Potassium, K'):
-                    potassium = float(food['amount'])
-                elif (food['nutrient']['name'] == 'Sodium, NA'):
-                    sodium = float(food['amount'])
+            for nutrient in outcome['foodNutrients']:
+                if (nutrient['nutrient']['name'] == 'Protein'):
+                    protien = float(nutrient['amount'])
+                elif (nutrient['nutrient']['name'] == 'Phosphorus, P'):
+                    phosphorus = float(nutrient['amount'])
+                elif (nutrient['nutrient']['name'] == 'Potassium, K'):
+                    potassium = float(nutrient['amount'])
+                elif (nutrient['nutrient']['name'] == 'Sodium, Na'):
+                    sodium = float(nutrient['amount'])
 
             # Add new food        
             newFood = Food(
@@ -123,6 +125,8 @@ def saveAPIFood(request):
         
         # Save new food
         newFood.save()
+
+        return redirect('/search')
             
     except Exception as e:
         # Log error
