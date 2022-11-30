@@ -10,7 +10,99 @@
     {% block title %} user info {% endblock %}
 </head>
 <body>
-<h1> user info</h1>
+    <body>
+        <p>
+            <form name="form" , method="post" action="{% url 'userInfo' %}">
+                {% csrf_token %}
+                <input type="hidden" id="user" , name="user" value="{{user}}" />
+                <label for="email">Email: </label>
+                <input
+                  type="text"
+                  name="email"
+                  id="email"
+                  value="{{user.email}}"
+                  autofocus
+                />
+                <br /><br />
+                <label for="first_name">First Name: </label>
+                <input
+                  type="text"
+                  name="first_name"
+                  id="first_name"
+                  value="{{user.first_name}}"
+                />
+                <br /><br />
+                <label for="last_name">Last Name: </label>
+                <input
+                  type="text"
+                  name="last_name"
+                  id="last_name"
+                  value="{{user.last_name}}"
+                />
+                <br /><br />
+                <label for="phone">Phone:</label>
+                <input
+                  type="tel"
+                  name="phone"
+                  id="phone"
+                  value="{{user.profile.phone}}"
+                />
+                <br /><br />
+                <label for="birthdate">Birthdate:</label>
+                <input
+                  type="datetime"
+                  name="birthdate"
+                  id="birthdate"
+                  value="{{user.profile.birth_date}}"
+                />
+                <br /><br />
+                <label for="weight">Weight:</label>
+                <input
+                  type="number"
+                  name="weight"
+                  id="weight"
+                  value="{{user.profile.weight}}"
+                />
+                <br /><br />
+                <label for="height">Height:</label>
+                <input
+                  type="number"
+                  name="height"
+                  id="height"
+                  value="{{user.profile.height}}"
+                />
+                <br /><br />
+                <label for="comorbidity">Comorbidity:</label>
+                <input
+                  type="text"
+                  name="comorbidity"
+                  id="comorbidity"
+                  value="{{user.profile.comorbidity_ID}}"
+                />
+                <br /><br />
+                <label for="race">Race:</label>
+                <input
+                  type="text"
+                  name="race"
+                  id="race"
+                  value="{{user.profile.race_ID}}"
+                />
+                <br /><br />
+                <label for="height">Gender:</label>
+                <input
+                  type="text"
+                  name="gender"
+                  id="gender"
+                  value="{{user.profile.gender_ID}}"
+                />
+                <br /><br />
+              
+                <button type="submit">Update</button>
+              </form>
+        </p>
+    
+          <body>
 <body>
     
 {% endblock %}
+

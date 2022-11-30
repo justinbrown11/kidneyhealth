@@ -13,6 +13,8 @@
         <h3>Username: {{ user }}</h3>
         {% if user.is_authenticated %}
         <h3>Email: {{user.email}}</h3>
+        <h3>First Name: {{user.first_name}}</h3>
+        <h3>Last Name: {{user.last_name}}</h3>
         <h3>Phone: {{user.profile.phone}}</h3>
         <h3>Birthdate: {{user.profile.birth_date}}</h3>
         <h3>Weight: {{user.profile.weight}}</h3>
@@ -22,11 +24,8 @@
         <h3>Gender: {{user.profile.gender_ID}}</h3>
         {% endif %}
     </p>
-    <button href={% url 'deleteUser' %}> Delete Account
-    <button>
-      <body>
+    <button href={% url 'updateUserInfo' %}> Update Account Info
         {% endblock %}
-      </body>
-    </button>
+
   </body>
 </html>
