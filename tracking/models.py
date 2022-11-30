@@ -53,9 +53,9 @@ class Lab(models.Model):
 
 class Food(models.Model):
     food_description = models.CharField(max_length=50)
-    brand_name = models.CharField(max_length=40)
-    serving_size = models.DecimalField(max_digits=6, decimal_places=2)
-    serving_size_unit = models.CharField(max_length=2)
+    brand_name = models.CharField(max_length=40, blank=True)
+    serving_size = models.DecimalField(max_digits=6, decimal_places=2, blank=True)
+    serving_size_unit = models.CharField(max_length=2, blank=True)
     protien_g = models.DecimalField(max_digits=6, decimal_places=2)
     phosphorus_mg = models.DecimalField(max_digits=6, decimal_places=2)
     potassium_mg = models.DecimalField(max_digits=6, decimal_places=2)

@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect
-from .models import Lab, Profile
+from .models import Lab, Profile, Food
 from .forms import LabForm, ProfileForm
+import requests
 
 # Import functions
 from .functions.searchFood import searchFood
@@ -41,6 +42,91 @@ def searchResultsPageView(request):
 
         # Render error page
         return render(request, 'tracking/error.html')
+
+def saveAPIFood(request):
+
+    try:
+        # Grab query param from request
+        food = request.GET.__getitem__("food")
+
+        # Set body for request
+        payload = {
+            "api_key": env('FOOD_API_KEY'),
+            "nutrients": "203,305,306,307"
+        }
+
+        # Send request
+        outcome = (requests.get(f"{env('FOOD_API_URL')}/food/{food}", params=payload)).json()
+
+        newFood = {}
+
+        # If food is branded
+        if (outcome['dataType'] == 'Branded'):
+
+            protien = 0.00
+            phosphorus = 0.00
+            potassium = 0.00
+            sodium = 0.00
+
+            # Loop through nutrients
+            for food in outcome['footNutrients']:
+                if (food['nutrient']['name'] == 'Protein'):
+                    protien = float(food['amount'])
+                elif (food['nutrient']['name'] == 'Phosphorus, P'):
+                    phosphorus = float(food['amount'])
+                elif (food['nutrient']['name'] == 'Potassium, K'):
+                    potassium = float(food['amount'])
+                elif (food['nutrient']['name'] == 'Sodium, NA'):
+                    sodium = float(food['amount'])
+
+            # Add new food        
+            newFood = Food(
+                food_description=outcome['description'], 
+                brand_name=outcome['brandName'], 
+                serving_size=float(outcome['servingSize']), 
+                serving_size_unit=outcome['servingSizeUnit'],
+                protien_g=protien,
+                phosphorus_mg=phosphorus,
+                potassium_mg=potassium,
+                sodium_mg=sodium
+            )
+
+        else:
+            protien = 0.00
+            phosphorus = 0.00
+            potassium = 0.00
+            sodium = 0.00
+
+            # Loop through nutrients
+            for food in outcome['footNutrients']:
+                if (food['nutrient']['name'] == 'Protein'):
+                    protien = float(food['amount'])
+                elif (food['nutrient']['name'] == 'Phosphorus, P'):
+                    phosphorus = float(food['amount'])
+                elif (food['nutrient']['name'] == 'Potassium, K'):
+                    potassium = float(food['amount'])
+                elif (food['nutrient']['name'] == 'Sodium, NA'):
+                    sodium = float(food['amount'])
+
+            # Add new food        
+            newFood = Food(
+                food_description=outcome['description'], 
+                protien_g=protien,
+                phosphorus_mg=phosphorus,
+                potassium_mg=potassium,
+                sodium_mg=sodium
+            )
+        
+        # Save new food
+        newFood.save()
+            
+    except Exception as e:
+        # Log error
+        print(e)
+
+        # Render error page
+        return render(request, 'tracking/error.html')
+
 
 def weeklyPageView(request):
     return render(request, 'tracking/weekly.html')
