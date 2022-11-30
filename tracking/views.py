@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect
-from .models import Lab
-from .forms import LabForm
+from .models import Lab, Profile
+from .forms import LabForm, ProfileForm
 
 # Import functions
 from .functions.searchFood import searchFood
@@ -55,6 +55,18 @@ def accountCreationPageView(request):
     return render(request, 'tracking/createAccount.html')
 
 def viewUserInfoPageView(request):
+    data = Profile.objects.all()
+    if request.method == 'POST':
+        form = ProfileForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('/userInfo')
+    else:
+        form = ProfileForm()
+    context = {
+        'data': data,
+        'form': form,
+    }
     return render(request, 'tracking/userInfo.html')
 
 def updateUserInfoPageView(request):
