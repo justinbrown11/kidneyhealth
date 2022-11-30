@@ -8,7 +8,43 @@
     {% block title %} view labs{% endblock %}
   </head>
   <body>
-    <h1>view labs</h1>
+    <canvas id="myChart" width="800" height="450"></canvas>
+    <script>
+      const ctx = document.getElementById("myChart").getContext("2d");
+      const myChart = new Chart(ctx, {
+        type: "line",
+        data: {
+          labels: [
+            "Sunday",
+            "Monday",
+            "Tuesday",
+            "Wednesday",
+            "Thursday",
+            "Friday",
+            "Saturday",
+          ],
+          datasets: [
+            {
+              label: "Blood Sugar Level Trends",
+              data: [80, 60, 110, 50, 60, 75, 100],
+              borderColor: "rgba(54, 162, 235, 0.2)",
+              pointBackgroundColor: "rgba(54, 162, 235, 1)",
+            },
+          ],
+        },
+        options: {
+          scales: {
+            yAxes: [
+              {
+                ticks: {
+                  min: 0,
+                },
+              },
+            ],
+          },
+        },
+      });
+    </script>
     <body>
       {% endblock %}
     </body>
