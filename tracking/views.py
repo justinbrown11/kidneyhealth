@@ -13,7 +13,7 @@ def indexPageView(request):
 def dailyPageView(request):
     return render(request, 'tracking/daily.html')
 
-async def searchResultsPageView(request):
+def searchResultsPageView(request):
     """
     The page view with results from food searching
     """
@@ -22,7 +22,7 @@ async def searchResultsPageView(request):
         query = request.GET.__getitem__("query")
 
         # Search food
-        data = await searchFood(query)
+        data = searchFood(query)
 
         # Check for error
         if (data['result'] == 1):
