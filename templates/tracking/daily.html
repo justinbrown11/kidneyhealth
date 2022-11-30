@@ -9,28 +9,30 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="{% static 'css/rings.css' %}" rel="stylesheet" />
     <script src="{% static 'js/rings.js' %}"></script>
-    {% block title %} Daily Progress {% endblock %}
+
 </head>
 <body>
-  <h1> daily </h1>
+
+<br><br>
     <ul class="nav justify-content-center">
         <li class="nav-item">
-          <a class="nav-link active" aria-current="page" href={%url 'daily' %}>Today</a>
+          <a class="nav-link active" aria-current="page" href={%url 'daily' %} style="background-color: lightgrey;  border-radius: 15px;">Today</a>
         </li>
         <li class="nav-item">
           <a class="nav-link" href={% url 'monthly' %}>This Month</a>
         </li>
       </ul>
-
-      <div id="SodiumRing" class="lbBar label-center" data-preset="circle" data-value="0">Sodium</div>
-      <br><br><br>
-      <div id="ProteinRing" class="ldBar label-center" data-preset="circle" data-value="0">Protein</div>
-      <br><br><br>
-      <div id="WaterRing" class="ldBar label-center" data-preset="circle" data-value="0">Water</div>
-      <br><br><br>
-      <div id="PotassiumRing" class="ldBar label-center" data-preset="circle" data-value="0">Potassium</div>
-      <br><br><br>
-      <div id="PhosRing" class="ldBar label-center" data-preset="circle" data-value="0">Phosphorus</div>
+      <h1> Today's Dashboard </h1>
+      <br><br>
+      <div id="SodiumRing" class="lbBar label-center" data-preset="circle" data-value="0" style="float:left; width: 19%;">Sodium</div>
+ 
+      <div id="ProteinRing" class="ldBar label-center" data-preset="circle" data-value="0" style="float:left; width: 19%;">Protein</div>
+   
+      <div id="WaterRing" class="ldBar label-center" data-preset="circle" data-value="0" style="float:left; width: 19%;">Water</div>
+    
+      <div id="PotassiumRing" class="ldBar label-center" data-preset="circle" data-value="0"style="float:left; width: 19%;">Potassium</div>
+ 
+      <div id="PhosRing" class="ldBar label-center" data-preset="circle" data-value="0"style="float:left; width: 19%;">Phosphorus</div>
   
       <script>
           // sample values to test functionality
