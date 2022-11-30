@@ -68,7 +68,7 @@ def saveAPIFood(request):
         # If food is branded
         if (outcome['dataType'] == 'Branded'):
 
-            protien = 0.00
+            protein = 0.00
             phosphorus = 0.00
             potassium = 0.00
             sodium = 0.00
@@ -76,7 +76,7 @@ def saveAPIFood(request):
             # Loop through nutrients
             for nutrient in outcome['foodNutrients']:
                 if (nutrient['nutrient']['name'] == 'Protein'):
-                    protien = float(nutrient['amount'])
+                    protein = float(nutrient['amount'])
                 elif (nutrient['nutrient']['name'] == 'Phosphorus, P'):
                     phosphorus = float(nutrient['amount'])
                 elif (nutrient['nutrient']['name'] == 'Potassium, K'):
@@ -84,7 +84,7 @@ def saveAPIFood(request):
                 elif (nutrient['nutrient']['name'] == 'Sodium, Na'):
                     sodium = float(nutrient['amount'])
 
-            print(protien,phosphorus,potassium,sodium)
+            print(protein,phosphorus,potassium,sodium)
 
             # Add new food        
             newFood = Food(
@@ -92,14 +92,14 @@ def saveAPIFood(request):
                 brand_name=outcome['brandName'], 
                 serving_size=float(outcome['servingSize']), 
                 serving_size_unit=outcome['servingSizeUnit'],
-                protien_g=protien,
+                protein_g=protein,
                 phosphorus_mg=phosphorus,
                 potassium_mg=potassium,
                 sodium_mg=sodium
             )
 
         else:
-            protien = 0.00
+            protein = 0.00
             phosphorus = 0.00
             potassium = 0.00
             sodium = 0.00
@@ -107,7 +107,7 @@ def saveAPIFood(request):
             # Loop through nutrients
             for nutrient in outcome['foodNutrients']:
                 if (nutrient['nutrient']['name'] == 'Protein'):
-                    protien = float(nutrient['amount'])
+                    protein = float(nutrient['amount'])
                 elif (nutrient['nutrient']['name'] == 'Phosphorus, P'):
                     phosphorus = float(nutrient['amount'])
                 elif (nutrient['nutrient']['name'] == 'Potassium, K'):
@@ -118,7 +118,7 @@ def saveAPIFood(request):
             # Add new food        
             newFood = Food(
                 food_description=outcome['description'], 
-                protien_g=protien,
+                protein_g=protein,
                 phosphorus_mg=phosphorus,
                 potassium_mg=potassium,
                 sodium_mg=sodium
@@ -151,7 +151,7 @@ def saveCustomFood(request):
             brand_name=body['brand_name'] if body['brand_name'] != '' else '', 
             serving_size=float(body['serving_size']) if body['serving_size'] != '' else 0, 
             serving_size_unit=body['serving_size_unit'] if body['serving_size_unit'] != '' else '',
-            protien_g=body['protien_g'],
+            protein_g=body['protein_g'],
             phosphorus_mg=body['phosphorus_mg'],
             potassium_mg=body['potassium_mg'],
             sodium_mg=body['sodium_mg']
@@ -242,3 +242,6 @@ def tipsPageView(request):
 
 def customFoodPageView(request):
     return render(request, 'tracking/customFood.html')
+
+def myPantryPageView(request):
+    return render(request, 'tracking/myPantry.html')
