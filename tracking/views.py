@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect
-from .models import Lab, Profile, Food
-from .forms import LabForm, ProfileForm
+from .models import Lab, Food
+from .forms import LabForm
 import requests
 import environ
 
@@ -142,18 +142,6 @@ def accountCreationPageView(request):
     return render(request, 'tracking/createAccount.html')
 
 def viewUserInfoPageView(request):
-    data = Profile.objects.all()
-    if request.method == 'POST':
-        form = ProfileForm(request.POST)
-        if form.is_valid():
-            form.save()
-            return redirect('/userInfo')
-    else:
-        form = ProfileForm()
-    context = {
-        'data': data,
-        'form': form,
-    }
     return render(request, 'tracking/userInfo.html')
 
 def updateUserInfoPageView(request):
