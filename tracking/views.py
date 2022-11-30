@@ -1,9 +1,10 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, login
-from .models import Lab, Food
+from .models import Lab, Food, DailyEntry
 from .forms import LabForm, ExtendedUserCreationForm, ProfileForm
 import requests
 import environ
+from datetime import date
 
 # Set env
 env = environ.Env()
@@ -17,7 +18,16 @@ def indexPageView(request):
     return render(request, 'tracking/index.html')
 
 def dailyPageView(request):
-    return render(request, 'tracking/daily.html')
+
+    # Grab today's entry for the user
+    today = (DailyEntry.objects.filter(entry_date=date.today(), user__id=request.user.id)).values()
+
+    # Set water level
+    context = {
+        "currentWaterLevel": float(today[0]['water_intake_liters'])
+    }
+
+    return render(request, 'tracking/daily.html', context)
 
 def searchResultsPageView(request):
     """
