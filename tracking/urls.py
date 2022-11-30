@@ -1,5 +1,5 @@
 from django.urls import path
-from tracking.views import dailyPageView, myPantryPageView, indexPageView, weeklyPageView, monthlyPageView, searchResultsPageView, viewUserInfoPageView, addLabsPageView, register, deleteUserPageView, errorPageView, searchPageView, updateUserInfoPageView, viewLabsPageView, tipsPageView, saveAPIFood, customFoodPageView, saveCustomFood, updateWaterLevel
+from tracking.views import dailyPageView, myPantryPageView, indexPageView, weeklyPageView, monthlyPageView, searchAPIResultsPageView, searchFoodResultsPageView, viewUserInfoPageView, addLabsPageView, register, deleteUserPageView, errorPageView, searchPageView, updateUserInfoPageView, viewLabsPageView, tipsPageView, saveAPIFood, customFoodPageView, saveCustomFood, updateWaterLevel
 
 urlpatterns = [
     path('daily/', dailyPageView, name = 'daily'),
@@ -10,10 +10,10 @@ urlpatterns = [
     path('register/', register, name = 'register'),
     path('deleteUser/', deleteUserPageView, name = 'deleteUser'),
     path('error/', errorPageView, name = 'error'),
-    path('search/', searchPageView, name = 'search'),
+    path('api/search/', searchPageView, name = 'apiSearch'),
     path('updateUserInfo/', updateUserInfoPageView, name = 'updateUserInfo'),
     path('viewLabs/', viewLabsPageView, name = 'viewLabs'),
-    path('food/search/', searchResultsPageView, name = 'searchFoodQuery'),
+    path('food/api/search/', searchAPIResultsPageView, name = 'searchAPIFoodQuery'),
     path('tips/', tipsPageView, name = 'tips'),
     path('', indexPageView, name = 'index'),
     path('food/api/save', saveAPIFood, name = 'saveApiFood'),
@@ -21,4 +21,5 @@ urlpatterns = [
     path('food/custom/save', saveCustomFood, name = 'saveCustomFood'),
     path('myPantry/', myPantryPageView, name = 'myPantry'),
     path('water/save', updateWaterLevel, name = 'updateWater'),
+    path('food/search/', searchFoodResultsPageView, name = 'searchFoodQuery'),
 ]

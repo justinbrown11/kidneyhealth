@@ -44,7 +44,39 @@ def updateWaterLevel(request):
 
     return redirect('/daily')
 
-def searchResultsPageView(request):
+def searchAPIResultsPageView(request):
+    """
+    The page view with results from food searching
+    """
+    try:
+        # Grab query param from request
+        query = request.GET.__getitem__("query")
+
+        # Set body for request
+        payload = { 
+            "query": query,
+            "api_key": env('FOOD_API_KEY')
+        }
+
+        # Send request
+        data = (requests.get(f"{env('FOOD_API_URL')}/foods/search", params=payload)).json()
+
+        # Set context
+        context = {
+            "foods": data['foods']
+        }
+
+        return render(request, 'tracking/foodApiSearchResults.html', context)
+
+    except Exception as e:
+        # Log error
+        print(e)
+
+        # Render error page
+        return render(request, 'tracking/error.html')
+
+
+def searchFoodResultsPageView(request):
     """
     The page view with results from food searching
     """
@@ -152,7 +184,7 @@ def saveAPIFood(request):
         # Save new food
         newFood.save()
 
-        return redirect('/search')
+        return redirect('/api/search')
             
     except Exception as e:
         # Log error
@@ -236,7 +268,7 @@ def deleteUserPageView(request):
     return render(request, 'tracking/deleteUser.html')
 
 def searchPageView(request):
-    return render(request, 'tracking/search.html')
+    return render(request, 'tracking/foodApiSearch.html')
 
 def viewLabsPageView(request):
     data = Lab.objects.all()

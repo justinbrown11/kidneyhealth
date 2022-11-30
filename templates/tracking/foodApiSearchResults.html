@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+<br>
+<h4> Search Results </h4>
+<br>
+<form action="{% url 'saveApiFood'%}">
+
+{% for food in foods %}
+    {% if food.dataType == 'Branded' %}
+        <input name="food" value={{food.fdcId}} type ='radio'>
+        <label> {{ food.description }} {{ food.brandName }} </label>
+        <br>
+    {% else %}
+        <input name="food" value={{food.fdcId}} type ='radio'>
+        <label> {{ food.description }} </label>
+        <br>
+    {% endif %}
+{% endfor %}
+<br>
+    <button class ="button-17" style = "margin-bottom: 40px" role="button" type='submit'>Save Food</button>
+</form>
+    <p> Don't see what you're looking for? </p>
+    <a href= {% url 'customFood' %}><button class ="button-17" style = "margin-bottom: 40px" role="button">Add Custom Food</button></a>
+<br>
+
+
+{% endblock %}
