@@ -1,8 +1,8 @@
 {% extends 'tracking/daily.html' %}
 {% load static %}
 {% block myPantryResults %}
-
-<h5>Search Results</h5>
+<br><br>
+<h5>My Pantry Results</h5>
 <form>
 {% for food in foods %}
     <input type = 'radio'>
@@ -11,6 +11,8 @@
 
 <label>How many servings?</label>
 <input type = 'number' step="0.01">
+<br>
+<button type ='submit' class = "button-17"> Submit </button>
 
 </form>
 {% endblock %}
