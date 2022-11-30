@@ -19,5 +19,5 @@ urlpatterns = [
     path('food/api/save', saveAPIFood, name = 'saveApiFood'),
     path('customFood', customFoodPageView, name = 'customFood'),
     path('food/custom/save', saveCustomFood, name = 'saveCustomFood'),
-    path('food/custom/save', myPantryPageView, name = 'saveCustomFood'),
+    path('myPantry/', myPantryPageView, name = 'myPantry'),
 ]
