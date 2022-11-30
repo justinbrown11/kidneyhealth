@@ -148,9 +148,9 @@ def saveCustomFood(request):
         # Add new food        
         newFood = Food(
             food_description=body['food_description'], 
-            brand_name=body['brand_name'] if body['brand_name'] != '' else None, 
-            serving_size=float(body['serving_size']) if body['serving_size'] != '' else None, 
-            serving_size_unit=body['serving_size_unit'] if body['serving_size_unit'] != '' else None,
+            brand_name=body['brand_name'] if body['brand_name'] != '' else '', 
+            serving_size=float(body['serving_size']) if body['serving_size'] != '' else 0, 
+            serving_size_unit=body['serving_size_unit'] if body['serving_size_unit'] != '' else '',
             protien_g=body['protien_g'],
             phosphorus_mg=body['phosphorus_mg'],
             potassium_mg=body['potassium_mg'],
@@ -188,11 +188,6 @@ def accountCreationPageView(request):
             password = form.cleaned_data('password1')
             user = authenticate(username=username, password=password)
             login(request, user)
-
-            return redirect('index')
-        else :
-            form = ExtendedUserCreationForm()
-            profile_form = ProfileForm()
         return render(request, 'tracking/createAccount.html')
 
 def viewUserInfoPageView(request):
