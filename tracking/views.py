@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect
+from django.contrib.auth import authenticate, login
 from .models import Lab, Food
-from .forms import LabForm
+from .forms import LabForm, ExtendedUserCreationForm, ProfileForm
 import requests
 import environ
 
@@ -176,7 +177,18 @@ def monthlyPageView(request):
     return render(request, 'tracking/monthly.html')
 
 def accountCreationPageView(request):
-    return render(request, 'tracking/createAccount.html')
+    if request.method == 'POST':
+        form = ExtendedUserCreationForm(request.POST)
+        profile_form = ProfileForm(request.POST)
+
+        if form.is_valid():
+            form.save()
+
+            username = form.cleaned_data('username')
+            password = form.cleaned_data('password1')
+            user = authenticate(username=username, password=password)
+            login(request, user)
+        return render(request, 'tracking/createAccount.html')
 
 def viewUserInfoPageView(request):
     return render(request, 'tracking/userInfo.html')
