@@ -44,9 +44,9 @@
 .fc a[data-navlink] {
     cursor: pointer;
   }
-.fc a[data-navlink]:hover {
+/* .fc a[data-navlink]:hover {
     text-decoration: underline;
-  }
+  } */
 .fc-direction-ltr {
   direction: ltr;
   text-align: left;
