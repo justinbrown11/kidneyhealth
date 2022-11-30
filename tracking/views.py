@@ -242,3 +242,6 @@ def tipsPageView(request):
 
 def customFoodPageView(request):
     return render(request, 'tracking/customFood.html')
+
+def myPantryPageView(request):
+    return render(request, 'tracking/myPantry.html')
