@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect
-from .models import Lab, Profile, Food
-from .forms import LabForm, ProfileForm
+from django.contrib.auth import authenticate, login
+from .models import Lab, Food
+from .forms import LabForm, ExtendedUserCreationForm, ProfileForm
 import requests
 import environ
 
@@ -136,6 +137,39 @@ def saveAPIFood(request):
         return render(request, 'tracking/error.html')
 
 
+def saveCustomFood(request):
+
+    try:
+        # Grab body from request
+        body = dict(request.POST.items())
+
+        print(body)
+
+        # Add new food        
+        newFood = Food(
+            food_description=body['food_description'], 
+            brand_name=body['brand_name'] if body['brand_name'] != '' else '', 
+            serving_size=float(body['serving_size']) if body['serving_size'] != '' else 0, 
+            serving_size_unit=body['serving_size_unit'] if body['serving_size_unit'] != '' else '',
+            protien_g=body['protien_g'],
+            phosphorus_mg=body['phosphorus_mg'],
+            potassium_mg=body['potassium_mg'],
+            sodium_mg=body['sodium_mg']
+        )
+        
+        # Save new food
+        newFood.save()
+
+        return redirect('/customFood')
+            
+    except Exception as e:
+        # Log error
+        print(e)
+
+        # Render error page
+        return render(request, 'tracking/error.html')
+
+
 def weeklyPageView(request):
     return render(request, 'tracking/weekly.html')
 
@@ -143,21 +177,20 @@ def monthlyPageView(request):
     return render(request, 'tracking/monthly.html')
 
 def accountCreationPageView(request):
-    return render(request, 'tracking/createAccount.html')
-
-def viewUserInfoPageView(request):
-    data = Profile.objects.all()
     if request.method == 'POST':
-        form = ProfileForm(request.POST)
+        form = ExtendedUserCreationForm(request.POST)
+        profile_form = ProfileForm(request.POST)
+
         if form.is_valid():
             form.save()
-            return redirect('/userInfo')
-    else:
-        form = ProfileForm()
-    context = {
-        'data': data,
-        'form': form,
-    }
+
+            username = form.cleaned_data('username')
+            password = form.cleaned_data('password1')
+            user = authenticate(username=username, password=password)
+            login(request, user)
+        return render(request, 'tracking/createAccount.html')
+
+def viewUserInfoPageView(request):
     return render(request, 'tracking/userInfo.html')
 
 def updateUserInfoPageView(request):

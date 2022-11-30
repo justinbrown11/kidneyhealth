@@ -1,28 +1,38 @@
-
-<form>
+{% extends 'base.html' %}
+{% load static %}
+{% block title %} Add Custom Food {% endblock %}
+{% block content %}
+<br>
+<br>
+<h4>Add Custom Food</h4>
+<form method='POST' action="{% url 'saveCustomFood' %}">
+    {% csrf_token %}
     <label>Food Name:</label>
-    <input type = 'text'>
+    <input required name='food_description' type = 'text'>
     <br>
-    <label>Brand Name:</label>
-    <input type = 'text'>
+    <label>Brand Name (optional):</label>
+    <input type = 'text' name='brand_name'>
     <br>
-    <label>Serving Size:</label>
-    <input type = 'text'>
+    <label>Serving Size (optional):</label>
+    <input step="0.01" type = 'number' name='serving_size'>
     <br>
-    <label>Serving Size Units:</label>
-    <input type = 'text'>
+    <label>Serving Size Units (optional):</label>
+    <input type = 'text'name='serving_size_unit'>
     <br>
-    <label>Protein Amount:</label>
-    <input type = 'text'>g
+    <label>Protein Amount (grams):</label>
+    <input required step="0.01" type = 'number' name='protien_g'>g
     <br>
-    <label>Sodium Amount:</label>
-    <input type = 'text'>mg
+    <label>Sodium Amount (milligrams):</label>
+    <input required step="0.01" type = 'number' name='sodium_mg'>mg
     <br>
-    <label>Phosphorus Amount:</label>
-    <input type = 'text'>mg
+    <label>Phosphorus Amount (milligrams):</label>
+    <input required step="0.01" type = 'number' name='phosphorus_mg'>mg
     <br>
-    <label>Potassium Amount:</label>
-    <input type = 'text'>mg
+    <label>Potassium Amount (milligrams):</label>
+    <input required step="0.01" type = 'number' name='potassium_mg'>mg
     <br>
     <button class ="button-17" style = "margin-bottom: 40px" role="button" type='submit'>Save Custom Food</button>
 </form>
+<br>
+<br>
+{% endblock %}
