@@ -5,7 +5,7 @@ import environ
 # Set env
 env = environ.Env()
 
-async def searchFood(query:str) -> dict:
+def searchFood(query:str) -> dict:
     """
     Searches for food items by keyword and returns list
     \n
