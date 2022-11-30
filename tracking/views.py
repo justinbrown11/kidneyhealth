@@ -1,4 +1,5 @@
 from django.shortcuts import render
+from .models import Lab
 
 # Import functions
 from .functions.searchFood import searchFood
@@ -65,7 +66,11 @@ def searchPageView(request):
     return render(request, 'tracking/search.html')
 
 def viewLabsPageView(request):
-    return render(request, 'tracking/viewLabs.html')
+    data = Lab.objects.all()
+    context = {
+        'data': data,
+    }
+    return render(request, 'tracking/viewLabs.html', context)
 
 def addLabsPageView(request):
     return render(request, 'tracking/addLabs.html')
