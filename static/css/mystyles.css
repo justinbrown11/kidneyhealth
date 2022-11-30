@@ -30,8 +30,3 @@
     padding-left: calc(var(--bs-gutter-x) * 0.5);
     margin-top: var(--bs-gutter-y);
   }
-
-  .banner {
-    background-image: url("../img/veggiebanner.jpg");
-    background-repeat: repeat-x;  
-}
