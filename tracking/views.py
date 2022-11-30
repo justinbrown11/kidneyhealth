@@ -148,9 +148,9 @@ def saveCustomFood(request):
         # Add new food        
         newFood = Food(
             food_description=body['food_description'], 
-            brand_name=body['brand_name'] if body['brand_name'] else None, 
-            serving_size=float(body['serving_size']) if body['serving_size'] else None, 
-            serving_size_unit=body['serving_size_unit'] if body['serving_size_unit'] else None,
+            brand_name=body['brand_name'] if body['brand_name'] != '' else None, 
+            serving_size=float(body['serving_size']) if body['serving_size'] != '' else None, 
+            serving_size_unit=body['serving_size_unit'] if body['serving_size_unit'] != '' else None,
             protien_g=body['protien_g'],
             phosphorus_mg=body['phosphorus_mg'],
             potassium_mg=body['potassium_mg'],
