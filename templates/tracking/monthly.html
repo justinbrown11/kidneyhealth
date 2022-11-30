@@ -10,7 +10,7 @@
     <link href="{% static 'css/calendar.css' %}" rel="stylesheet" />
     <script src="{% static 'js/calendar.js' %}"></script>
 </head>
-<body>
+<body style='margin:0px !important;'>
   <br>
   <br>
     <ul class="nav justify-content-center">
@@ -18,7 +18,7 @@
           <a class="nav-link" aria-current="page" href={%url 'daily' %}>Today</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link active" href={%url 'monthly' %}>This Month</a>
+          <a class="nav-link active" href={%url 'monthly' %} style="background-color: lightgrey; border-radius: 15px;">This Month</a>
         </li>
       </ul>
     <h1> Monthly </h1>
