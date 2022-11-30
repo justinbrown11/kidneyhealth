@@ -8,24 +8,31 @@
     <link href="{% static 'css/style.css' %}" rel="stylesheet" />
     {% block title %} Your Info {% endblock %}
   </head>
+  <div
+      style="width: 40%; margin: auto; text-align: center; padding-top: 40px"
+    >
   <body>
     <p>
-        <h3>Username: {{ user }}</h3>
+        <h4>Username: {{ user }}</h4><br>
         {% if user.is_authenticated %}
-        <h3>Email: {{user.email}}</h3>
-        <h3>First Name: {{user.first_name}}</h3>
-        <h3>Last Name: {{user.last_name}}</h3>
-        <h3>Phone: {{user.profile.phone}}</h3>
-        <h3>Birthdate: {{user.profile.birth_date}}</h3>
-        <h3>Weight: {{user.profile.weight}}</h3>
-        <h3>Height: {{user.profile.height}}</h3>
-        <h3>Comorbidity: {{user.profile.comorbidity}}</h3>
-        <h3>Race: {{user.profile.race}}</h3>
-        <h3>Gender: {{user.profile.gender}}</h3>
+        <h4>Email: {{user.email}}</h4><br>
+        <h4>First Name: {{user.first_name}}</h4><br>
+        <h4>Last Name: {{user.last_name}}</h4><br>
+        <h4>Phone: {{user.profile.phone}}</h4><br>
+        <h4>Birthdate: {{user.profile.birth_date}}</h4><br>
+        <h4>Weight: {{user.profile.weight}}</h4><br>
+        <h4>Height: {{user.profile.height}}</h4><br>
+        <h4>Comorbidity: {{user.profile.comorbidity}}</h4><br>
+        <h4>Race: {{user.profile.race}}</h4><br>
+        <h4>Gender: {{user.profile.gender}}</h4>
         {% endif %}
     </p>
     <a href={% url 'updateUserInfo' %}> Update Account Info
+        <br>
+        <br>
+        <br>
         {% endblock %}
 
   </body>
+</div>
 </html>
