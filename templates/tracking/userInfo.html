@@ -1,21 +1,32 @@
-{% extends 'base.html' %}
-{% load static %}
-{% block content %}
+{% extends 'base.html' %} {% load static %} {% block content %}
 
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link href="{% static 'css/style.css' %}" rel="stylesheet" />
-    {% block title %} User Info {% endblock %}
-    
-</head>
-<body>
-<p>
-    <h1>user info</h1>
-</p>
-<button href={% url 'deleteUser' %}> Delete Account <button>
-<body>
-    
-{% endblock %}
+    {% block title %} Your Info {% endblock %}
+  </head>
+  <body>
+    <p>
+        <h3>Username: {{ user }}</h3>
+        {% if user.is_authenticated %}
+        <h3>Email: {{user.email}}</h3>
+        <h3>Phone: {{user.profile.phone}}</h3>
+        <h3>Birthdate: {{user.profile.birth_date}}</h3>
+        <h3>Weight: {{user.profile.weight}}</h3>
+        <h3>Height: {{user.profile.height}}</h3>
+        <h3>Comorbidity: {{user.profile.comorbidity_ID}}</h3>
+        <h3>Race: {{user.profile.race_ID}}</h3>
+        <h3>Gender: {{user.profile.gender_ID}}</h3>
+        {% endif %}
+    </p>
+    <button href={% url 'deleteUser' %}> Delete Account
+    <button>
+      <body>
+        {% endblock %}
+      </body>
+    </button>
+  </body>
+</html>
