@@ -46,25 +46,24 @@
                     <br>
                     <input name="query" type = 'text'>
                     <br> <br>
-                    <button type ='submit' class = "button-17"> Search </button>
+                    <a href="{% url 'myPantry'%}"><button type ='submit' class = "button-17"> Search </button></a>
                 </form>
                 {% block myPantryResults %}
                 {% endblock %}
       </div>
       <br><br>
-      <h5>Add Today's Water</h5>
+      <h5>Update Today's Water</h5>
       <br>
       <div style='display: inline;'>
               <form action=''>
                   <label> Enter water intake in liters:</label>
                   <br>
-                  <input name="water" step='0.01' type = 'number'>
+                  <input name="water" step='0.01' type = 'number' value=0>
                   <br><br>
                   <button type ='submit' class = "button-17"> Submit </button>
               </form>
 
     </div>
-
       <br><br>
       <div>
         <h2>My Recommendations</h2>
