@@ -1,13 +1,15 @@
-{% extends 'base.html' %}
+{% extends 'search.html' %}
 {% load static %}
-{% block content %}
+{% block test %}
 
 <form action=''>
 {% for food in foods %}
-    <label> {{ food.description }} </label>
+    
     <input name="food" value = f"{{ food.fcdId }},{{ food.description }}" type ='radio'>
+    <label> {{ food.description }} </label>
+    <br>
 {% endfor %}
-    <button type='submit'>Save Food</button>
+    <button class ="button-17" role="button" type='submit'>Save Food</button>
 <form>
 
 {% endblock %}

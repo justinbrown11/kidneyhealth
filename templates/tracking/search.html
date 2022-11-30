@@ -7,14 +7,19 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    {% block title %} search {% endblock %}
+    <link href="{% static 'css/style.css' %}" rel="stylesheet"/>
 </head>
 <body>
     <form action="{% url 'searchFoodQuery'%}">
             <label> Search Food Name: </label>
+            <br>
             <input name="query" type ='text'>
-            <button type='submit'>Search</button>
+            <button class="button-17" role="button" type='submit'>Search</button>
         <form>
-<body>
-    
+
+    {% block test %}
+    {% endblock %}
+
+        </body>
 {% endblock %}
+
