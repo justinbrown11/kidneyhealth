@@ -49,7 +49,7 @@ class Lab(models.Model):
     blood_sugar_level = models.DecimalField(max_digits=5, decimal_places=2)
 
     def __str__(self) -> str:
-        return self.date
+        return self.lab_date
     class Meta:
         db_table = "lab"
 
