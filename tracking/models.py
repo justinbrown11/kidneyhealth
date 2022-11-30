@@ -13,18 +13,26 @@ class Comorbidity(models.Model):
         db_table = "comorbidity"
 
 class Race(models.Model):
-    race_description = models.CharField(max_length=10)
+    race_description = models.CharField(max_length=20)
 
     def __str__(self) -> str:
         return self.race_description
     class Meta:
         db_table = "race"
 
+class Gender(models.Model):
+    gender_description = models.CharField(max_length=10)
+
+    def __str__(self) -> str:
+        return self.gender_description
+    class Meta:
+        db_table = "gender"
+
 class Profile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     comorbidity_ID = models.ForeignKey(Comorbidity, on_delete=models.DO_NOTHING)
     race_ID = models.ForeignKey(Race, on_delete=models.DO_NOTHING)
-    gender = models.CharField(max_length=2)
+    gender_ID = models.ForeignKey(Gender, on_delete=models.DO_NOTHING)
     phone = models.CharField(max_length=12)
     weight = models.DecimalField(max_digits=5, decimal_places=2)
     height = models.DecimalField(max_digits=5, decimal_places=2)
@@ -56,7 +64,7 @@ class Food(models.Model):
     brand_name = models.CharField(max_length=40, blank=True)
     serving_size = models.DecimalField(max_digits=6, decimal_places=2, blank=True)
     serving_size_unit = models.CharField(max_length=2, blank=True)
-    protien_g = models.DecimalField(max_digits=6, decimal_places=2)
+    protein_g = models.DecimalField(max_digits=6, decimal_places=2)
     phosphorus_mg = models.DecimalField(max_digits=6, decimal_places=2)
     potassium_mg = models.DecimalField(max_digits=6, decimal_places=2)
     sodium_mg = models.DecimalField(max_digits=6, decimal_places=2)
