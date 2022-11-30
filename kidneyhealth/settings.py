@@ -45,6 +45,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'tracking.apps.TrackingConfig',
+    'crispy_forms',
 ]
 
 MIDDLEWARE = [
@@ -143,3 +144,5 @@ STATICFILE_DIRS = [os.path.join(BASE_DIR, 'kidneyhealth/static')]
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 LOGIN_REDIRECT_URL = "/"
+
+CRISPY_TEMPLATE_PACK = 'bootstrap4'
