@@ -59,8 +59,8 @@
             >
           </li>
           <li class="nav-item active">
-            <a class="nav-link" href="{% url 'searchFoodQuery' %}"
-              >Add Food<span class="sr-only">(current)</span></a
+            <a class="nav-link" href="{% url 'search' %}"
+              >Add Food to My Pantry<span class="sr-only">(current)</span></a
             >
           </li>
         </ul>
@@ -85,8 +85,10 @@
       </div>
     </nav>
     <div class="container">
-      {% if user.is_authenticated %} {% block content %} {% endblock %} {% else
-      %}
+      {% if user.is_authenticated %} 
+        {% block content %} 
+        {% endblock %} 
+      {% else%}
       <a href="{% url 'login' %}">Login</a>
       {% endif %}
     </div>

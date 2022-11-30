@@ -1,5 +1,5 @@
 from django.urls import path
-from tracking.views import dailyPageView, indexPageView, weeklyPageView, monthlyPageView, searchResultsPageView, viewUserInfoPageView, addLabsPageView,accountCreationPageView,deleteUserPageView, errorPageView, searchPageView, updateUserInfoPageView, viewLabsPageView, tipsPageView
+from tracking.views import dailyPageView, indexPageView, weeklyPageView, monthlyPageView, searchResultsPageView, viewUserInfoPageView, addLabsPageView,accountCreationPageView,deleteUserPageView, errorPageView, searchPageView, updateUserInfoPageView, viewLabsPageView, tipsPageView, saveAPIFood
 
 urlpatterns = [
     path('daily/', dailyPageView, name = 'daily'),
@@ -16,4 +16,5 @@ urlpatterns = [
     path('food/search/', searchResultsPageView, name = 'searchFoodQuery'),
     path('tips/', tipsPageView, name = 'tips'),
     path('', indexPageView, name = 'index'),
+    path('food/api/save', saveAPIFood, name = 'saveApiFood'),
 ]

@@ -2,6 +2,10 @@ from django.shortcuts import render, redirect
 from .models import Lab, Profile, Food
 from .forms import LabForm, ProfileForm
 import requests
+import environ
+
+# Set env
+env = environ.Env()
 
 # Import functions
 from .functions.searchFood import searchFood
