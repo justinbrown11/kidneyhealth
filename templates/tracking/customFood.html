@@ -2,8 +2,11 @@
 {% load static %}
 {% block title %} Add Custom Food {% endblock %}
 {% block content %}
+<br>
+<br>
 <h4>Add Custom Food</h4>
 <form method='POST' action="{% url 'saveCustomFood' %}">
+    {% csrf_token %}
     <label>Food Name:</label>
     <input required name='food_description' type = 'text'>
     <br>
@@ -11,24 +14,25 @@
     <input type = 'text' name='brand_name'>
     <br>
     <label>Serving Size (optional):</label>
-    <input type = 'text' name='serving_size'>
+    <input step="0.01" type = 'number' name='serving_size'>
     <br>
     <label>Serving Size Units (optional):</label>
     <input type = 'text'name='serving_size_unit'>
     <br>
     <label>Protein Amount (grams):</label>
-    <input required type = 'number' name='protien_g'>g
+    <input required step="0.01" type = 'number' name='protien_g'>g
     <br>
     <label>Sodium Amount (milligrams):</label>
-    <input required type = 'sodium_mg'>mg
+    <input required step="0.01" type = 'number' name='sodium_mg'>mg
     <br>
     <label>Phosphorus Amount (milligrams):</label>
-    <input required type = 'number' name='phosphorus_mg'>mg
+    <input required step="0.01" type = 'number' name='phosphorus_mg'>mg
     <br>
     <label>Potassium Amount (milligrams):</label>
-    <input required type = 'number' name='potassium_mg'>mg
+    <input required step="0.01" type = 'number' name='potassium_mg'>mg
     <br>
     <button class ="button-17" style = "margin-bottom: 40px" role="button" type='submit'>Save Custom Food</button>
 </form>
-
+<br>
+<br>
 {% endblock %}
