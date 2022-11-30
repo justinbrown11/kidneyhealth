@@ -1,4 +1,20 @@
 {% load static %}
+{% if user.is_authenticated %}
+  <!DOCTYPE html>
+  <html>
+    <head>
+      <title>\Redirect</title>
+    </head>
+    <body>
+      <script>
+        let url = "/daily";
+        window.location.href = url;
+      </script>
+    </body>
+  </html>
+
+{% else %}
+
   <head>
     <!-- Required meta tags -->
     <meta charset="utf-8">
@@ -35,4 +51,4 @@
     <p style = 'color: white; font-weight:bold'> Our mission is to help you achieve and maintain kidney health through diet tracking. </p>
     <a href={% url 'login' %}><button class="button-17" role="button" >Login</button></a>
     </div>
-</body>
+</body>{% endif %}
