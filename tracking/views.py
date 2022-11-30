@@ -188,6 +188,11 @@ def accountCreationPageView(request):
             password = form.cleaned_data('password1')
             user = authenticate(username=username, password=password)
             login(request, user)
+
+            return redirect('index')
+        else :
+            form = ExtendedUserCreationForm()
+            profile_form = ProfileForm()
         return render(request, 'tracking/createAccount.html')
 
 def viewUserInfoPageView(request):
