@@ -38,9 +38,9 @@
       <br>
       <br>
       <br>
-        <h2>Add Today's Foods</h2>
+        <h5>Add Today's Foods</h5>
         <br>
-        <div style='display: block;'>
+        <div style='display: inline;'>
                 <form action=''>
                     <label> Search My Pantry </label>
                     <br>
@@ -48,7 +48,23 @@
                     <br> <br>
                     <button type ='submit' class = "button-17"> Search </button>
                 </form>
+                {% block myPantryResults %}
+                {% endblock %}
       </div>
+      <br><br>
+      <h5>Add Today's Water</h5>
+      <br>
+      <div style='display: inline;'>
+              <form action=''>
+                  <label> Enter water intake in liters:</label>
+                  <br>
+                  <input name="water" step='0.01' type = 'number'>
+                  <br><br>
+                  <button type ='submit' class = "button-17"> Submit </button>
+              </form>
+
+    </div>
+
       <br><br>
       <div>
         <h2>My Recommendations</h2>

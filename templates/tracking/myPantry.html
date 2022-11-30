@@ -1,0 +1,17 @@
+{% extends 'daily.html' %}
+{% load static %}
+{% block myPantryResults %}
+
+<h5>Search Results</h5>
+<form>
+{% for food in foods %}
+    <input type = 'radio'>
+    <label>{{food.description}}</label>
+{% endfor %}
+
+<label>How many servings?</label>
+<input type = 'number' step="0.01">
+
+</form>
+{% endblock %}
+
