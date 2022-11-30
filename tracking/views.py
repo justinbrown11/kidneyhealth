@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, login
 from django.contrib.auth.models import User
-from .models import Lab, Food, DailyEntry, Profile
+from .models import Lab, Food, DailyEntry, Profile, FoodHistory
 from .forms import LabForm, ExtendedUserCreationForm, ProfileForm
 import requests
 import environ
@@ -82,14 +82,30 @@ def searchFoodResultsPageView(request):
         # Grab query param from request
         query = request.GET.__getitem__("query")
 
-        
+        # Grab Food History
+        foodHistory = FoodHistory.objects.filter(entry__user=request.user).values()
 
-        # Set context
+        # Grab foods
+        queryFoods = Food.objects.filter(food_description__contains=query).values()
+
+        # Intialize foods array
+        foods = []
+
+        # Make array with foods
+        for food in foodHistory:
+
+            # Grab food
+            validFood = Food.objects.get(id=food['food_id'])
+
+            for food2 in queryFoods:
+                if (food2['id'] == food['food_id']):
+                    foods.append(validFood)
+
         context = {
-            "foods": data['foods']
+            "foods": foods
         }
 
-        return render(request, 'tracking/foodApiSearchResults.html', context)
+        return render(request, 'tracking/myPantry.html', context)
 
     except Exception as e:
         # Log error
@@ -219,6 +235,24 @@ def saveCustomFood(request):
         return render(request, 'tracking/error.html')
 
 
+def addFoodToEntry(request):
+
+    # Grab body from request
+    body = dict(request.POST.items())
+
+    # Grab today's entry for the user
+    today = DailyEntry.objects.filter(entry_date=date.today(), user__id=request.user.id)[0]
+
+    # Grab food
+    food = Food.objects.get(id=body['food'])
+
+    # Create new food history
+    newFoodHistory = FoodHistory(entry=today, food=food, quantity=float(body['quantity']))
+    newFoodHistory.save()
+
+    return redirect('/daily')
+
+
 def weeklyPageView(request):
     return render(request, 'tracking/weekly.html')
 
@@ -269,7 +303,6 @@ def updateUserInfoPageView(request):
         user.first_name = body['first_name']
         user.last_name = body['last_name']
         profile.phone = body['phone']
-        profile.birth_date = body['birth_date']
         profile.weight = float(body['weight'])
         profile.height = float(body['height'])
 
