@@ -1839,10 +1839,7 @@ vertical slots in both the header AND the body
     bottom: 0;
   }
 
-
-
 body {
-  margin: 40px 10px;
   padding: 0;
   font-family: Arial, Helvetica Neue, Helvetica, sans-serif;
   font-size: 14px;
