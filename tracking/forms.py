@@ -32,4 +32,4 @@ class ExtendedUserCreationForm(UserCreationForm):
 class ProfileForm(forms.ModelForm):
     class Meta:
         model = Profile
-        fields = ('comorbidity_ID', 'race_ID', 'gender_ID', 'phone', 'weight', 'height', 'birth_date')
+        fields = ('comorbidity', 'race', 'gender', 'phone', 'weight', 'height', 'birth_date')

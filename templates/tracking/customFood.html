@@ -4,33 +4,41 @@
 {% block content %}
 <br>
 <br>
-<h4>Add Custom Food</h4>
+<h4>Add Custom Food Item</h4>
 <form method='POST' action="{% url 'saveCustomFood' %}">
     {% csrf_token %}
     <label>Food Name:</label>
+    <br>
     <input required name='food_description' type = 'text'>
     <br>
     <label>Brand Name (optional):</label>
+    <br>
     <input type = 'text' name='brand_name'>
     <br>
     <label>Serving Size (optional):</label>
+    <br>
     <input step="0.01" type = 'number' name='serving_size'>
     <br>
     <label>Serving Size Units (optional):</label>
+    <br>
     <input type = 'text'name='serving_size_unit'>
     <br>
     <label>Protein Amount (grams):</label>
+    <br>
     <input required step="0.01" type = 'number' name='protien_g'>g
     <br>
     <label>Sodium Amount (milligrams):</label>
+    <br>
     <input required step="0.01" type = 'number' name='sodium_mg'>mg
     <br>
     <label>Phosphorus Amount (milligrams):</label>
+    <br>
     <input required step="0.01" type = 'number' name='phosphorus_mg'>mg
     <br>
     <label>Potassium Amount (milligrams):</label>
-    <input required step="0.01" type = 'number' name='potassium_mg'>mg
     <br>
+    <input required step="0.01" type = 'number' name='potassium_mg'>mg
+    <br><br>
     <button class ="button-17" style = "margin-bottom: 40px" role="button" type='submit'>Save Custom Food</button>
 </form>
 <br>

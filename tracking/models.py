@@ -30,9 +30,9 @@ class Gender(models.Model):
 
 class Profile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
-    comorbidity_ID = models.ForeignKey(Comorbidity, on_delete=models.DO_NOTHING)
-    race_ID = models.ForeignKey(Race, on_delete=models.DO_NOTHING)
-    gender_ID = models.ForeignKey(Gender, on_delete=models.DO_NOTHING)
+    comorbidity = models.ForeignKey(Comorbidity, on_delete=models.DO_NOTHING)
+    race = models.ForeignKey(Race, on_delete=models.DO_NOTHING)
+    gender = models.ForeignKey(Gender, on_delete=models.DO_NOTHING)
     phone = models.CharField(max_length=12)
     weight = models.DecimalField(max_digits=5, decimal_places=2)
     height = models.DecimalField(max_digits=5, decimal_places=2)
@@ -44,7 +44,7 @@ class Profile(models.Model):
         db_table = "user"
 
 class Lab(models.Model):
-    user_ID = models.ForeignKey(User, on_delete=models.CASCADE)
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
     lab_date = models.DateField(default=date.today, blank=True)
     blood_pressure = models.DecimalField(max_digits=5, decimal_places=2)
     potassium_level = models.DecimalField(max_digits=5, decimal_places=2)
@@ -55,7 +55,7 @@ class Lab(models.Model):
     blood_sugar_level = models.DecimalField(max_digits=5, decimal_places=2)
 
     def __str__(self) -> str:
-        return str(self.lab_date)
+        return f"{self.lab_date}, {self.user}"
     class Meta:
         db_table = "lab"
 
@@ -75,19 +75,19 @@ class Food(models.Model):
         db_table = "food"
 
 class DailyEntry(models.Model):
-    user_ID = models.ForeignKey(User, on_delete=models.CASCADE)
-    entry_date = models.DateField(default=date.today, blank=True)
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    entry_date = models.DateField(default=date.today(), blank=True)
     water_intake_liters = models.DecimalField(max_digits=4, decimal_places=2)
     foods = models.ManyToManyField(Food, through='FoodHistory')
 
     def __str__(self) -> str:
-        return self.entry_date
+        return f"{self.entry_date}, {self.user}"
     class Meta:
         db_table = "daily_entry"
 
 class FoodHistory(models.Model):
-    entry_ID = models.ForeignKey(DailyEntry, on_delete=models.CASCADE)
-    food_ID = models.ForeignKey(Food, on_delete=models.CASCADE)
+    entry = models.ForeignKey(DailyEntry, on_delete=models.CASCADE)
+    food = models.ForeignKey(Food, on_delete=models.CASCADE)
     quantity = models.DecimalField(max_digits=4, decimal_places=2)
 
     def __str__(self) -> str:

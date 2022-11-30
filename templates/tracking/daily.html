@@ -55,14 +55,14 @@
       <h5>Update Today's Water</h5>
       <br>
       <div style='display: inline;'>
-              <form action=''>
+              <form action="{% url 'updateWater' %}" method='POST'>
+                {% csrf_token %}
                   <label> Enter water intake in liters:</label>
                   <br>
-                  <input name="water" step='0.01' type = 'number' value=0>
+                  <input name="water" step='0.01' type = 'number' value={{ currentWaterLevel }}>
                   <br><br>
                   <button type ='submit' class = "button-17"> Submit </button>
               </form>
-
     </div>
       <br><br>
       <div>
@@ -70,14 +70,18 @@
             <h5>Sodium</h5>
                 <p>Your sodium is high</p>
                 <a href="{% url 'tips' %}#Sodium">Sodium Recommendations</a>
+            <br><br>
             <h5>Protein</h5>
                 <p>recommendations</p>
                 <a href="{% url 'tips' %}#Protein">Protein Recommendations</a>
+            <br><br>
             <h5>Water</h5>
                 <p>recommendations</p>
+            <br>
             <h5>Potassium</h5>
                 <p>recommendations</p>
                 <a href="{% url 'tips' %}#Potassium">Potassium Recommendations</a>
+            <br><br>
             <h5>Phosphorus</h5>
                 <p>recommendations</p>
                 <a href="{% url 'tips' %}#Phosphorus">Phosphorus Recommendations</a>

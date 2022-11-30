@@ -13,14 +13,16 @@
 </head>
 <body>
     <div>
-        <img src="{% static 'img/veggiebanner.jpeg'%}" alt="">
+        <img style="max-width:100%;" border="0" margin="0" padding="0" src="{% static 'img/veggiebanner.jpeg'%}" alt="">
     </div> 
     <br>
-    <a href="#Recipes">Jump to Recipes</a>
-    <a href="#Protein">Jump to Protein</a>
-    <a href="#Sodium">Jump to Sodium</a>
-    <a href="#Phosphorus">Jump to Phosphorus</a>
-    <a href="#Potassium">Jump to Potassium</a>
+    {% comment %} <ul>Jump to:
+        <li><a href="#Recipes">Recipes</a></li>
+        <li><a href="#Protein">Protein</a></li>
+        <li><a href="#Sodium">Sodium</a></li>
+        <li><a href="#Phosphorus">Phosphorus</a></li>
+        <li><a href="#Potassium">Potassium</a></li>
+    </ul> {% endcomment %}
     <div class="grid-container">
         <div class="container">
             <a id="Recipes">
@@ -123,8 +125,7 @@
         </div>
     </div>
     <div>
-        <p>These suggestions are given by the National Institute of Diabetes and Digestive and Kidney Diseases</p>
-        <a href="https://www.niddk.nih.gov/health-information/kidney-disease/chronic-kidney-disease-ckd/eating-nutrition" target="_blank" rel="noopener noreferrer">More information on these recommendations</a>
+        <p>These suggestions are given by the National Institute of Diabetes and Digestive and Kidney Diseases. <a href="https://www.niddk.nih.gov/health-information/kidney-disease/chronic-kidney-disease-ckd/eating-nutrition" target="_blank" rel="noopener noreferrer">Click here for more</a></p>
         <br>
     </div>
 
