@@ -91,7 +91,7 @@ def updateWaterLevel(request):
     today = DailyEntry.objects.filter(entry_date=date.today(), user__id=request.user.id)[0]
 
     # If entry exists, update it
-    if (len(today) > 0):
+    if (today):
 
         # Update water level
         today.water_intake_liters = float(body['water'])
@@ -152,7 +152,7 @@ def searchFoodResultsPageView(request):
         foodHistory = FoodHistory.objects.filter(entry__user=request.user).values()
 
         # Grab foods
-        queryFoods = Food.objects.filter(food_description__contains=query).values()
+        queryFoods = Food.objects.filter(food_description__contains=query).distinct().values()
 
         # Intialize foods array
         foods = []
@@ -164,7 +164,14 @@ def searchFoodResultsPageView(request):
             validFood = Food.objects.get(id=food['food_id'])
 
             for food2 in queryFoods:
-                if (food2['id'] == food['food_id']):
+
+                index = -1
+                try:
+                    index = foods.index(validFood)
+                except ValueError:
+                    index = -1
+
+                if (food2['id'] == food['food_id']) and (index == -1) :
                     foods.append(validFood)
 
         context = {
@@ -341,6 +348,70 @@ def weeklyPageView(request):
     return render(request, 'tracking/weekly.html')
 
 def monthlyPageView(request):
+
+    # Grab today's entry for the user
+    today = (DailyEntry.objects.filter(entry_date=date.today(), user__id=request.user.id)).values()
+
+    # If entry doesn't exist, create one
+    if (len(today) < 1):
+
+       # Grab current user
+        currentUser = User.objects.get(id=request.user.id)
+
+        # Add new entry
+        today = DailyEntry(user=currentUser, entry_date=date.today(), water_intake_liters=0)
+        today.save()
+
+    # Grab food histories
+    foodHistory = FoodHistory.objects.filter(entry__id=today[0]['id']).values()
+
+    ProteinTotal = 0
+    SodiumTotal = 0
+    PhosphorusTotal = 0
+    PotassiumTotal = 0
+
+    weight = float(request.user.profile.weight) * 0.453592
+
+    RecommendedProtein = weight * .6
+    RecommendedSodium = 2300
+    RecommendedPhosphorus = 1000
+    RecommendedPotassium = 3000
+    RecommendedWater = 0.00
+
+    if request.user.profile.gender.gender_description == "f":
+        RecommendedWater = 2.7
+    else :
+        RecommendedWater = 3.7
+
+    for item in foodHistory:
+        food = Food.objects.get(id=item['food_id'])
+
+        ProteinTotal += float(food.protein_g * item['quantity'])
+        SodiumTotal += float(food.sodium_mg * item['quantity'])
+        PhosphorusTotal += float(food.phosphorus_mg * item['quantity'])
+        PotassiumTotal += float(food.potassium_mg * item['quantity'])
+
+
+    WaterPercentage = (float(float(today[0]['water_intake_liters'])/RecommendedWater)) * 100
+    SodiumPercentage = (float(SodiumTotal/RecommendedSodium)) * 100
+    ProteinPercentage = (float(ProteinTotal/RecommendedProtein)) * 100
+    PotassiumPercentage = (float(PotassiumTotal/RecommendedPotassium)) * 100
+    PhosphorusPercentage = (float(PhosphorusTotal/RecommendedPhosphorus)) * 100
+
+    context = {
+        "currentWaterLevel": float(today[0]['water_intake_liters']),
+        "currentWaterPercentage": WaterPercentage,
+        "currentProteinLevel": ProteinTotal,
+        "currentProteinPercentage": ProteinPercentage,
+        "currentSodiumLevel": SodiumTotal,
+        "currentSodiumPercentage": SodiumPercentage,
+        "currentPotassiumLevel": PotassiumTotal,
+        "currentPotassiumPercentage": PotassiumPercentage,
+        "currentPhosphorusLevel": PhosphorusTotal,
+        "currentPhosphorusPercentage": PhosphorusPercentage,
+    }
+
+    return render(request, 'tracking/daily.html', context)
     return render(request, 'tracking/monthly.html')
 
 def register(request):
