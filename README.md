@@ -42,8 +42,8 @@ The KidneyHealth Web App is an app designed to combat the challenges faced by th
 
 Rachel Daniel<br>
 Full Stack Developer<br>
-[Rachel's LinkedIn]()<br>
-[Rachel's Github]()
+[Rachel's LinkedIn](https://www.linkedin.com/in/rachel-daniel1/)<br>
+[Rachel's Github](https://github.com/rachel-daniel)
 
 Brooke Woodland<br>
 Full Stack Developer<br>
