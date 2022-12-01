@@ -310,7 +310,7 @@ def addFoodToEntry(request):
     today = DailyEntry.objects.filter(entry_date=date.today(), user__id=request.user.id)[0]
 
     # If entry exists, update it
-    if (len(today) > 0):
+    if (today):
         # Grab food
         food = Food.objects.get(id=body['food'])
 
