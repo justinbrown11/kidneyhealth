@@ -1,12 +1,17 @@
 {% extends 'base.html' %}
 {% load static %}
 {% block content %}
-
+<br>
 <h3> {{ name }} </h3>
+<br>
 <form action="{% url 'editFoodHistory'%}" method='POST'>
     {% csrf_token %}
+ 
     <input type= 'hidden' value={{ id }} name='id'>
+    <label> Servings: </label>
+    
     <input type = 'number' step="0.01" value = {{ quantity }} name = "quantity">
+    <br><br>
     <button type = 'submit' class = "button-17">Submit Changes</button>
 </form>
 {% endblock %}
