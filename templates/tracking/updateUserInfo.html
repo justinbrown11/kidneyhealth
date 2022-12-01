@@ -8,14 +8,12 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link href="{% static 'css/style.css' %}" rel="stylesheet" />
-    {% block title %} user info {% endblock %}
+    {% comment %} {% block title %} user info {% endblock %} {% endcomment %}
 </head>
-<div
-      style="width: 20%; margin: auto; text-align: center; padding-top: 40px"
-    >
 <body>
-    <body>
-        <p>
+  <div style="margin: auto; text-align: center; padding-top: 40px">
+      <h2>Update My Info</h2>
+        <br>
             <form name="form" , method="post" action="{% url 'updateUserInfo' %}">
                 {% csrf_token %}
                 <input type="hidden" id="user" , name="user" value="{{user}}" />
@@ -71,11 +69,11 @@
               
                 <button class="button-17" style="margin: 10px" type="submit">Update</button>
               </form>
-        </p>
-    
-          <body>
-<body>
-</div>
+        </div>
+      </body>
+      <br>
+      <br>
+      <br>
     
 {% endblock %}
 
