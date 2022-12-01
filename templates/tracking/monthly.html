@@ -33,8 +33,14 @@
 <body>
 
 <script>
-console.log(document.getElementsByClassName('fc-toolbar-chunk'));
-//document.getElementsByClassName('fc-toolbar-chunk')[3].style.display = 'none'
+  onload = (event) => { 
+  console.log('working')
+console.log(document.querySelectorAll("div.fc-toolbar-chunk"));
+console.log(document.getElementsByClassName('fc-toolbar-chunk')[2]);
+buttons = document.getElementsByClassName('fc-toolbar-chunk')[2];
+buttons.style.visibility = 'hidden';
+};
+
 </script>
 
 
