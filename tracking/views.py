@@ -417,7 +417,7 @@ def monthlyPageView(request):
         "currentPhosphorusPercentage": PhosphorusPercentage,
     }
 
-    return render(request, 'tracking/daily.html', context)
+#     return render(request, 'tracking/daily.html', context)
     return render(request, 'tracking/monthly.html')
 
 def register(request):
