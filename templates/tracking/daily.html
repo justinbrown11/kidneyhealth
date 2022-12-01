@@ -181,10 +181,10 @@
           }
   
           // Protein
-          if ({{ currentProteinLevel }} < protein) {
+          if ({{ currentProteinLevel }} < {{recommendedProtein}}) {
               document.getElementById("proteinRec").innerHTML= "Keep it up! Try to get a little more protein today";
           }
-          else if ({{ currentProteinLevel }} > protein) {
+          else if ({{ currentProteinLevel }} > {{recommendedProtein}}) {
               document.getElementById("proteinRec").innerHTML = "Uh oh! Your protein intake is a little high for today. Try to limit protein for the rest of the day and tomorrow";
           }
           else {
