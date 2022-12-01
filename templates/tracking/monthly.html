@@ -32,7 +32,7 @@
     <br>
 <body>
 
-<script>
+{% comment %} <script>
   onload = (event) => { 
   console.log('working')
 console.log(document.querySelectorAll("div.fc-toolbar-chunk"));
@@ -41,7 +41,7 @@ buttons = document.getElementsByClassName('fc-toolbar-chunk')[2];
 buttons.style.visibility = 'hidden';
 };
 
-</script>
+</script> {% endcomment %}
 
 
 {% endblock %}
