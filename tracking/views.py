@@ -411,7 +411,6 @@ def monthlyPageView(request):
 
     json = dumps(context, default=str)
 
-#     return render(request, 'tracking/daily.html', context)
     return render(request, 'tracking/monthly.html', { "data": json })
 
 def register(request):
