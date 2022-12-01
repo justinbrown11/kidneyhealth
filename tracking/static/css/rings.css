@@ -2,7 +2,7 @@
   position: relative;
 }
 
-.ldBar path.mainline {
+/* .ldBar path.mainline {
   stroke-width: 6;
   stroke: #09f;
   stroke-linecap: round;
@@ -12,7 +12,7 @@
   stroke: #f1f2f3;
   stroke-linecap: round;
   filter:url(#custom-shadow);
-}
+} */
 
 .ldBar.label-center > .ldBar-label {
   position: absolute;
