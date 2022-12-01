@@ -85,7 +85,7 @@ WSGI_APPLICATION = 'kidneyhealth.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'test3',
+        'NAME': env('DB_NAME'),
         'USER': 'postgres',
         'PASSWORD': env('DB_PASSWORD'),
         'HOST': 'localhost'
