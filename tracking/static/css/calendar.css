@@ -750,7 +750,7 @@ A HORIZONTAL event
 .fc .fc-daygrid-day.fc-day-today {
       /* Change today to blue */
       background-color: white;
-      /* background-color: var(--fc-today-bg-color, white); */
+      background-color: var(--fc-today-bg-color, white);
       /* original: */
       /* background-color: rgba(255, 220, 40, 0.15);
       background-color: var(--fc-today-bg-color, rgba(255, 220, 40, 0.15)); */
