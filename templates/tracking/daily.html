@@ -33,7 +33,7 @@
     
       <div id="PotassiumRing" class="ldBar label-center" data-preset="circle" data-value="0"style="float:left; width: 19%;"><h4 style="text-align:center;">Potassium<h4></div>
  
-      <div id="PhosRing" class="ldBar label-center" data-preset="circle" data-value="0"style="float:left; width: 19%;"><h4 style="text-align:center;">Phosphorus<h4></div>
+      <div id="PhosRing" class="ldBar label-center" data-preset="circle" data-value="0" style="float:left; width: 19%;"><h4 style="text-align:center;">Phosphorus<h4></div>
     </div>
       <br>
       <br>
@@ -90,11 +90,11 @@
         </div>
       <script>
           // sample values to test functionality
-          let sodiumPct = 50;
-          let proteinPct = 75;
+          //let sodiumPct = 50;
+          //let proteinPct = 75;
           //let waterPctF = 99;
-          let kPct = 20;
-          let phosPct = 150;
+          //let kPct = 20;
+          //let phosPct = 150;
 
           const sodiumMin = 1495;
           const sodiumMax = 2300;
@@ -105,18 +105,18 @@
           const phosMin = 800;
           const phosMax = 1000;
 
-          var mySodium = 2500;
-          var myProtein = .6;
-          var myWater = {{ currentWaterLevel }};
-          var myK = 2700;
-          var myPhos = 700;
+          //var mySodium = 2500;
+          //var myProtein = .6;
+          //var myWater = {{ currentWaterLevel }};
+          //var myK = 2700;
+          //var myPhos = 700;
 
           // calculate current percentage
-           let sodiumPct = {{ SodiumPercent }};
-           let proteinPct = {{ ProteinPercent }};
-           let waterPct= {{ WaterPercent }};
-           let kPct = {{ PotassiumPercent }};
-           let phosPct = {{ PhosphorousPercent }};
+           var sodiumPct = {{ currentSodiumPercent }};
+           let proteinPct = {{ currentProteinPercent }};
+           var waterPct= {{ currentWaterPercent }};
+           let kPct = {{ currentPotassiumPercent }};
+           let phosPct = {{ currentPhosphorousPercent }};
   
           // scripts to write the load bars
           var sodiumBar = new ldBar("#SodiumRing");
