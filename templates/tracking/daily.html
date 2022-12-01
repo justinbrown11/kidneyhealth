@@ -153,11 +153,11 @@
         <td>{{food.protein}}g</td>
         <td>{{food.potassium}}mg</td>
         <td>{{food.phosphorus}}mg</td>
-        <td><a href="{% url 'editFoodHistoryView' id=food.id name=food.food_description quantity=food.quantity %}"><button class = "button-17">Edit</button></a></td>
+        <td><a href="{% url 'editFoodHistoryView' id=food.id name=food.food_description quantity=food.quantity %}"><button class = "button-17" style="height: 30px; width: 60px;">Edit</button></a></td>
         <td><form action="{% url 'removeFoodHistory' %}" method='POST'>
             {% csrf_token %}
         <input type= 'hidden' value={{ food.id }} name='id'>
-        <button type='submit' class = "button-17" style="height: 30px; width: 50px;">Delete</button>
+        <button type='submit' class = "button-17" style="height: 30px; width: 60px;">Delete</button>
         </form></td>
     </tr>
     {% endfor %}
