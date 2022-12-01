@@ -120,6 +120,20 @@
                   <button type ='submit' class = "button-17"> Submit </button>
               </form>
     </div>
+    <table class="table table-hover">
+        <thead>
+          <tr>
+            <th scope="col">Food</th>
+            <th scope="col">Servings</th>
+            <th scope="col">Sodium</th>
+            <th scope="col">Protein</th>
+            <th scope="col">Phosphorus</th>
+            <th scope="col">Potassium</th>
+            <th scope="col">Edit</th>
+            <th scope="col">Delete</th>
+          </tr>
+        </thead>
+        <tbody>
     {% for food in foods %}
     <p> {{ food.food_description}} </p>
     <p> {{ food.quantity}}</p>
