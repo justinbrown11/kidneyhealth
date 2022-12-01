@@ -12,156 +12,158 @@
 
 </head>
 <body>
-
-<br><br>
-    <ul class="nav justify-content-center">
-        <li class="nav-item">
-          <a class="nav-link active" aria-current="page" href={%url 'daily' %} style="background-color: lightgrey;  border-radius: 15px;">Today</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href={% url 'monthly' %}>This Month</a>
-        </li>
-      </ul>
-      <h1> Today's Dashboard </h1>
-      <br>
-    <div class="grid-container">
-        <div>
-            <div id="SodiumRing" class="lbBar label-center ring" data-stroke="green" data-stroke-width="6" data-preset="circle" data-value="0" ><h4 style="text-align:center;">Sodium</h4></div>
-                <div class="ring-text-container">
-                        <div class="levels">
-                        <p>{{ currentSodiumLevel }}mg /{{ recommendedSodium }}mg</p>
-                        <p id = 'sodiumRec'></p>
-                        <p id = 'sodiumTip'></p>
-                        <a id="sodiumLink" href="{% url 'tips' %}#Sodium">Sodium Recommendations</a>
-                    </div> 
+    <br><br>
+        <ul class="nav justify-content-center">
+            <li class="nav-item">
+            <a class="nav-link active" aria-current="page" href={%url 'daily' %} style="background-color: lightgrey;  border-radius: 15px;">Today</a>
+            </li>
+            <li class="nav-item">
+            <a class="nav-link" href={% url 'monthly' %}>This Month</a>
+            </li>
+        </ul>
+        <h1> Today's Dashboard </h1>
+        <br><br><br><br><br><br>
+        <div class="grid-container">
+            <div>
+                <div id="SodiumRing" class="lbBar label-center ring" data-stroke="green" data-stroke-width="6" data-preset="circle" data-value="0" ><h4 style="text-align:center;">Sodium</h4></div>
+                    <div class="ring-text-container">
+                            <div class="levels">
+                            <p>{{ currentSodiumLevel }}mg /{{ recommendedSodium }}mg</p>
+                            <p id = 'sodiumRec'></p>
+                            <p id = 'sodiumTip'></p>
+                            <a id="sodiumLink" href="{% url 'tips' %}#Sodium">Sodium Recommendations</a>
+                        </div> 
+                    </div>
                 </div>
+            <div>
+                <div id="ProteinRing" class="ldBar label-center ring" style="justify-self:center" data-stroke="pink" data-stroke-width="6" data-preset="circle" data-value="0"><h4 style="text-align:center;">Protein</h4></div>
+                    <div class="ring-text-container">
+                        <div class="levels">
+                            <p>{{ currentProteinLevel }}g /{{ recommendedProtein }}g</p>
+                            <p id = 'proteinRec'></p>
+                            <p id = 'proteinTip'></p>
+                            <a id="proteinLink" href="{% url 'tips' %}#Protein">Protein Recommendations</a>
+                        </div> 
+                    </div>
             </div>
-        <div>
-            <div id="ProteinRing" class="ldBar label-center ring" style="justify-self:center" data-stroke="pink" data-stroke-width="6" data-preset="circle" data-value="0"><h4 style="text-align:center;">Protein</h4></div>
-                <div class="ring-text-container">
-                    <div class="levels">
-                        <p>{{ currentProteinLevel }}g /{{ recommendedProtein }}g</p>
-                        <p id = 'proteinRec'></p>
-                        <p id = 'proteinTip'></p>
-                        <a id="proteinLink" href="{% url 'tips' %}#Protein">Protein Recommendations</a>
-                    </div> 
+            <div>
+                <div id="WaterRing" class="ldBar label-center ring" data-stroke="#09f" data-stroke-width="6" data-preset="circle" data-value="0"><h4 style="text-align:center;">Water</h4></div>
+                    <div class="ring-text-container">
+                        <div class="levels">
+                            <p>{{ currentWaterLevel }}L /{{ recommendedWater }}L</p>
+                            <p id = 'waterRec'></p>
+                            <p id = 'waterTip'></p>
+                            <a id="waterLink" href="https://www.mayoclinichealthsystem.org/hometown-health/speaking-of-health/tips-for-drinking-more-water" target="_blank" rel="noopener noreferrer">Tips for drinking more water</a>
+                        </div> 
+                    </div>
+                </div>
+            <div>
+                <div id="PotassiumRing" class="ldBar label-center ring" data-stroke="gold" data-stroke-width="6" data-preset="circle" data-value="0"><h4 style="text-align:center;">Potassium</h4></div>
+                    <div class="ring-text-container">
+                        <div class="levels">
+                            <p>{{ currentPotassiumLevel }}mg /{{ recommendedPotassium }}mg</p>
+                            <p id = 'potassiumRec'></p>
+                            <p id = 'potassiumTip'></p>
+                            <a id="potassiumLink" href="{% url 'tips' %}#Potassium">Potassium Recommendations</a>
+                        </div>
+                    </div>
+                </div>
+            <div>
+                <div id="PhosRing" class="ldBar label-center ring" data-stroke="purple" data-stroke-width="6" data-preset="circle" data-value="0"><h4 style="text-align:center;">Phosphorus</h4></div>
+                    <div class="ring-text-container">
+                        <div class="levels">
+                            <p>{{ currentPhosphorusLevel }}mg /{{ recommendedPhosphorus }}mg</p>
+                            <p id = 'phosphorusRec'></p>
+                            <p id = 'phosphorusTip'></p>
+                            <a id="phosphorusLink" href="{% url 'tips' %}#Phosphorus">Phosphorus Recommendations</a>
+                        </div>
+                    </div>
                 </div>
         </div>
         <div>
-            <div id="WaterRing" class="ldBar label-center ring" data-stroke="#09f" data-stroke-width="6" data-preset="circle" data-value="0"><h4 style="text-align:center;">Water</h4></div>
-                <div class="ring-text-container">
-                    <div class="levels">
-                        <p>{{ currentWaterLevel }}L /{{ recommendedWater }}L</p>
-                        <p id = 'waterRec'></p>
-                        <p id = 'waterTip'></p>
-                        <a id="waterLink" href="https://www.mayoclinichealthsystem.org/hometown-health/speaking-of-health/tips-for-drinking-more-water" target="_blank" rel="noopener noreferrer">Tips for drinking more water</a>
-                    </div> 
-                </div>
-            </div>
-        <div>
-            <div id="PotassiumRing" class="ldBar label-center ring" data-stroke="gold" data-stroke-width="6" data-preset="circle" data-value="0"><h4 style="text-align:center;">Potassium</h4></div>
-                <div class="ring-text-container">
-                    <div class="levels">
-                        <p>{{ currentPotassiumLevel }}mg /{{ recommendedPotassium }}mg</p>
-                        <p id = 'potassiumRec'></p>
-                        <p id = 'potassiumTip'></p>
-                        <a id="potassiumLink" href="{% url 'tips' %}#Potassium">Potassium Recommendations</a>
-                    </div>
-                </div>
-            </div>
-        <div>
-            <div id="PhosRing" class="ldBar label-center ring" data-stroke="purple" data-stroke-width="6" data-preset="circle" data-value="0"><h4 style="text-align:center;">Phosphorus</h4></div>
-                <div class="ring-text-container">
-                    <div class="levels">
-                        <p>{{ currentPhosphorusLevel }}mg /{{ recommendedPhosphorus }}mg</p>
-                        <p id = 'phosphorusRec'></p>
-                        <p id = 'phosphorusTip'></p>
-                        <a id="phosphorusLink" href="{% url 'tips' %}#Phosphorus">Phosphorus Recommendations</a>
-                    </div>
-                </div>
-            </div>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        </div>
+    <div>
+        <h5>Today's Foods</h5>
+        <br>
+        <table class="table table-hover">
+            <thead>
+            <tr>
+                <th scope="col">Food</th>
+                <th scope="col">Servings</th>
+                <th scope="col">Sodium</th>
+                <th scope="col">Protein</th>
+                <th scope="col">Phosphorus</th>
+                <th scope="col">Potassium</th>
+                <th scope="col">Edit</th>
+                <th scope="col">Delete</th>
+            </tr>
+            </thead>
+            <tbody>
+        {% for food in foods %}
+        <tr>
+            <td> {{ food.food_description}} </td>
+            <td> {{ food.quantity}}</td>
+            <td>{{food.sodium}}mg</td>
+            <td>{{food.protein}}g</td>
+            <td>{{food.potassium}}mg</td>
+            <td>{{food.phosphorus}}mg</td>
+            <td><a href="{% url 'editFoodHistoryView' id=food.id name=food.food_description quantity=food.quantity %}"><button class = "button-17" style="height: 30px; width: 60px;">Edit</button></a></td>
+            <td><form action="{% url 'removeFoodHistory' %}" method='POST'>
+                {% csrf_token %}
+            <input type= 'hidden' value={{ food.id }} name='id'>
+            <button type='submit' class = "button-17" style="height: 30px; width: 60px;">Delete</button>
+            </form></td>
+        </tr>
+        {% endfor %}
+
+        </tbody>
+        </table>
     </div>
     <div>
-      <br>
-      <br>
-      <br>
-    </div>
-<div>
-    <h5>Today's Foods</h5>
-    <br>
-    <table class="table table-hover">
-        <thead>
-        <tr>
-            <th scope="col">Food</th>
-            <th scope="col">Servings</th>
-            <th scope="col">Sodium</th>
-            <th scope="col">Protein</th>
-            <th scope="col">Phosphorus</th>
-            <th scope="col">Potassium</th>
-            <th scope="col">Edit</th>
-            <th scope="col">Delete</th>
-        </tr>
-        </thead>
-        <tbody>
-    {% for food in foods %}
-    <tr>
-        <td> {{ food.food_description}} </td>
-        <td> {{ food.quantity}}</td>
-        <td>{{food.sodium}}mg</td>
-        <td>{{food.protein}}g</td>
-        <td>{{food.potassium}}mg</td>
-        <td>{{food.phosphorus}}mg</td>
-        <td><a href="{% url 'editFoodHistoryView' id=food.id name=food.food_description quantity=food.quantity %}"><button class = "button-17" style="height: 30px; width: 60px;">Edit</button></a></td>
-        <td><form action="{% url 'removeFoodHistory' %}" method='POST'>
-            {% csrf_token %}
-        <input type= 'hidden' value={{ food.id }} name='id'>
-        <button type='submit' class = "button-17" style="height: 30px; width: 60px;">Delete</button>
-        </form></td>
-    </tr>
-    {% endfor %}
-
-    </tbody>
-    </table>
-</div>
-<div>
-    <br>
-    <br>
-    <br>
-</div>
-<div>
-    <div style = "display:inline; float: left; width: 49%;">
-        <h5>Add Today's Foods</h5>
         <br>
-        <div style='display: inline;'>
-            <form action="{% url 'searchFoodQuery' %}">
-                <label> Search My Pantry </label>
-                <br>
-                <input name="query" type = 'text'>
-                <br> <br>
-                <button type ='submit' class = "button-17"> Search </button>
-            </form>
+        <br>
+        <br>
+    </div>
+    <div>
+        <div style = "display:inline; float: left; width: 49%;">
+            <h5>Add Today's Foods</h5>
+            <br>
+            <div style='display: inline;'>
+                <form action="{% url 'searchFoodQuery' %}">
+                    <label> Search My Pantry </label>
+                    <br>
+                    <input name="query" type = 'text'>
+                    <br> <br>
+                    <button type ='submit' class = "button-17"> Search </button>
+                </form>
+            </div>
+        </div>
+        <div style = "display:inline; float: left; width: 49%;">
+            <h5>Update Today's Water</h5>
+            <br>
+            <div style='display: inline;'>
+                <form action="{% url 'updateWater' %}" method='POST'>
+                {% csrf_token %}
+                    <label> Enter water intake in liters:</label>
+                    <br>
+                    <input name="water" step='0.01' type = 'number' value={{ currentWaterLevel }}>
+                    <br><br>
+                    <button type ='submit' class = "button-17"> Submit </button>
+                </form>
+            </div>
         </div>
     </div>
-    <div style = "display:inline; float: left; width: 49%;">
-        <h5>Update Today's Water</h5>
-        <br>
-        <div style='display: inline;'>
-            <form action="{% url 'updateWater' %}" method='POST'>
-            {% csrf_token %}
-                <label> Enter water intake in liters:</label>
-                <br>
-                <input name="water" step='0.01' type = 'number' value={{ currentWaterLevel }}>
-                <br><br>
-                <button type ='submit' class = "button-17"> Submit </button>
-            </form>
-        </div>
     </div>
-</div>
-</div>
-<div>
-    <br>
-    <br>
-</div>
+    <div>
+        <br>
+        <br>
+    </div>
 </body>
 <script>
     // sample values to test functionality

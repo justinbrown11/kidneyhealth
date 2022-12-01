@@ -25,17 +25,6 @@
   font-weight: 500;
 }
 
-.grid-container {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(125px, 1fr));
-  grid-auto-rows: minmax(200px,auto);
-  gap: 10px;
-  /* background-color: aquamarine; */
-  justify-items: center;
-  align-items: center;
-  /* grid-gap: 5px; */
-  /* padding: -10px; */
-}
 
 .ring {
   float:left; 
@@ -52,4 +41,18 @@
 
 .levels {
   text-align:center;
+}
+
+.grid-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(125px, 1fr));
+  grid-auto-rows: 200px;
+  gap: 10px;
+  /* background-color: aquamarine; */
+  justify-items: center;
+  align-items: center;
+  align-content:space-between;
+  justify-content:space-between;
+  /* grid-gap: 5px; */
+  /* padding: -10px; */
 }

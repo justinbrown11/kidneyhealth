@@ -21066,7 +21066,7 @@ document.addEventListener('DOMContentLoaded', function() {
     headerToolbar: {
       left: 'today prev,next',
       center: 'title',
-    //   right: 'dayGridMonth' // get rid of the week and day views
+      right: 'dayGridMonth'
     },
     initialView: 'dayGridMonth',
     views: {
