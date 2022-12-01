@@ -35,7 +35,7 @@
   display: block;
   text-align:left;
   margin-top:150px;
-  height:100px;
+  min-height:100px;
 }
 
 .levels {
@@ -51,9 +51,13 @@
   align-items: center;
   align-content: center;
   justify-content: center;
-  margin-bottom: 50px;
+  margin-bottom: 40px;
 }
 
 .table-style {
-  margin-top: 50px;
+  margin-top: 40px;
+}
+
+.footer-fix {
+  margin-bottom: 200px;
 }
