@@ -2,9 +2,15 @@ from django.db import models
 from django.contrib.auth.models import User
 from datetime import date
 
-# Create your models here.
 
 class Comorbidity(models.Model):
+    """
+    The Comorbidity model
+    \n
+    Fields:
+    - id
+    - comorbid_description
+    """
     comorbid_description = models.CharField(max_length=20)
 
     def __str__(self) -> str:
@@ -13,6 +19,13 @@ class Comorbidity(models.Model):
         db_table = "comorbidity"
 
 class Race(models.Model):
+    """
+    The Race model
+    \n
+    Fields:
+    - id
+    - race_description
+    """
     race_description = models.CharField(max_length=20)
 
     def __str__(self) -> str:
@@ -21,6 +34,13 @@ class Race(models.Model):
         db_table = "race"
 
 class Gender(models.Model):
+    """
+    The Gender model
+    \n
+    Fields:
+    - id
+    - gender_description
+    """
     gender_description = models.CharField(max_length=10)
 
     def __str__(self) -> str:
@@ -29,6 +49,19 @@ class Gender(models.Model):
         db_table = "gender"
 
 class Profile(models.Model):
+    """
+    The User Profile model
+    \n
+    Fields:
+    - user
+    - comorbidity
+    - race
+    - gender
+    - phone
+    - weight
+    - height
+    - birth_date
+    """
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     comorbidity = models.ForeignKey(Comorbidity, on_delete=models.DO_NOTHING)
     race = models.ForeignKey(Race, on_delete=models.DO_NOTHING)
@@ -44,6 +77,21 @@ class Profile(models.Model):
         db_table = "user"
 
 class Lab(models.Model):
+    """
+    The Lab model
+    \n
+    Fields:
+    - id
+    - user
+    - lab_date
+    - blood_pressure
+    - potassium_level
+    - phosphorous_level
+    - sodium_level
+    - creatinine_level
+    - albumin_level
+    - blood_sugar_level
+    """
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     lab_date = models.DateField(default=date.today, blank=True)
     blood_pressure = models.DecimalField(max_digits=5, decimal_places=2)
@@ -60,6 +108,20 @@ class Lab(models.Model):
         db_table = "lab"
 
 class Food(models.Model):
+    """
+    The Food model
+    \n
+    Fields:
+    - id
+    - food_description
+    - brand_name
+    - serving_size
+    - serving_size_unit
+    - protein_g
+    - phosphorus_mg
+    - potassium_mg
+    - sodium_mg
+    """
     food_description = models.CharField(max_length=50)
     brand_name = models.CharField(max_length=40, blank=True)
     serving_size = models.DecimalField(max_digits=6, decimal_places=2, blank=True)
@@ -75,6 +137,16 @@ class Food(models.Model):
         db_table = "food"
 
 class DailyEntry(models.Model):
+    """
+    The DailyEntry model
+    \n
+    Fields:
+    - id
+    - user
+    - entry_date
+    - water_intake_liters
+    - foods
+    """
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     entry_date = models.DateField(default=date.today(), blank=True)
     water_intake_liters = models.DecimalField(max_digits=4, decimal_places=2)
@@ -86,6 +158,15 @@ class DailyEntry(models.Model):
         db_table = "daily_entry"
 
 class FoodHistory(models.Model):
+    """
+    The FoodHistory model
+    \n
+    Fields:
+    - id
+    - user
+    - food
+    - quantity
+    """
     entry = models.ForeignKey(DailyEntry, on_delete=models.CASCADE)
     food = models.ForeignKey(Food, on_delete=models.CASCADE)
     quantity = models.DecimalField(max_digits=4, decimal_places=2)
