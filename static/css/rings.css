@@ -2,18 +2,6 @@
   position: relative;
 }
 
-/* .ldBar path.mainline {
-  stroke-width: 6;
-  stroke: #09f;
-  stroke-linecap: round;
-} 
-.ldBar path.baseline {
-  stroke-width: 14;
-  stroke: #f1f2f3;
-  stroke-linecap: round;
-  filter:url(#custom-shadow);
-} */
-
 .ldBar.label-center > .ldBar-label {
   position: absolute;
   top: 50%;
