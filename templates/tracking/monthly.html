@@ -34,11 +34,9 @@
 
 <script>
   onload = (event) => { 
-  console.log('working')
-console.log(document.querySelectorAll("div.fc-toolbar-chunk"));
-console.log(document.getElementsByClassName('fc-toolbar-chunk')[2]);
-buttons = document.getElementsByClassName('fc-toolbar-chunk')[2];
-buttons.style.visibility = 'hidden';
+    console.log('working')
+    console.log(document.getElementsByClassName('fc-daygrid-day fc-day fc-day-tue fc-day-today')[0]);
+    document.getElementsByClassName('fc-daygrid-day fc-day fc-day-tue fc-day-today')[0].style.background-color = "transparent !important;"
 };
 
 </script> 
