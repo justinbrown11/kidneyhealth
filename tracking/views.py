@@ -20,6 +20,16 @@ def dailyPageView(request):
     # Grab today's entry for the user
     today = (DailyEntry.objects.filter(entry_date=date.today(), user__id=request.user.id)).values()
 
+    # If entry doesn't exist, create one
+    if (len(today) < 1):
+
+       # Grab current user
+        currentUser = User.objects.get(id=request.user.id)
+
+        # Add new entry
+        today = DailyEntry(user=currentUser, entry_date=date.today(), water_intake_liters=0)
+        today.save()
+
     # Grab food histories
     foodHistory = FoodHistory.objects.filter(entry__id=today[0]['id']).values()
 
@@ -28,12 +38,13 @@ def dailyPageView(request):
     PhosphorusTotal = 0
     PotassiumTotal = 0
 
-    weight = float((request.user.profile.weight) * 0.453592)
+    weight = float(request.user.profile.weight) * 0.453592
 
     RecommendedProtein = weight * .6
     RecommendedSodium = 2300
     RecommendedPhosphorus = 1000
     RecommendedPotassium = 3000
+    RecommendedWater = 0.00
 
     if request.user.profile.gender.gender_description == "f":
         RecommendedWater = 2.7
@@ -43,30 +54,28 @@ def dailyPageView(request):
     for item in foodHistory:
         food = Food.objects.get(id=item['food_id'])
 
-        ProteinTotal+=(food.protein_g * item['quantity'])
-        SodiumTotal+=(food.sodium_mg * item['quantity'])
-        PhosphorusTotal+=(food.phosphorus_mg * item['quantity'])
-        PotassiumTotal+=(food.potassium_mg * item['quantity'])
+        ProteinTotal += float(food.protein_g * item['quantity'])
+        SodiumTotal += float(food.sodium_mg * item['quantity'])
+        PhosphorusTotal += float(food.phosphorus_mg * item['quantity'])
+        PotassiumTotal += float(food.potassium_mg * item['quantity'])
 
 
-    WaterPercentage = (float(today[0]['water_intake_liters']/RecommendedWater)) * 100 if len(today) > 0 else 0
-    SodiumPercentage = (float(SodiumTotal/RecommendedSodium)) * 100 if len(today) > 0 else 0
-    ProteinPercentage = (float(ProteinTotal/RecommendedProtein)) * 100 if len(today) > 0 else 0
-    PotassiumPercentage = (float(PotassiumTotal/RecommendedPotassium)) * 100 if len(today) > 0 else 0
-    PhosphorusPercentage = (float(PhosphorusTotal/RecommendedPhosphorus)) * 100 if len(today) > 0 else 0
+    WaterPercentage = (float(float(today[0]['water_intake_liters'])/RecommendedWater)) * 100
+    SodiumPercentage = (float(SodiumTotal/RecommendedSodium)) * 100
+    ProteinPercentage = (float(ProteinTotal/RecommendedProtein)) * 100
+    PotassiumPercentage = (float(PotassiumTotal/RecommendedPotassium)) * 100
+    PhosphorusPercentage = (float(PhosphorusTotal/RecommendedPhosphorus)) * 100
 
-
-    # Set water level
     context = {
-        "currentWaterLevel": float(today[0]['water_intake_liters'] if len(today) > 0 else 0),
+        "currentWaterLevel": float(today[0]['water_intake_liters']),
         "currentWaterPercentage": WaterPercentage,
-        "currentProteinLevel": float(today[0]['protein_g'] if len(today) > 0 else 0),
+        "currentProteinLevel": ProteinTotal,
         "currentProteinPercentage": ProteinPercentage,
-        "currentSodiumLevel": float(today[0]['sodium_mg'] if len(today) > 0 else 0),
+        "currentSodiumLevel": SodiumTotal,
         "currentSodiumPercentage": SodiumPercentage,
-        "currentPotassiumLevel": float(today[0]['potassium_mg'] if len(today) > 0 else 0),
+        "currentPotassiumLevel": PotassiumTotal,
         "currentPotassiumPercentage": PotassiumPercentage,
-        "currentPhosphorusLevel": float(today[0]['phosphorus_mg'] if len(today) > 0 else 0),
+        "currentPhosphorusLevel": PhosphorusTotal,
         "currentPhosphorusPercentage": PhosphorusPercentage,
     }
 
@@ -81,9 +90,21 @@ def updateWaterLevel(request):
     # Grab today's entry for the user
     today = DailyEntry.objects.filter(entry_date=date.today(), user__id=request.user.id)[0]
 
-    # Update water level
-    today.water_intake_liters = float(body['water'])
-    today.save()
+    # If entry exists, update it
+    if (len(today) > 0):
+
+        # Update water level
+        today.water_intake_liters = float(body['water'])
+        today.save()
+
+    # No entry exists, create one
+    else:
+        # Grab current user
+        currentUser = User.objects.get(id=request.user.id)
+
+        # Add new entry
+        newEntry = DailyEntry(user=currentUser, entry_date=date.today(), water_intake_liters=float(body['water']))
+        newEntry.save()
 
     return redirect('/daily')
 
@@ -288,12 +309,30 @@ def addFoodToEntry(request):
     # Grab today's entry for the user
     today = DailyEntry.objects.filter(entry_date=date.today(), user__id=request.user.id)[0]
 
-    # Grab food
-    food = Food.objects.get(id=body['food'])
+    # If entry exists, update it
+    if (len(today) > 0):
+        # Grab food
+        food = Food.objects.get(id=body['food'])
 
-    # Create new food history
-    newFoodHistory = FoodHistory(entry=today, food=food, quantity=float(body['quantity']))
-    newFoodHistory.save()
+        # Create new food history
+        newFoodHistory = FoodHistory(entry=today, food=food, quantity=float(body['quantity']))
+        newFoodHistory.save()
+
+    # Entry doesn't exist, create one
+    else:
+        # Grab current user
+        currentUser = User.objects.get(id=request.user.id)
+
+        # Add new entry
+        newEntry = DailyEntry(user=currentUser, entry_date=date.today(), water_intake_liters=0)
+        newEntry.save()
+
+        # Grab food
+        food = Food.objects.get(id=body['food'])
+
+        # Create new food history
+        newFoodHistory = FoodHistory(entry=newEntry, food=food, quantity=float(body['quantity']))
+        newFoodHistory.save()
 
     return redirect('/daily')
 
