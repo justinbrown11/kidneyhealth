@@ -128,23 +128,24 @@
     <br>
     <br>
 </div>
+<div>
     <div style = "display:inline; float: left; width: 49%;">
         <h5>Add Today's Foods</h5>
         <br>
         <div style='display: inline;'>
-                <form action="{% url 'searchFoodQuery' %}">
-                    <label> Search My Pantry </label>
-                    <br>
-                    <input name="query" type = 'text'>
-                    <br> <br>
-                    <button type ='submit' class = "button-17"> Search </button>
-                </form>
-      </div>
+            <form action="{% url 'searchFoodQuery' %}">
+                <label> Search My Pantry </label>
+                <br>
+                <input name="query" type = 'text'>
+                <br> <br>
+                <button type ='submit' class = "button-17"> Search </button>
+            </form>
+        </div>
     </div>
-<div style = "display:inline; float: left; width: 49%;">
-    <h5>Update Today's Water</h5>
-    <br>
-    <div style='display: inline;'>
+    <div style = "display:inline; float: left; width: 49%;">
+        <h5>Update Today's Water</h5>
+        <br>
+        <div style='display: inline;'>
             <form action="{% url 'updateWater' %}" method='POST'>
             {% csrf_token %}
                 <label> Enter water intake in liters:</label>
@@ -153,211 +154,208 @@
                 <br><br>
                 <button type ='submit' class = "button-17"> Submit </button>
             </form>
-       </div>
-    </div>
-
-    <br><br>
-    <div>
-        <br>
-        <br>
-        <br>
+        </div>
     </div>
 </div>
+</div>
+<div>
+    <br>
+    <br>
+</div>
 </body>
-      <br><br>
-      <script>
-          // sample values to test functionality
-          //let sodiumPct = 50;
-          //let proteinPct = 75;
-          //let waterPctF = 99;
-          //let kPct = 20;
-          //let phosPct = 150;
-
-          const sodiumMin = 1495;
-          const sodiumMax = 2300;
-          const protein = 0.6;
-          const water = 3.7;
-          const kMin = 2500;
-          const kMax = 3000;
-          const phosMin = 800;
-          const phosMax = 1000;
-
-          //var mySodium = 2500;
-          //var myProtein = .6;
-          //var myWater = {{ currentWaterLevel }};
-          //var myK = 2700;
-          //var myPhos = 700;
-
-          // calculate current percentage
-           var sodiumPct = {{ currentSodiumPercentage }};
-           var proteinPct = {{ currentProteinPercentage }};
-           var waterPct= {{ currentWaterPercentage }};
-           var kPct = {{ currentPotassiumPercentage }};
-           var phosPct = {{ currentPhosphorusPercentage }};
-
-           //console.log(sodiumPct);
-
-          // scripts to write the load bars
-          var sodiumBar = new ldBar("#SodiumRing");
-          var bar1 = document.getElementById('SodiumRing').ldBar;
-          sodiumBar.set(sodiumPct);
-  
-          var proteinBar = new ldBar("#ProteinRing");
-          var bar2 = document.getElementById('ProteinRing').ldBar;
-          proteinBar.set(proteinPct);
-  
-          var waterBar = new ldBar("#WaterRing");
-          var bar3 = document.getElementById('WaterRing').ldBar;
-          waterBar.set(waterPct);
-  
-          var kBar = new ldBar("#PotassiumRing");
-          var bar4 = document.getElementById('PotassiumRing').ldBar;
-          kBar.set(kPct);
-  
-          var phosBar = new ldBar("#PhosRing");
-          var bar5 = document.getElementById('PhosRing').ldBar;
-          phosBar.set(phosPct);
-          
-      </script>
 <script>
-          // Constants for daily recommended amounts
+    // sample values to test functionality
+    //let sodiumPct = 50;
+    //let proteinPct = 75;
+    //let waterPctF = 99;
+    //let kPct = 20;
+    //let phosPct = 150;
 
-  
-          // // input variables for user data
-          // let mySodium = parseInt(document.getElementById("SodiumValue").innerHTML);
-          // let myProtein = parseInt(document.getElementById("ProteinValue").innerHTML);
-          // let myWater = parseInt(document.getElementById("WaterValue").innerHTML);
-          // let myK = parseInt(document.getElementById("PotassiumValue").innerHTML);
-          // let myPhos = parseInt(document.getElementById("PhosValue").innerHTML);
-          // let gender = '';
+    const sodiumMin = 1495;
+    const sodiumMax = 2300;
+    const protein = 0.6;
+    const water = 3.7;
+    const kMin = 2500;
+    const kMax = 3000;
+    const phosMin = 800;
+    const phosMax = 1000;
 
-  
-          // Sodium
-          // Default to show nothing
-          if ({{ currentSodiumLevel }} == 0) {
-            document.getElementById("sodiumTip").innerHTML = "";
-            document.getElementById("sodiumRec").innerHTML = "";
-            document.getElementById("sodiumLink").style.display = "none";
-          }
-          else if ({{ currentSodiumLevel }} < sodiumMin) {
-              document.getElementById("sodiumTip").innerHTML = "Your sodium levels are a little low for today. Try to get some more to get within a healthy range";
-              document.getElementById("sodiumRec").innerHTML = 'Below Recommended';
-              document.getElementById("sodiumRec").style.color = "gold";
-              document.getElementById("sodiumLink").style.display = "block";
-          }
-          else if ({{ currentSodiumLevel }} > sodiumMax) {
-              document.getElementById("sodiumTip").innerHTML ="Oops! Your sodium intake is above the recommended range. Try to limit sodium for the rest of the day and tomorrow";
-              document.getElementById("sodiumRec").innerHTML = "Above Recommended"; 
-              document.getElementById("sodiumRec").style.color = "#C21807"; 
-              document.getElementById("sodiumLink").style.display = "block";
-          }
-          else if ({{ currentSodiumLevel }} > sodiumMin && {{ currentSodiumLevel }} < sodiumMax) {
-              
-              document.getElementById("sodiumTip").innerHTML = "Nice! Keep your sodium between 1495-2300mg to stay in range for today";
-              document.getElementById("sodiumRec").innerHTML = "In Range of Recommended";
-              document.getElementById("sodiumRec").style.color = "#3BB143"; 
-              document.getElementById("sodiumLink").style.display = "none";
-          }
-  
-          // Protein
-          if ({{ currentProteinLevel }} == 0) {
-            document.getElementById("proteinRec").innerHTML = "";
-            document.getElementById("proteinTip").innerHTML = "";
-            document.getElementById("proteinLink").style.display = "none";
-          }
-          else if ({{ currentProteinLevel }} < {{recommendedProtein}}) {
-              document.getElementById("proteinTip").innerHTML= "Keep it up! Try to get a little more protein today";
-              document.getElementById("proteinRec").innerHTML= "Below Recommended";
-              document.getElementById("proteinRec").style.color = "gold";
-              document.getElementById("proteinLink").style.display = "block";
-          }
-          else if ({{ currentProteinLevel }} > {{recommendedProtein}}) {
-              document.getElementById("proteinTip").innerHTML = "Uh oh! Your protein intake is a little high for today. Try to limit protein for the rest of the day and tomorrow";
-              document.getElementById("proteinRec").innerHTML= "Above Recommended";
-              document.getElementById("proteinRec").style.color = "#C21807"; 
-              document.getElementById("proteinLink").style.display = "block";
-          }
-          else {
-              document.getElementById("proteinTip").innerHTML ="Good eating! Your protein level is exactly where it should be for today!";
-              document.getElementById("proteinRec").innerHTML= "In Range of Recommended";
-              document.getElementById("proteinRec").style.color = "#3BB143"; 
-              document.getElementById("proteinLink").style.display = "none";
-          }
-  
-          // Water
-          if ({{ currentWaterLevel }} == 0) {
-            document.getElementById("waterRec").innerHTML = "";
-            document.getElementById("waterTip").innerHTML = "";
-            document.getElementById("waterLink").style.display = "none";
-          }
-          else if ({{ currentWaterLevel }} < {{recommendedWater}}) {
-              document.getElementById("waterTip").innerHTML ="Keep drinking! More water will help your kidneys!";
-              document.getElementById("waterRec").innerHTML= "Below Recommended";
-              document.getElementById("waterRec").style.color = "gold";
-              document.getElementById("waterLink").style.display = "block";
-          }
-          else if ({{ currentWaterLevel }} > {{recommendedWater}}) {
-              document.getElementById("waterTip").innerHTML="Careful! Your water intake is a little high for today.";
-              document.getElementById("waterRec").style.color = "#C21807"; 
-              document.getElementById("waterRec").innerHTML="Above Recommended";
-              document.getElementById("waterLink").style.display = "block";
-          }
-          else {
-              document.getElementById("waterTip").innerHTML="Great job! You've had just enough water for today";
-              document.getElementById("waterRec").innerHTML="In Range of Recommended";
-              document.getElementById("waterRec").style.color = "#3BB143"; 
-              document.getElementById("waterLink").style.display = "none";
-          }
-      
-          // Potassium
-          if ({{ currentPotassiumLevel }} == 0) {
-            document.getElementById("potassiumRec").innerHTML = "";
-            document.getElementById("potassiumTip").innerHTML = "";
-            document.getElementById("potassiumLink").style.display = "none";
-          }
-          else if ({{ currentPotassiumLevel }}  < kMin) {
-              document.getElementById("potassiumTip").innerHTML = "Looks like your potassium is a little low. Try to get some more today to get it to a healthy range!";
-              document.getElementById("potassiumRec").style.color = "gold";
-              document.getElementById("potassiumRec").innerHTML = "Below Recommended";
-              document.getElementById("potassiumLink").style.display = "block";
-          } 
-          else if ({{ currentPotassiumLevel }}  > kMax) {
-              document.getElementById("potassiumTip").innerHTML = "Careful! Your potassium levels are high for today. Try to limit potassium for the rest of the day and tomorrow";
-              document.getElementById("potassiumRec").style.color = "#C21807";
-              document.getElementById("potassiumRec").innerHTML = "Above Recommended"; 
-              document.getElementById("potassiumLink").style.display = "block";
-          }
-          else if ({{ currentPotassiumLevel }}  > kMin && {{ currentPotassiumLevel }}  < kMax) {
-              document.getElementById("potassiumTip").innerHTML = "Well done! Your potassium is within the healthy range";
-              document.getElementById("potassiumRec").innerHTML = "In Range of Recommended";
-              document.getElementById("potassiumRec").style.color = "#3BB143"; 
-              document.getElementById("potassiumLink").style.display = "none";
-          }
-  
-          // Phosphorus
-          if ({{ currentPhosphorusLevel }} == 0) {
-            document.getElementById("phosphorusTip").innerHTML = "";
-            document.getElementById("phosphorusRec").innerHTML = "";
-            document.getElementById("phosphorusLink").style.display = "none";
-          }
-          else if ({{ currentPhosphorusLevel }}  < phosMin) {
-              document.getElementById("phosphorusTip").innerHTML = "Try to get a little more phosphorus today to get to a healthy range!";
-              document.getElementById("phosphorusRec").innerHTML = "Below Recommended";
-              document.getElementById("phosphorusRec").style.color = "gold";
-              document.getElementById("phosphorusLink").style.display = "block";
-          } 
-          else if ({{ currentPhosphorusLevel }}  > phosMax) {
-              document.getElementById("phosphorusTip").innerHTML = "Hmm, looks like you had a little too much phosphorus today. Try to limit phosphorus for the rest of today and tomorrow";
-              document.getElementById("phosphorusRec").style.color = "#C21807";
-              document.getElementById("phosphorusRec").innerHTML = "Above Recommended"; 
-              document.getElementById("phosphorusLink").style.display = "block";
-          }
-          else if ({{ currentPhosphorusLevel }}  > phosMin && {{ currentPhosphorusLevel }} < phosMax) {
-              document.getElementById("phosphorusTip").innerHTML = "Look at you! Great job keeping phosphorus in a healthy range";
-              document.getElementById("phosphorusRec").style.color = "#3BB143";
-              document.getElementById("phosphorusRec").innerHTML = "In Range of Recommended";
-              document.getElementById("phosphorusLink").style.display = "none";
-          } 
-      </script>
+    //var mySodium = 2500;
+    //var myProtein = .6;
+    //var myWater = {{ currentWaterLevel }};
+    //var myK = 2700;
+    //var myPhos = 700;
+
+    // calculate current percentage
+    var sodiumPct = {{ currentSodiumPercentage }};
+    var proteinPct = {{ currentProteinPercentage }};
+    var waterPct= {{ currentWaterPercentage }};
+    var kPct = {{ currentPotassiumPercentage }};
+    var phosPct = {{ currentPhosphorusPercentage }};
+
+    //console.log(sodiumPct);
+
+    // scripts to write the load bars
+    var sodiumBar = new ldBar("#SodiumRing");
+    var bar1 = document.getElementById('SodiumRing').ldBar;
+    sodiumBar.set(sodiumPct);
+
+    var proteinBar = new ldBar("#ProteinRing");
+    var bar2 = document.getElementById('ProteinRing').ldBar;
+    proteinBar.set(proteinPct);
+
+    var waterBar = new ldBar("#WaterRing");
+    var bar3 = document.getElementById('WaterRing').ldBar;
+    waterBar.set(waterPct);
+
+    var kBar = new ldBar("#PotassiumRing");
+    var bar4 = document.getElementById('PotassiumRing').ldBar;
+    kBar.set(kPct);
+
+    var phosBar = new ldBar("#PhosRing");
+    var bar5 = document.getElementById('PhosRing').ldBar;
+    phosBar.set(phosPct);
+    
+</script>
+<script>
+    // Constants for daily recommended amounts
+
+
+    // // input variables for user data
+    // let mySodium = parseInt(document.getElementById("SodiumValue").innerHTML);
+    // let myProtein = parseInt(document.getElementById("ProteinValue").innerHTML);
+    // let myWater = parseInt(document.getElementById("WaterValue").innerHTML);
+    // let myK = parseInt(document.getElementById("PotassiumValue").innerHTML);
+    // let myPhos = parseInt(document.getElementById("PhosValue").innerHTML);
+    // let gender = '';
+
+
+    // Sodium
+    // Default to show nothing
+    if ({{ currentSodiumLevel }} == 0) {
+    document.getElementById("sodiumTip").innerHTML = "";
+    document.getElementById("sodiumRec").innerHTML = "";
+    document.getElementById("sodiumLink").style.display = "none";
+    }
+    else if ({{ currentSodiumLevel }} < sodiumMin) {
+        document.getElementById("sodiumTip").innerHTML = "Your sodium levels are a little low for today. Try to get some more to get within a healthy range";
+        document.getElementById("sodiumRec").innerHTML = 'Below Recommended';
+        document.getElementById("sodiumRec").style.color = "gold";
+        document.getElementById("sodiumLink").style.display = "block";
+    }
+    else if ({{ currentSodiumLevel }} > sodiumMax) {
+        document.getElementById("sodiumTip").innerHTML ="Oops! Your sodium intake is above the recommended range. Try to limit sodium for the rest of the day and tomorrow";
+        document.getElementById("sodiumRec").innerHTML = "Above Recommended"; 
+        document.getElementById("sodiumRec").style.color = "#C21807"; 
+        document.getElementById("sodiumLink").style.display = "block";
+    }
+    else if ({{ currentSodiumLevel }} > sodiumMin && {{ currentSodiumLevel }} < sodiumMax) {
+        
+        document.getElementById("sodiumTip").innerHTML = "Nice! Keep your sodium between 1495-2300mg to stay in range for today";
+        document.getElementById("sodiumRec").innerHTML = "In Range of Recommended";
+        document.getElementById("sodiumRec").style.color = "#3BB143"; 
+        document.getElementById("sodiumLink").style.display = "none";
+    }
+
+    // Protein
+    if ({{ currentProteinLevel }} == 0) {
+    document.getElementById("proteinRec").innerHTML = "";
+    document.getElementById("proteinTip").innerHTML = "";
+    document.getElementById("proteinLink").style.display = "none";
+    }
+    else if ({{ currentProteinLevel }} < {{recommendedProtein}}) {
+        document.getElementById("proteinTip").innerHTML= "Keep it up! Try to get a little more protein today";
+        document.getElementById("proteinRec").innerHTML= "Below Recommended";
+        document.getElementById("proteinRec").style.color = "gold";
+        document.getElementById("proteinLink").style.display = "block";
+    }
+    else if ({{ currentProteinLevel }} > {{recommendedProtein}}) {
+        document.getElementById("proteinTip").innerHTML = "Uh oh! Your protein intake is a little high for today. Try to limit protein for the rest of the day and tomorrow";
+        document.getElementById("proteinRec").innerHTML= "Above Recommended";
+        document.getElementById("proteinRec").style.color = "#C21807"; 
+        document.getElementById("proteinLink").style.display = "block";
+    }
+    else {
+        document.getElementById("proteinTip").innerHTML ="Good eating! Your protein level is exactly where it should be for today!";
+        document.getElementById("proteinRec").innerHTML= "In Range of Recommended";
+        document.getElementById("proteinRec").style.color = "#3BB143"; 
+        document.getElementById("proteinLink").style.display = "none";
+    }
+
+    // Water
+    if ({{ currentWaterLevel }} == 0) {
+    document.getElementById("waterRec").innerHTML = "";
+    document.getElementById("waterTip").innerHTML = "";
+    document.getElementById("waterLink").style.display = "none";
+    }
+    else if ({{ currentWaterLevel }} < {{recommendedWater}}) {
+        document.getElementById("waterTip").innerHTML ="Keep drinking! More water will help your kidneys!";
+        document.getElementById("waterRec").innerHTML= "Below Recommended";
+        document.getElementById("waterRec").style.color = "gold";
+        document.getElementById("waterLink").style.display = "block";
+    }
+    else if ({{ currentWaterLevel }} > {{recommendedWater}}) {
+        document.getElementById("waterTip").innerHTML="Careful! Your water intake is a little high for today.";
+        document.getElementById("waterRec").style.color = "#C21807"; 
+        document.getElementById("waterRec").innerHTML="Above Recommended";
+        document.getElementById("waterLink").style.display = "block";
+    }
+    else {
+        document.getElementById("waterTip").innerHTML="Great job! You've had just enough water for today";
+        document.getElementById("waterRec").innerHTML="In Range of Recommended";
+        document.getElementById("waterRec").style.color = "#3BB143"; 
+        document.getElementById("waterLink").style.display = "none";
+    }
+
+    // Potassium
+    if ({{ currentPotassiumLevel }} == 0) {
+    document.getElementById("potassiumRec").innerHTML = "";
+    document.getElementById("potassiumTip").innerHTML = "";
+    document.getElementById("potassiumLink").style.display = "none";
+    }
+    else if ({{ currentPotassiumLevel }}  < kMin) {
+        document.getElementById("potassiumTip").innerHTML = "Looks like your potassium is a little low. Try to get some more today to get it to a healthy range!";
+        document.getElementById("potassiumRec").style.color = "gold";
+        document.getElementById("potassiumRec").innerHTML = "Below Recommended";
+        document.getElementById("potassiumLink").style.display = "block";
+    } 
+    else if ({{ currentPotassiumLevel }}  > kMax) {
+        document.getElementById("potassiumTip").innerHTML = "Careful! Your potassium levels are high for today. Try to limit potassium for the rest of the day and tomorrow";
+        document.getElementById("potassiumRec").style.color = "#C21807";
+        document.getElementById("potassiumRec").innerHTML = "Above Recommended"; 
+        document.getElementById("potassiumLink").style.display = "block";
+    }
+    else if ({{ currentPotassiumLevel }}  > kMin && {{ currentPotassiumLevel }}  < kMax) {
+        document.getElementById("potassiumTip").innerHTML = "Well done! Your potassium is within the healthy range";
+        document.getElementById("potassiumRec").innerHTML = "In Range of Recommended";
+        document.getElementById("potassiumRec").style.color = "#3BB143"; 
+        document.getElementById("potassiumLink").style.display = "none";
+    }
+
+    // Phosphorus
+    if ({{ currentPhosphorusLevel }} == 0) {
+    document.getElementById("phosphorusTip").innerHTML = "";
+    document.getElementById("phosphorusRec").innerHTML = "";
+    document.getElementById("phosphorusLink").style.display = "none";
+    }
+    else if ({{ currentPhosphorusLevel }}  < phosMin) {
+        document.getElementById("phosphorusTip").innerHTML = "Try to get a little more phosphorus today to get to a healthy range!";
+        document.getElementById("phosphorusRec").innerHTML = "Below Recommended";
+        document.getElementById("phosphorusRec").style.color = "gold";
+        document.getElementById("phosphorusLink").style.display = "block";
+    } 
+    else if ({{ currentPhosphorusLevel }}  > phosMax) {
+        document.getElementById("phosphorusTip").innerHTML = "Hmm, looks like you had a little too much phosphorus today. Try to limit phosphorus for the rest of today and tomorrow";
+        document.getElementById("phosphorusRec").style.color = "#C21807";
+        document.getElementById("phosphorusRec").innerHTML = "Above Recommended"; 
+        document.getElementById("phosphorusLink").style.display = "block";
+    }
+    else if ({{ currentPhosphorusLevel }}  > phosMin && {{ currentPhosphorusLevel }} < phosMax) {
+        document.getElementById("phosphorusTip").innerHTML = "Look at you! Great job keeping phosphorus in a healthy range";
+        document.getElementById("phosphorusRec").style.color = "#3BB143";
+        document.getElementById("phosphorusRec").innerHTML = "In Range of Recommended";
+        document.getElementById("phosphorusLink").style.display = "none";
+    } 
+</script>
 
 {% endblock %}
