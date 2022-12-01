@@ -4,12 +4,18 @@ from django.contrib.auth.forms import UserCreationForm
 from .models import Lab, Profile
  
 class LabForm(forms.ModelForm):
+    """
+    The Lab Form
+    """
     class Meta:
         model = Lab
         fields = '__all__'
 
 
 class ExtendedUserCreationForm(UserCreationForm):
+    """
+    The User Creation Form
+    """
     email=forms.EmailField(required=True)
     first_name=forms.CharField(max_length=30)
     last_name=forms.CharField(max_length=150)
@@ -30,6 +36,9 @@ class ExtendedUserCreationForm(UserCreationForm):
         return user
     
 class ProfileForm(forms.ModelForm):
+    """
+    The User Profile Form
+    """
     class Meta:
         model = Profile
         fields = ('comorbidity', 'race', 'gender', 'phone', 'weight', 'height', 'birth_date')

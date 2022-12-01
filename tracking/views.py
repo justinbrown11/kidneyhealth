@@ -15,12 +15,12 @@ env = environ.Env()
 
 # ------------ VIEWS ------------#
 
+
 def indexPageView(request):
     """
     The landing page view before the user logs in.
     """
     return render(request, 'tracking/index.html')
-
 
 
 def dailyPageView(request):
@@ -881,14 +881,22 @@ def editFoodHistory(request):
         return HttpResponse("<script>alert('Failed to update food, please try again'); window.location.href='/daily'</script>")
 
 
-def errorPageView(request):
-    return render(request, 'tracking/error.html')
 
 def tipsPageView(request):
+    """
+    Static info page with tips and information.
+    """
     return render(request, 'tracking/tips.html')
 
+
 def customFoodPageView(request):
+    """
+    Custom food submission form.
+    """
     return render(request, 'tracking/customFood.html')
 
 def myPantryPageView(request):
+    """
+    The user's pantry page view.
+    """
     return render(request, 'tracking/myPantry.html')
