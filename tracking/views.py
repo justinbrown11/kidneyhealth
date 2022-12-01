@@ -1,4 +1,5 @@
 from django.shortcuts import render, redirect
+from django.http import HttpResponse
 from django.contrib.auth import authenticate, login
 from django.contrib.auth.models import User
 from .models import Lab, Food, DailyEntry, Profile, FoodHistory
@@ -18,108 +19,133 @@ def indexPageView(request):
 
 def dailyPageView(request):
 
-    # Grab today's entry for the user
-    today = (DailyEntry.objects.filter(entry_date=date.today(), user__id=request.user.id)).values()
-
-    # If entry doesn't exist, create one
-    if (len(today) < 1):
-
-       # Grab current user
-        currentUser = User.objects.get(id=request.user.id)
-
-        # Add new entry
-        newEntry = DailyEntry(user=currentUser, entry_date=date.today(), water_intake_liters=0)
-        newEntry.save()
+    try:
 
         # Grab today's entry for the user
-        today = (DailyEntry.objects.filter(entry_date=date.today(), user__id=request.user.id)).values()[0]
+        today = (DailyEntry.objects.filter(entry_date=date.today(), user__id=request.user.id)).values()
 
-    else:
-        today = today[0]
+        # If entry doesn't exist, create one
+        if (len(today) < 1):
 
-    # Grab food histories
-    foodHistory = FoodHistory.objects.filter(entry__id=today['id']).values()
+        # Grab current user
+            currentUser = User.objects.get(id=request.user.id)
 
-    ProteinTotal = 0
-    SodiumTotal = 0
-    PhosphorusTotal = 0
-    PotassiumTotal = 0
+            # Add new entry
+            newEntry = DailyEntry(user=currentUser, entry_date=date.today(), water_intake_liters=0)
+            newEntry.save()
 
-    weight = float(request.user.profile.weight) * 0.453592
+            # Grab today's entry for the user
+            today = (DailyEntry.objects.filter(entry_date=date.today(), user__id=request.user.id)).values()[0]
 
-    RecommendedProtein = .6 * weight
-    RecommendedSodium = 2300
-    RecommendedPhosphorus = 1000
-    RecommendedPotassium = 3000
-    RecommendedWater = 2.70
+        else:
+            today = today[0]
 
-    if request.user.profile.gender.gender_description == "f":
-        RecommendedWater = 2.7
-    else :
-        RecommendedWater = 3.7
+        # Grab food histories
+        foodHistory = FoodHistory.objects.filter(entry__id=today['id']).values()
 
-    for item in foodHistory:
-        food = Food.objects.get(id=item['food_id'])
+        ProteinTotal = 0
+        SodiumTotal = 0
+        PhosphorusTotal = 0
+        PotassiumTotal = 0
 
-        ProteinTotal += float(food.protein_g * item['quantity'])
-        SodiumTotal += float(food.sodium_mg * item['quantity'])
-        PhosphorusTotal += float(food.phosphorus_mg * item['quantity'])
-        PotassiumTotal += float(food.potassium_mg * item['quantity'])
+        weight = float(request.user.profile.weight) * 0.453592
+
+        RecommendedProtein = round(.6 * weight, 2)
+        RecommendedSodium = 2300
+        RecommendedPhosphorus = 1000
+        RecommendedPotassium = 3000
+        RecommendedWater = 2.70
+
+        if request.user.profile.gender.gender_description == "f":
+            RecommendedWater = 2.7
+        else :
+            RecommendedWater = 3.7
+
+        for item in foodHistory:
+            food = Food.objects.get(id=item['food_id'])
+
+            ProteinTotal += round(float(food.protein_g * item['quantity']), 2)
+            SodiumTotal += float(food.sodium_mg * item['quantity'])
+            PhosphorusTotal += float(food.phosphorus_mg * item['quantity'])
+            PotassiumTotal += float(food.potassium_mg * item['quantity'])
 
 
-    WaterPercentage = (float(float(today['water_intake_liters'])/RecommendedWater)) * 100
-    SodiumPercentage = (float(SodiumTotal/RecommendedSodium)) * 100
-    ProteinPercentage = (float(ProteinTotal/RecommendedProtein)) * 100
-    PotassiumPercentage = (float(PotassiumTotal/RecommendedPotassium)) * 100
-    PhosphorusPercentage = (float(PhosphorusTotal/RecommendedPhosphorus)) * 100
+        WaterPercentage = (float(float(today['water_intake_liters'])/RecommendedWater)) * 100
+        SodiumPercentage = (float(SodiumTotal/RecommendedSodium)) * 100
+        ProteinPercentage = (float(ProteinTotal/RecommendedProtein)) * 100
+        PotassiumPercentage = (float(PotassiumTotal/RecommendedPotassium)) * 100
+        PhosphorusPercentage = (float(PhosphorusTotal/RecommendedPhosphorus)) * 100
 
-    context = {
-        "currentWaterLevel": float(today['water_intake_liters']),
-        "currentWaterPercentage": WaterPercentage,
-        "currentProteinLevel": ProteinTotal,
-        "currentProteinPercentage": ProteinPercentage,
-        "currentSodiumLevel": SodiumTotal,
-        "currentSodiumPercentage": SodiumPercentage,
-        "currentPotassiumLevel": PotassiumTotal,
-        "currentPotassiumPercentage": PotassiumPercentage,
-        "currentPhosphorusLevel": PhosphorusTotal,
-        "currentPhosphorusPercentage": PhosphorusPercentage,
-        "recommendedProtein": RecommendedProtein,
-        "recommendedSodium": RecommendedSodium,
-        "recommendedWater": RecommendedWater,
-        "recommendedPhosphorus": RecommendedPhosphorus,
-        "recommendedPotassium": RecommendedPotassium,
+        context = {
+            "currentWaterLevel": float(today['water_intake_liters']),
+            "currentWaterPercentage": WaterPercentage,
+            "currentProteinLevel": ProteinTotal,
+            "currentProteinPercentage": ProteinPercentage,
+            "currentSodiumLevel": SodiumTotal,
+            "currentSodiumPercentage": SodiumPercentage,
+            "currentPotassiumLevel": PotassiumTotal,
+            "currentPotassiumPercentage": PotassiumPercentage,
+            "currentPhosphorusLevel": PhosphorusTotal,
+            "currentPhosphorusPercentage": PhosphorusPercentage,
+            "recommendedProtein": RecommendedProtein,
+            "recommendedSodium": RecommendedSodium,
+            "recommendedWater": RecommendedWater,
+            "recommendedPhosphorus": RecommendedPhosphorus,
+            "recommendedPotassium": RecommendedPotassium,
 
-    }
+        }
 
-    return render(request, 'tracking/daily.html', context)
+        return render(request, 'tracking/daily.html', context)
+    
+    except Exception as e:
+
+        # log error
+        print(e)
+
+        if (type(e) == User.profile.RelatedObjectDoesNotExist):
+            return HttpResponse("<script>alert('User does not have a profile, please create one and try again.'); window.location.href='/logout'</script>")
+
+        else:
+            return HttpResponse("<script>alert('An error occured, please login again'); window.location.href='/logout'</script>")
 
 
 def updateWaterLevel(request):
 
-    # Grab body from request
-    body = dict(request.POST.items())
+    try:
 
-    # Grab today's entry for the user
-    today = DailyEntry.objects.filter(entry_date=date.today(), user__id=request.user.id)[0]
+        # Grab body from request
+        body = dict(request.POST.items())
 
-    # If entry exists, update it
-    if (today):
+        # Grab today's entry for the user
+        today = DailyEntry.objects.filter(entry_date=date.today(), user__id=request.user.id)[0]
 
-        # Update water level
-        today.water_intake_liters = float(body['water'])
-        today.save()
+        # If entry exists, update it
+        if (today):
 
-    # No entry exists, create one
-    else:
-        # Grab current user
-        currentUser = User.objects.get(id=request.user.id)
+            # Update water level
+            today.water_intake_liters = float(body['water'])
+            today.save()
 
-        # Add new entry
-        newEntry = DailyEntry(user=currentUser, entry_date=date.today(), water_intake_liters=float(body['water']))
-        newEntry.save()
+        # No entry exists, create one
+        else:
+            # Grab current user
+            currentUser = User.objects.get(id=request.user.id)
 
-    return redirect('/daily')
+            # Add new entry
+            newEntry = DailyEntry(user=currentUser, entry_date=date.today(), water_intake_liters=float(body['water']))
+            newEntry.save()
+
+
+        return HttpResponse("<script>alert('Water level updated successfully!'); window.location.href='/daily'</script>")
+
+
+    except Exception as e:
+
+        # Log error
+        print(e)
+
+        return HttpResponse("<script>alert('Failed to update water intake'); window.location.href='/daily'</script>")
+
 
 def searchAPIResultsPageView(request):
     """
@@ -149,8 +175,8 @@ def searchAPIResultsPageView(request):
         # Log error
         print(e)
 
-        # Render error page
-        return render(request, 'tracking/error.html')
+        return HttpResponse("<script>alert('Failed to load results, try again'); window.location.href='/api/search'</script>")
+
 
 
 def searchFoodResultsPageView(request):
@@ -175,8 +201,8 @@ def searchFoodResultsPageView(request):
         # Log error
         print(e)
 
-        # Render error page
-        return render(request, 'tracking/error.html')
+        return HttpResponse("<script>alert('Failed to load results, try again'); window.location.href='/daily'</script>")
+
 
 def saveAPIFood(request):
 
@@ -258,14 +284,14 @@ def saveAPIFood(request):
         # Save new food
         newFood.save()
 
-        return redirect('/api/search')
+        return HttpResponse("<script>alert('Food saved successfully!'); window.location.href='/api/search'</script>")
             
     except Exception as e:
         # Log error
         print(e)
 
         # Render error page
-        return render(request, 'tracking/error.html')
+        return HttpResponse("<script>alert('Failed to save food, try again'); window.location.href='/api/search'</script>")
 
 
 def saveCustomFood(request):
@@ -289,50 +315,59 @@ def saveCustomFood(request):
         # Save new food
         newFood.save()
 
-        return redirect('/customFood')
+        return HttpResponse("<script>alert('Food saved successfully!'); window.location.href='/customFood'</script>")
             
     except Exception as e:
         # Log error
         print(e)
 
-        # Render error page
-        return render(request, 'tracking/error.html')
+        return HttpResponse("<script>alert('Failed to save food, try again'); window.location.href='/customFood'</script>")
+
 
 
 def addFoodToEntry(request):
 
-    # Grab body from request
-    body = dict(request.POST.items())
+    try:
 
-    # Grab today's entry for the user
-    today = DailyEntry.objects.filter(entry_date=date.today(), user__id=request.user.id)[0]
+        # Grab body from request
+        body = dict(request.POST.items())
 
-    # If entry exists, update it
-    if (today):
-        # Grab food
-        food = Food.objects.get(id=body['food'])
+        # Grab today's entry for the user
+        today = DailyEntry.objects.filter(entry_date=date.today(), user__id=request.user.id)[0]
 
-        # Create new food history
-        newFoodHistory = FoodHistory(entry=today, food=food, quantity=float(body['quantity']))
-        newFoodHistory.save()
+        # If entry exists, update it
+        if (today):
+            # Grab food
+            food = Food.objects.get(id=body['food'])
 
-    # Entry doesn't exist, create one
-    else:
-        # Grab current user
-        currentUser = User.objects.get(id=request.user.id)
+            # Create new food history
+            newFoodHistory = FoodHistory(entry=today, food=food, quantity=float(body['quantity']))
+            newFoodHistory.save()
 
-        # Add new entry
-        newEntry = DailyEntry(user=currentUser, entry_date=date.today(), water_intake_liters=0)
-        newEntry.save()
+        # Entry doesn't exist, create one
+        else:
+            # Grab current user
+            currentUser = User.objects.get(id=request.user.id)
 
-        # Grab food
-        food = Food.objects.get(id=body['food'])
+            # Add new entry
+            newEntry = DailyEntry(user=currentUser, entry_date=date.today(), water_intake_liters=0)
+            newEntry.save()
 
-        # Create new food history
-        newFoodHistory = FoodHistory(entry=newEntry, food=food, quantity=float(body['quantity']))
-        newFoodHistory.save()
+            # Grab food
+            food = Food.objects.get(id=body['food'])
 
-    return redirect('/daily')
+            # Create new food history
+            newFoodHistory = FoodHistory(entry=newEntry, food=food, quantity=float(body['quantity']))
+            newFoodHistory.save()
+
+        return HttpResponse("<script>alert('Food added successfully!'); window.location.href='/daily'</script>")
+
+    except Exception as e:
+
+        # Log error
+        print(e)
+
+        return HttpResponse("<script>alert('Failed to add food, try again'); window.location.href='/daily'</script>")
 
 
 def weeklyPageView(request):
@@ -340,156 +375,216 @@ def weeklyPageView(request):
 
 def monthlyPageView(request):
 
-    # Intialize return array
-    returnData = []
+    try:
 
-    # Recommended values
-    weight = float(request.user.profile.weight) * 0.453592
+        # Intialize return array
+        returnData = []
 
-    RecommendedProtein = weight * .6
-    RecommendedSodium = 2300
-    RecommendedPhosphorus = 1000
-    RecommendedPotassium = 3000
-    RecommendedWater = 0.00
+        # Recommended values
+        weight = float(request.user.profile.weight) * 0.453592
 
-    if request.user.profile.gender.gender_description == "f":
-        RecommendedWater = 2.7
-    else :
-        RecommendedWater = 3.7
+        RecommendedProtein = weight * .6
+        RecommendedSodium = 2300
+        RecommendedPhosphorus = 1000
+        RecommendedPotassium = 3000
+        RecommendedWater = 0.00
 
-    # Grab current user
-    currentUser = User.objects.get(id=request.user.id)
+        if request.user.profile.gender.gender_description == "f":
+            RecommendedWater = 2.7
+        else :
+            RecommendedWater = 3.7
 
-    # Grab all daily entries
-    allEntries = DailyEntry.objects.filter(user=currentUser).values()
+        # Grab current user
+        currentUser = User.objects.get(id=request.user.id)
 
-    # Loop through each daily entry
-    for entry in allEntries:
+        # Grab all daily entries
+        allEntries = DailyEntry.objects.filter(user=currentUser).values()
 
-        # Grab all food histories
-        foodHistories = FoodHistory.objects.filter(entry__id=entry['id']).values()
+        # Loop through each daily entry
+        for entry in allEntries:
 
-        # Initialize totals
-        ProteinTotal = 0
-        SodiumTotal = 0
-        PhosphorusTotal = 0
-        PotassiumTotal = 0
+            # Grab all food histories
+            foodHistories = FoodHistory.objects.filter(entry__id=entry['id']).values()
 
-        for item in foodHistories:
-            food = Food.objects.get(id=item['food_id'])
+            # Initialize totals
+            ProteinTotal = 0
+            SodiumTotal = 0
+            PhosphorusTotal = 0
+            PotassiumTotal = 0
 
-            ProteinTotal += float(food.protein_g * item['quantity'])
-            SodiumTotal += float(food.sodium_mg * item['quantity'])
-            PhosphorusTotal += float(food.phosphorus_mg * item['quantity'])
-            PotassiumTotal += float(food.potassium_mg * item['quantity'])
+            for item in foodHistories:
+                food = Food.objects.get(id=item['food_id'])
 
-        # Intialize counter
-        counter = 0
+                ProteinTotal += float(food.protein_g * item['quantity'])
+                SodiumTotal += float(food.sodium_mg * item['quantity'])
+                PhosphorusTotal += float(food.phosphorus_mg * item['quantity'])
+                PotassiumTotal += float(food.potassium_mg * item['quantity'])
 
-        # Update counter with healthy levels for the day
-        if (ProteinTotal <= RecommendedProtein):
-            counter = counter + 1
-        if (SodiumTotal <= RecommendedSodium):
-            counter = counter + 1
-        if (PhosphorusTotal <= RecommendedPhosphorus):
-            counter = counter + 1
-        if (PotassiumTotal <= RecommendedPotassium):
-            counter = counter + 1
-        if (float(entry['water_intake_liters']) <= RecommendedWater):
-            counter = counter + 1
+            # Intialize counter
+            counter = 0
 
-        # Push current entry to return data array
-        returnData.append({
-            "date": entry['entry_date'],
-            "healthyCount": counter
-        })
+            # Update counter with healthy levels for the day
+            if (ProteinTotal <= RecommendedProtein):
+                counter = counter + 1
+            if (SodiumTotal <= RecommendedSodium):
+                counter = counter + 1
+            if (PhosphorusTotal <= RecommendedPhosphorus):
+                counter = counter + 1
+            if (PotassiumTotal <= RecommendedPotassium):
+                counter = counter + 1
+            if (float(entry['water_intake_liters']) <= RecommendedWater):
+                counter = counter + 1
 
-    print(returnData)
+            # Push current entry to return data array
+            returnData.append({
+                "date": entry['entry_date'],
+                "healthyCount": counter
+            })
 
-    context = {
-        "array": returnData
-    }
+        context = {
+            "array": returnData
+        }
 
-    json = dumps(context, default=str)
+        json = dumps(context, default=str)
 
-    return render(request, 'tracking/monthly.html', { "data": json })
+        return render(request, 'tracking/monthly.html', { "data": json })
+
+    except Exception as e:
+
+        # Log error
+        print(e)
+
+        return HttpResponse("<script>alert('Failed to load monthly view'); window.location.href='/daily'</script>")
 
 def register(request):
-    if request.method == 'POST':
-        form = ExtendedUserCreationForm(request.POST)
-        profile_form = ProfileForm(request.POST)
 
-        if form.is_valid() and profile_form.is_valid():
-            user = form.save()
+    try:
 
-            profile = profile_form.save(commit=False)
-            profile.user = user
+        if request.method == 'POST':
+            form = ExtendedUserCreationForm(request.POST)
+            profile_form = ProfileForm(request.POST)
 
-            profile.save()
+            if form.is_valid() and profile_form.is_valid():
+                user = form.save()
 
-            username = form.cleaned_data.get('username')
-            password = form.cleaned_data.get('password1')
-            user = authenticate(username=username, password=password)
-            login(request, user)
+                profile = profile_form.save(commit=False)
+                profile.user = user
 
-            return redirect('/daily')
+                profile.save()
 
-    else: 
-        form = ExtendedUserCreationForm()
-        profile_form = ProfileForm()
+                username = form.cleaned_data.get('username')
+                password = form.cleaned_data.get('password1')
+                user = authenticate(username=username, password=password)
+                login(request, user)
 
-    context = {'form' : form, 'profile_form' : profile_form}
-    return render(request, 'tracking/register.html', context)
+                return redirect('/daily')
+
+        else: 
+            form = ExtendedUserCreationForm()
+            profile_form = ProfileForm()
+
+        context = {'form' : form, 'profile_form' : profile_form}
+        return render(request, 'tracking/register.html', context)
+
+    except Exception as e:
+
+        # Log error
+        print(e)
+
+        return HttpResponse("<script>alert('An error occured, please try again'); window.location.href='/login'</script>")
+
 
 def viewUserInfoPageView(request):
     return render(request, 'tracking/userInfo.html')
 
 def updateUserInfoPageView(request):
-    if request.method == 'POST':
 
-        # Grab body from request
-        body = dict(request.POST.items())
+    try:
 
-        # Grab today's entry for the user
-        user = User.objects.get(id=request.user.id)
-        profile = Profile.objects.get(user__id=request.user.id)
+        if request.method == 'POST':
 
-        user.email = body['email']
-        user.first_name = body['first_name']
-        user.last_name = body['last_name']
-        profile.phone = body['phone']
-        profile.weight = float(body['weight'])
-        profile.height = float(body['height'])
+            # Grab body from request
+            body = dict(request.POST.items())
 
-        user.save()
-        profile.save()
+            # Grab today's entry for the user
+            user = User.objects.get(id=request.user.id)
+            profile = Profile.objects.get(user__id=request.user.id)
 
-        return redirect('/userInfo')
+            user.email = body['email']
+            user.first_name = body['first_name']
+            user.last_name = body['last_name']
+            profile.phone = body['phone']
+            profile.weight = float(body['weight'])
+            profile.height = float(body['height'])
 
-    else:
-        return render(request, 'tracking/updateUserInfo.html')
+            user.save()
+            profile.save()
+
+            return redirect('/userInfo')
+
+        else:
+            return render(request, 'tracking/updateUserInfo.html')
+
+    except Exception as e:
+
+        # Log error
+        print(e)
+
+        return HttpResponse("<script>alert('Failed to update user info, please try again'); window.location.href='/userInfo'</script>")
+
 
 def deleteUserPageView(request):
     return render(request, 'tracking/deleteUser.html')
+
+
+def deleteUser(request):
+
+    try:
+        # Grab current user
+        user = User.objects.get(id=request.user.id)
+
+        # Delete it
+        user.delete()
+
+        return HttpResponse("<script>alert('Your account has been deleted successfully. Goodbye!'); window.location.href='/logout'</script>")
+
+    except Exception as e:
+
+        # Log error
+        print(e)
+
+        return HttpResponse("<script>alert('Failed to delete user, please try again'); window.location.href='/userInfo'</script>")
+
 
 def searchPageView(request):
     return render(request, 'tracking/foodApiSearch.html')
 
 def viewLabsPageView(request):
-    data = Lab.objects.all()
-    if request.method == 'POST':
-        form = LabForm(request.POST)
-        if form.is_valid():
-            form.save()
-            return redirect('/viewLabs')
-    else:
-        form = LabForm()
-    context = {
-        'data': data,
-        'form': form,
-    }
 
-    return render(request, 'tracking/viewLabs.html', context)
+    try:
+
+        data = Lab.objects.all()
+        if request.method == 'POST':
+            form = LabForm(request.POST)
+            if form.is_valid():
+                form.save()
+                return redirect('/viewLabs')
+        else:
+            form = LabForm()
+        context = {
+            'data': data,
+            'form': form,
+        }
+
+        return render(request, 'tracking/viewLabs.html', context)
+
+    except Exception as e:
+
+        # Log error
+        print(e)
+
+        return HttpResponse("<script>alert('An error occurred'); window.location.href='/daily'</script>")
+
 
 def addLabsPageView(request):
     return render(request, 'tracking/addLabs.html')
