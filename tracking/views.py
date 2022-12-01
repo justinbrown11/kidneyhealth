@@ -77,6 +77,12 @@ def dailyPageView(request):
         "currentPotassiumPercentage": PotassiumPercentage,
         "currentPhosphorusLevel": PhosphorusTotal,
         "currentPhosphorusPercentage": PhosphorusPercentage,
+        "recommendedProtein": RecommendedProtein,
+        "recommendedSodium": RecommendedSodium,
+        "recommendedWater": RecommendedWater,
+        "recommendedPhosphorus": RecommendedPhosphorus,
+        "recommendedPotassium": RecommendedPotassium,
+
     }
 
     return render(request, 'tracking/daily.html', context)
