@@ -21027,6 +21027,35 @@ __webpack_require__.r(__webpack_exports__);
 document.addEventListener('DOMContentLoaded', function() {
   let calendarEl = document.getElementById('calendar');
 
+  let events = [];
+
+  // Generate events for later use
+  nutrientData.array.map(item => {
+        let color = "";
+
+        if (item.healthyCount < 3) color = "#FFCBCB"
+        else if (item.healthyCount < 5) color = "#FDEFB2"
+
+        if (color !== "")
+        {
+            events.push({
+                id: item.date,
+                display: 'background',
+                color: color,
+                start: item.date,
+            });
+        }
+
+        else
+        {
+            events.push({
+                id: item.date,
+                display: 'background',
+                start: item.date,
+            });
+        }
+  });
+
   let calendar = new _fullcalendar_core__WEBPACK_IMPORTED_MODULE_0__.Calendar(calendarEl, {
     plugins: [ _fullcalendar_adaptive__WEBPACK_IMPORTED_MODULE_1__["default"], _fullcalendar_interaction__WEBPACK_IMPORTED_MODULE_2__["default"], _fullcalendar_daygrid__WEBPACK_IMPORTED_MODULE_3__["default"], _fullcalendar_list__WEBPACK_IMPORTED_MODULE_4__["default"], _fullcalendar_timegrid__WEBPACK_IMPORTED_MODULE_5__["default"], _fullcalendar_resource_timeline__WEBPACK_IMPORTED_MODULE_6__["default"] ],
     schedulerLicenseKey: 'XXX',
@@ -21079,12 +21108,14 @@ document.addEventListener('DOMContentLoaded', function() {
     //   { id: 'y', title: 'Auditorium Y' },
     //   { id: 'z', title: 'Auditorium Z' }
     // ],
-    events: [
-      { id: '1', resourceId: 'b', start: '2022-11-21', display:'background'}, // defaults to green
-      { id: '2', resourceId: 'c', start: '2022-11-22', display:'background', color:'#FFCBCB'}, // red
-      { id: '3', resourceId: 'd', start: '2022-11-15', display:'background', color:'#FDEFB2'}, // yellow #FFFBC8
-      { id: '4', resourceId: 'e', start: '2018-02-07T03:00:00', end: '2018-02-07T08:00:00', title: 'event 4' },
-    ]
+    // events: [
+    //   { id: '1', resourceId: 'b', start: '2022-11-21', display:'background'}, // defaults to green
+    //   { id: '2', resourceId: 'c', start: '2022-11-22', display:'background', color:'#FFCBCB'}, // red
+    //   { id: '3', resourceId: 'd', start: '2022-11-15', display:'background', color:'#FDEFB2'}, // yellow #FFFBC8
+    //   { id: '4', resourceId: 'e', start: '2018-02-07T03:00:00', end: '2018-02-07T08:00:00', title: 'event 4' },
+    // ]
+    events: events
+    
   });
 
   calendar.render();
