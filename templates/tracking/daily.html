@@ -23,49 +23,54 @@
         </li>
       </ul>
       <h1> Today's Dashboard </h1>
-      <br><br>
-    <div class="grid-container" style="display: block; height: 100px;">
-      <div id="SodiumRing" class="lbBar label-center" data-stroke="green" data-stroke-width="6" data-preset="circle" data-value="0" style="float:left; width: 20%;"><h4 style="text-align:center;">Sodium<h4></div>
-
-      <div id="ProteinRing" class="ldBar label-center" data-stroke="pink" data-stroke-width="6" data-preset="circle" data-value="0" style="float:left; width: 20%;"><h4 style="text-align:center;">Protein<h4></div>
-   
-      <div id="WaterRing" class="ldBar label-center" data-stroke="#09f" data-stroke-width="6" data-preset="circle" data-value="0" style="float:left; width: 20%;"><h4 style="text-align:center;">Water<h4></div>
-    
-      <div id="PotassiumRing" class="ldBar label-center" data-stroke="gold" data-stroke-width="6" data-preset="circle" data-value="0"style="float:left; width: 20%;"><h4 style="text-align:center;">Potassium<h4></div>
- 
-      <div id="PhosRing" class="ldBar label-center" data-stroke="purple" data-stroke-width="6" data-preset="circle" data-value="0" style="float:left; width: 20%;"><h4 style="text-align:center;">Phosphorus<h4></div>
+      <br>
+    <div class="grid-container">
+        <div id="SodiumRing" class="lbBar label-center ring" data-stroke="green" data-stroke-width="6" data-preset="circle" data-value="0" ><h4 style="text-align:center;">Sodium</h4>
+            <div class="ring-text-container">
+                    <div class="levels">
+                    <p>{{ currentSodiumLevel }}mg /{{ recommendedSodium }}mg</p>
+                    <p id = 'sodiumRec'></p>
+                    <a id="sodiumLink" href="{% url 'tips' %}#Sodium">Sodium Recommendations</a>
+                </div> 
+            </div>
+        </div>
+        <div class="ring-text-container">
+            <div id="ProteinRing" class="ldBar label-center ring" style="justify-self:center" data-stroke="pink" data-stroke-width="6" data-preset="circle" data-value="0"><h4 style="text-align:center;">Protein</h4>
+                <div class="levels">
+                    <p>{{ currentProteinLevel }}g /{{ recommendedProtein }}g</p>
+                    <p id = 'proteinRec'></p>
+                    <a id="proteinLink" href="{% url 'tips' %}#Protein">Protein Recommendations</a>
+                </div> 
+            </div>
+        </div>
+        <div class="ring-text-container">
+            <div id="WaterRing" class="ldBar label-center ring" data-stroke="#09f" data-stroke-width="6" data-preset="circle" data-value="0"><h4 style="text-align:center;">Water</h4>
+                <div class="levels">
+                    <p>{{ currentWaterLevel }}L /{{ recommendedWater }}L</p>
+                    <p id = 'waterRec'></p>
+                    <a id="waterLink" href="https://www.mayoclinichealthsystem.org/hometown-health/speaking-of-health/tips-for-drinking-more-water" target="_blank" rel="noopener noreferrer">Tips for drinking more water</a>
+                </div> 
+            </div>
+        </div>
+        <div class="ring-text-container">
+            <div id="PotassiumRing" class="ldBar label-center ring" data-stroke="gold" data-stroke-width="6" data-preset="circle" data-value="0"><h4 style="text-align:center;">Potassium</h4>
+                <div class="levels">
+                    <p>{{ currentPotassiumLevel }}mg /{{ recommendedPotassium }}mg</p>
+                    <p id = 'potassiumRec'></p>
+                    <a id="potassiumLink" href="{% url 'tips' %}#Potassium">Potassium Recommendations</a>
+                </div>
+            </div>
+        </div>
+        <div class="ring-text-container">
+            <div id="PhosRing" class="ldBar label-center ring" data-stroke="purple" data-stroke-width="6" data-preset="circle" data-value="0"><h4 style="text-align:center;">Phosphorus</h4>
+                <div class="levels">
+                    <p>{{ currentPhosphorusLevel }}mg /{{ recommendedPhosphorus }}mg</p>
+                    <p id = 'phosphorusRec'></p>
+                    <a id="phosphorusLink" href="{% url 'tips' %}#Phosphorus">Phosphorus Recommendations</a>
+                </div>
+            </div>
+        </div>
     </div>
-    <div style="display: block; height: 100px;text-align:center;margin-top: 40px;">
-        <div style="float:left; width: 20%; padding: 10px;">
-            <p>{{ currentSodiumLevel }}mg /{{ recommendedSodium }}mg</p>
-            <p id = 'sodiumRec'></p>
-            <a href="{% url 'tips' %}#Sodium">Sodium Recommendations</a>
-        </div>
-          
-        <div style="float:left; width: 20%; padding: 10px;">
-            <p>{{ currentProteinLevel }}g /{{ recommendedProtein }}g</p>
-            <p id = 'proteinRec'></p>
-                <a href="{% url 'tips' %}#Protein">Protein Recommendations</a>
-        </div>
-
-        <div style="float:left; width: 20%; padding: 10px;">
-            <p>{{ currentWaterLevel }}L /{{ recommendedWater }}L</p>
-            <p id = 'waterRec'></p>
-            <a href="https://www.mayoclinichealthsystem.org/hometown-health/speaking-of-health/tips-for-drinking-more-water" target="_blank" rel="noopener noreferrer">Tips for drinking more water</a>
-        </div>
-      
-        <div style="float:left; width: 20%; padding: 10px;">
-            <p>{{ currentPotassiumLevel }}mg /{{ recommendedPotassium }}mg</p>
-            <p id = 'potassiumRec'></p>
-            <a href="{% url 'tips' %}#Potassium">Potassium Recommendations</a>
-        </div>
-   
-        <div style="float:left; width: 20%; padding: 10px;">
-            <p>{{ currentPhosphorusLevel }}mg /{{ recommendedPhosphorus }}mg</p>
-            <p id = 'phosphorusRec'></p>
-            <a href="{% url 'tips' %}#Phosphorus">Phosphorus Recommendations</a>
-        </div>
-      </div>
       <br>
       <br>
       <br>
@@ -74,6 +79,23 @@
       <br>
       <br>
       <br>
+      <br>
+      <br>
+      <br>
+      <br>
+      <br>
+      <br>
+      <br>
+      <br>
+      <br>
+      <br>
+      <br>
+      <br>
+      <br>
+      <br>
+      <br>
+      <br>
+    </div>
         <h5>Add Today's Foods</h5>
         <br>
         <div style='display: inline;'>
@@ -173,86 +195,106 @@
           // Default to show nothing
           if ({{ currentSodiumLevel }} == 0) {
             document.getElementById("sodiumRec").innerHTML = "";
+            document.getElementById("sodiumLink").style.display = "none";
           }
           else if ({{ currentSodiumLevel }} < sodiumMin) {
               document.getElementById("sodiumRec").innerHTML = "Your sodium levels are a little low for today. Try to get some more to get within a healthy range";
               document.getElementById("sodiumRec").style.color = "gold";
+              document.getElementById("sodiumLink").style.display = "block";
           }
           else if ({{ currentSodiumLevel }} > sodiumMax) {
               document.getElementById("sodiumRec").innerHTML ="Oops! Your sodium intake is above the recommended range. Try to limit sodium for the rest of the day and tomorrow";
               document.getElementById("sodiumRec").style.color = "#C21807"; 
+              document.getElementById("sodiumLink").style.display = "block";
           }
           else if ({{ currentSodiumLevel }} > sodiumMin && {{ currentSodiumLevel }} < sodiumMax) {
               document.getElementById("sodiumRec").innerHTML = "Nice! Keep your sodium between 1495-2300mg to stay in range for today";
               document.getElementById("sodiumRec").style.color = "#3BB143"; 
+              document.getElementById("sodiumLink").style.display = "none";
           }
   
           // Protein
           if ({{ currentProteinLevel }} == 0) {
             document.getElementById("proteinRec").innerHTML = "";
+            document.getElementById("proteinLink").style.display = "none";
           }
           else if ({{ currentProteinLevel }} < {{recommendedProtein}}) {
               document.getElementById("proteinRec").innerHTML= "Keep it up! Try to get a little more protein today";
               document.getElementById("proteinRec").style.color = "gold";
+              document.getElementById("proteinLink").style.display = "block";
           }
           else if ({{ currentProteinLevel }} > {{recommendedProtein}}) {
               document.getElementById("proteinRec").innerHTML = "Uh oh! Your protein intake is a little high for today. Try to limit protein for the rest of the day and tomorrow";
               document.getElementById("proteinRec").style.color = "#C21807"; 
+              document.getElementById("proteinLink").style.display = "block";
           }
           else {
               document.getElementById("proteinRec").innerHTML ="Good eating! Your protein level is exactly where it should be for today!";
               document.getElementById("proteinRec").style.color = "#3BB143"; 
+              document.getElementById("proteinLink").style.display = "none";
           }
   
           // Water
           if ({{ currentWaterLevel }} == 0) {
             document.getElementById("waterRec").innerHTML = "";
+            document.getElementById("waterLink").style.display = "none";
           }
-          else if ({{ currentWaterLevel }}< {{recommendedWater}}) {
+          else if ({{ currentWaterLevel }} < {{recommendedWater}}) {
               document.getElementById("waterRec").innerHTML ="Keep drinking! More water will help your kidneys!";
               document.getElementById("waterRec").style.color = "gold";
+              document.getElementById("waterLink").style.display = "block";
           }
           else if ({{ currentWaterLevel }} > {{recommendedWater}}) {
               document.getElementById("waterRec").innerHTML="Careful! Your water intake is a little high for today.";
               document.getElementById("waterRec").style.color = "#C21807"; 
+              document.getElementById("waterLink").style.display = "block";
           }
           else {
               document.getElementById("waterRec").innerHTML="Great work! You've had just enough water for today";
               document.getElementById("waterRec").style.color = "#3BB143"; 
+              document.getElementById("waterLink").style.display = "none";
           }
       
           // Potassium
           if ({{ currentPotassiumLevel }} == 0) {
             document.getElementById("potassiumRec").innerHTML = "";
+            document.getElementById("potassiumLink").style.display = "none";
           }
           else if ({{ currentPotassiumLevel }}  < kMin) {
               document.getElementById("potassiumRec").innerHTML = "Looks like your potassium is a little low. Try to get some more today to get it to a healthy range!";
               document.getElementById("potassiumRec").style.color = "gold";
+              document.getElementById("potassiumLink").style.display = "block";
           } 
           else if ({{ currentPotassiumLevel }}  > kMax) {
               document.getElementById("potassiumRec").innerHTML = "Careful! Your potassium levels are high for today. Try to limit potassium for the rest of the day and tomorrow";
               document.getElementById("potassiumRec").style.color = "#C21807"; 
+              document.getElementById("potassiumLink").style.display = "block";
           }
           else if ({{ currentPotassiumLevel }}  > kMin && {{ currentPotassiumLevel }}  < kMax) {
               document.getElementById("potassiumRec").innerHTML = "Well done! Your potassium is within the healthy range";
               document.getElementById("potassiumRec").style.color = "#3BB143"; 
+              document.getElementById("potassiumLink").style.display = "none";
           }
   
           // Phosphorus
           if ({{ currentPhosphorusLevel }} == 0) {
             document.getElementById("phosphorusRec").innerHTML = "";
+            document.getElementById("phosphorusLink").style.display = "none";
           }
           else if ({{ currentPhosphorusLevel }}  < phosMin) {
               document.getElementById("phosphorusRec").innerHTML = "Try to get a little more phosphorus today to get to a healthy range!";
               document.getElementById("phosphorusRec").style.color = "gold";
+              document.getElementById("phosphorusLink").style.display = "block";
           } 
           else if ({{ currentPhosphorusLevel }}  > phosMax) {
               document.getElementById("phosphorusRec").innerHTML = "Hmm, looks like you had a little too much phosphorus today. Try to limit phosphorus for the rest of today and tomorrow";
               document.getElementById("phosphorusRec").style.color = "#C21807"; 
+              document.getElementById("phosphorusLink").style.display = "block";
           }
           else if ({{ currentPhosphorusLevel }}  > phosMin && {{ currentPhosphorusLevel }} < phosMax) {
               document.getElementById("phosphorusRec").innerHTML = "Look at you! Great job keeping phosphorus in a healthy range";
               document.getElementById("phosphorusRec").style.color = "#3BB143"; 
+              document.getElementById("phosphorusLink").style.display = "none";
           } 
       </script>
 
