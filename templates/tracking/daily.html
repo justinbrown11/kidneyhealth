@@ -166,7 +166,7 @@
           // let gender = '';
   
 
-    
+    console.log({{ currentWaterLevel}})
 
   
           // Sodium
@@ -192,10 +192,10 @@
           }
   
           // Water
-          if ({{ currentWaterLevel }}< water) {
+          if ({{ currentWaterLevel }}< {{recommendedWater}}) {
               document.getElementById("waterRec").innerHTML ="Keep drinking! More water will help your kidneys!";
           }
-          else if ({{ currentWaterLevel }} > water) {
+          else if ({{ currentWaterLevel }} > {{recommendedWater}}) {
               document.getElementById("waterRec").innerHTML="Wow! Great job drinking enough water today.";
           }
           else {
