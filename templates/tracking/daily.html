@@ -124,7 +124,7 @@
     <p> {{ food.food_description}} </p>
     <p> {{ food.quantity}}</p>
     <ul>Sodium: {{food.sodium}}mg</ul>
-    <ul>Protein: {{food.sodium}}g</ul>
+    <ul>Protein: {{food.protein}}g</ul>
     <ul>Potassium: {{food.potassium}}mg</ul>
     <ul>Phosphorus: {{food.phosphorus}}mg</ul>
     <a href="{% url 'editFoodHistoryView' id={{food.id}} name={{food.food_description}} quantity={{food.quantity}} %}"><button class = "button-17">Edit</button></a>
