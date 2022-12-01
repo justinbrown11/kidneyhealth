@@ -49,29 +49,36 @@
             data: {
               labels: [{% for data in data %} '{{data.lab_date}}', {% endfor %}],
               datasets: [
+              {
+                label: "Blood Pressure Trends",
+                data: [{% for data in data %} {{data.blood_pressure}}, {% endfor %}],
+                borderColor: "rgba(255, 99, 132, 0.5)",
+                pointBackgroundColor: "rgba(255, 99, 132, 1)",
+                
+              },
                 {
                   label: "Potassium Level Trends",
                   data: [{% for data in data %} {{data.potassium_level}}, {% endfor %}],
-                  borderColor: "rgba(255, 99, 132, 0.5)",
-                  pointBackgroundColor: "rgba(255, 99, 132, 1)",
-                },
-                {
-                  label: "Phosphorus Level Trends",
-                  data: [{% for data in data %} {{data.phosphorous_level}}, {% endfor %}],
-                  borderColor: "rgba(54, 162, 235, 0.5)",
-                  pointBackgroundColor: "rgba(54, 162, 235, 1)",
-                },
-                {
-                  label: "Sodium Level Trends",
-                  data: [{% for data in data %} {{data.sodium_level}}, {% endfor %}],
                   borderColor: "rgba(255, 206, 86, 0.5)",
                   pointBackgroundColor: "rgba(255, 206, 86, 1)",
                 },
                 {
-                  label: "Creatinine Level Trends",
-                  data: [{% for data in data %} {{data.creatinine_level}}, {% endfor %}],
+                  label: "Phosphorus Level Trends",
+                  data: [{% for data in data %} {{data.phosphorous_level}}, {% endfor %}],
                   borderColor: "rgba(75, 192, 192, 0.5)",
                   pointBackgroundColor: "rgba(75, 192, 192, 1)",
+                },
+                {
+                  label: "Sodium Level Trends",
+                  data: [{% for data in data %} {{data.sodium_level}}, {% endfor %}],
+                  borderColor: "rgba(72, 122, 280, 0.5)",
+                  pointBackgroundColor: "rgba(72, 122, 180, 1)",
+                },
+                {
+                  label: "Creatinine Level Trends",
+                  data: [{% for data in data %} {{data.creatinine_level}}, {% endfor %}],
+                  borderColor: "rgba(54, 162, 235, 0.5)",
+                  pointBackgroundColor: "rgba(54, 162, 235, 1)",
                 },
                 {
                   label: "Albumin Level Trends",
