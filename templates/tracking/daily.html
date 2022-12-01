@@ -135,30 +135,20 @@
         </thead>
         <tbody>
     {% for food in foods %}
-          <tr>
-            <th scope="row">1</th>
-            <td>{{ food.food_description}} </td>
-            <td>{{ food.quantity}}</td>
-            <td>{{food.sodium}}mg<td>
-            <td>{{food.protein}}g<td>
-            <td>{{food.phosphorus}}g<td>
-            <td>{{food.potassium}}g<td>
-            <td>    <a href="{% url 'editFoodHistoryView' id={{food.id}} name={{food.food_description}} quantity={{food.quantity}} %}"><button class = "button-17">Edit</button></a></td>
-            <td>
-                <form action="{% url 'removeFoodHistory' %}" method='POST'>
-                    {% csrf_token %}
-                <input type= 'hidden' value={{ food.id }} name='id'>
-                <button type='submit' class = "button-17">Delete</button>
-                </form>
-            </td>
-          </tr>
-          {% endfor %}
-        </tbody>
-    </table>
+    <p> {{ food.food_description}} </p>
+    <p> {{ food.quantity}}</p>
+    <ul>Sodium: {{food.sodium}}mg</ul>
+    <ul>Protein: {{food.protein}}g</ul>
+    <ul>Potassium: {{food.potassium}}mg</ul>
     <ul>Phosphorus: {{food.phosphorus}}mg</ul>
+    <a href="{% url 'editFoodHistoryView' id=food.id name=food.food_description quantity=food.quantity %}"><button class = "button-17">Edit</button></a>
+    <form action="{% url 'removeFoodHistory' %}" method='POST'>
+        {% csrf_token %}
+    <input type= 'hidden' value={{ food.id }} name='id'>
+    <button type='submit' class = "button-17">Delete</button>
+    </form>
 
-
-
+{% endfor %}
       <br><br>
       <script>
           // sample values to test functionality
