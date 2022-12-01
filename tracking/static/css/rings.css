@@ -20,7 +20,6 @@
 }
 
 .ldBar-label {
-  /* color: #09f; */
   font-family: 'varela round';
   font-size: 1em;
   font-weight: 500;
@@ -28,7 +27,32 @@
 
 .grid-container {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
-  /* grid-gap: 9px; */
-  /* padding: 15px; */
+  grid-template-columns: repeat(auto-fit, minmax(125px, 1fr));
+  grid-auto-rows: minmax(200px,auto);
+  gap: 10px;
+  /* background-color: aquamarine; */
+  justify-items: center;
+  align-items: center;
+  /* grid-gap: 5px; */
+  /* padding: -10px; */
+}
+
+.ring {
+  float:left; 
+  text-align:center;
+  position:relative;
+  top:0px;
+}
+
+.ring-text-container {
+  display: block;
+  text-align:center;
+  /* justify-content: center;
+  align-content: center; */
+  /* margin-top: 40px; */
+}
+
+.levels {
+  margin-top:150px;
+  text-align:center;
 }
