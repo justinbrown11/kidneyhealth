@@ -28,11 +28,11 @@
         <div>
             <div id="SodiumRing" class="lbBar label-center ring" data-stroke="green" data-stroke-width="6" data-preset="circle" data-value="0" ><h4 style="text-align:center;">Sodium</h4></div>
                 <div class="ring-text-container">
-                        {% comment %} <div class="levels"> {% endcomment %}
+                        <div class="levels">
                         <p>{{ currentSodiumLevel }}mg /{{ recommendedSodium }}mg</p>
                         <p id = 'sodiumRec'></p>
                         <a id="sodiumLink" href="{% url 'tips' %}#Sodium">Sodium Recommendations</a>
-                    {% comment %} </div>  {% endcomment %}
+                    </div> 
                 </div>
             </div>
         <div>
@@ -121,6 +121,41 @@
 
 </div>
 
+<h5>Today's Foods</h5>
+<br>
+<table class="table table-hover">
+    <thead>
+      <tr>
+        <th scope="col">Food</th>
+        <th scope="col">Servings</th>
+        <th scope="col">Sodium</th>
+        <th scope="col">Protein</th>
+        <th scope="col">Phosphorus</th>
+        <th scope="col">Potassium</th>
+        <th scope="col">Edit</th>
+        <th scope="col">Delete</th>
+      </tr>
+    </thead>
+    <tbody>
+{% for food in foods %}
+<tr>
+    <td> {{ food.food_description}} </td>
+    <td> {{ food.quantity}}</td>
+    <td>{{food.sodium}}mg</td>
+    <td>{{food.protein}}g</td>
+    <td>{{food.potassium}}mg</td>
+    <td>{{food.phosphorus}}mg</td>
+    <td><a href="{% url 'editFoodHistoryView' id=food.id name=food.food_description quantity=food.quantity %}"><button class = "button-17">Edit</button></a></td>
+    <td><form action="{% url 'removeFoodHistory' %}" method='POST'>
+        {% csrf_token %}
+    <input type= 'hidden' value={{ food.id }} name='id'>
+    <button type='submit' class = "button-17" style="height: 30px; width: 50px;">Delete</button>
+    </form></td>
+</tr>
+{% endfor %}
+
+</tbody>
+</table>
       <br><br>
       <script>
           // sample values to test functionality
