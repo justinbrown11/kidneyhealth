@@ -1,5 +1,5 @@
 from django.urls import path
-from tracking.views import dailyPageView, myPantryPageView, indexPageView, weeklyPageView, monthlyPageView, searchAPIResultsPageView, searchFoodResultsPageView, viewUserInfoPageView, addLabsPageView, register, deleteUser, deleteUserPageView, errorPageView, searchPageView, updateUserInfoPageView, viewLabsPageView, tipsPageView, saveAPIFood, customFoodPageView, saveCustomFood, updateWaterLevel, addFoodToEntry
+from tracking.views import dailyPageView, myPantryPageView, indexPageView, weeklyPageView, monthlyPageView, searchAPIResultsPageView, searchFoodResultsPageView, viewUserInfoPageView, addLabsPageView, register, deleteUser, deleteUserPageView, errorPageView, searchPageView, updateUserInfoPageView, viewLabsPageView, tipsPageView, saveAPIFood, customFoodPageView, saveCustomFood, updateWaterLevel, addFoodToEntry, editFoodHistoryPageView, editFoodHistory, deleteFoodHistory
 
 urlpatterns = [
     path('daily/', dailyPageView, name = 'daily'),
@@ -23,5 +23,8 @@ urlpatterns = [
     path('myPantry/', myPantryPageView, name = 'myPantry'),
     path('water/save', updateWaterLevel, name = 'updateWater'),
     path('food/search/', searchFoodResultsPageView, name = 'searchFoodQuery'),
-    path('food/add', addFoodToEntry, name = 'addFoodEntry'),
+    path('food/add/', addFoodToEntry, name = 'addFoodEntry'),
+    path('food/edit/<int:id>/<str:name>/<float:quantity>', editFoodHistoryPageView, name = 'editFoodHistoryView'),
+    path('food/edit/save/', editFoodHistory, name = 'editFoodHistory'),
+    path('food/remove/', deleteFoodHistory, name = 'removeFoodHistory'),
 ]
