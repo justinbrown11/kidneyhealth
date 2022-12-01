@@ -167,6 +167,7 @@ def searchFoodResultsPageView(request):
         context = {
             "foods": foods
         }
+        print(context)
 
         return render(request, 'tracking/myPantry.html', context)
 
@@ -503,6 +504,4 @@ def customFoodPageView(request):
     return render(request, 'tracking/customFood.html')
 
 def myPantryPageView(request):
-
-    
     return render(request, 'tracking/myPantry.html')
