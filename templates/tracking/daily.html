@@ -96,6 +96,8 @@
       <br>
       <br>
     </div>
+<div>
+    <div style = "display:inline; float: left; width: 49%;">
         <h5>Add Today's Foods</h5>
         <br>
         <div style='display: inline;'>
@@ -107,7 +109,8 @@
                     <button type ='submit' class = "button-17"> Search </button>
                 </form>
       </div>
-      <br><br>
+    </div>
+    <div style = "display:inline; float: left; width: 49%;">
       <h5>Update Today's Water</h5>
       <br>
       <div style='display: inline;'>
@@ -119,7 +122,15 @@
                   <br><br>
                   <button type ='submit' class = "button-17"> Submit </button>
               </form>
+       </div>
     </div>
+
+    <br><br>
+
+</div>
+
+    <h5>Today's Foods</h5>
+    <br>
     <table class="table table-hover">
         <thead>
           <tr>
@@ -135,20 +146,25 @@
         </thead>
         <tbody>
     {% for food in foods %}
-    <p> {{ food.food_description}} </p>
-    <p> {{ food.quantity}}</p>
-    <ul>Sodium: {{food.sodium}}mg</ul>
-    <ul>Protein: {{food.protein}}g</ul>
-    <ul>Potassium: {{food.potassium}}mg</ul>
-    <ul>Phosphorus: {{food.phosphorus}}mg</ul>
-    <a href="{% url 'editFoodHistoryView' id=food.id name=food.food_description quantity=food.quantity %}"><button class = "button-17">Edit</button></a>
-    <form action="{% url 'removeFoodHistory' %}" method='POST'>
-        {% csrf_token %}
-    <input type= 'hidden' value={{ food.id }} name='id'>
-    <button type='submit' class = "button-17">Delete</button>
-    </form>
+    <tr>
+        <td> {{ food.food_description}} </td>
+        <td> {{ food.quantity}}</td>
+        <td>Sodium: {{food.sodium}}mg</td>
+        <td>Protein: {{food.protein}}g</td>
+        <td>Potassium: {{food.potassium}}mg</td>
+        <td>Phosphorus: {{food.phosphorus}}mg</td>
+        <td><a href="{% url 'editFoodHistoryView' id=food.id name=food.food_description quantity=food.quantity %}"><button class = "button-17">Edit</button></a></td>
+        <td><form action="{% url 'removeFoodHistory' %}" method='POST'>
+            {% csrf_token %}
+        <input type= 'hidden' value={{ food.id }} name='id'>
+        <button type='submit' class = "button-17">Delete</button>
+        </form></td>
+    </tr>
+    {% endfor %}
 
-{% endfor %}
+    </tbody>
+    </table>
+
       <br><br>
       <script>
           // sample values to test functionality
