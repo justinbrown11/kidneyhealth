@@ -47,8 +47,8 @@ Full Stack Developer<br>
 
 Brooke Woodland<br>
 Full Stack Developer<br>
-[Brooke's LinkedIn]()<br>
-[Brooke's Github]()
+[Brooke's LinkedIn](https://www.linkedin.com/in/brooke-woodland/)<br>
+[Brooke's Github](https://github.com/wb385334)
 
 Ellie Richardson<br>
 Full Stack Developer<br>
