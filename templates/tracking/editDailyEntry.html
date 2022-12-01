@@ -3,10 +3,10 @@
 {% block content %}
 
 <h3> {{ name }} </h3>
-<form action='' method='POST'>
+<form action="{% url 'editFoodHistory'%}" method='POST'>
     {% csrf_token %}
-    <input type= 'hidden' value={{ id }}>
-    <input type = 'number' step="0.01" value = {{ quantity }}>
+    <input type= 'hidden' value={{ id }} name='id'>
+    <input type = 'number' step="0.01" value = {{ quantity }} name = "quantity">
     <button type = 'submit' class = "button-17">Submit Changes</button>
 </form>
 {% endblock %}
