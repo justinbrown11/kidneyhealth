@@ -20,9 +20,35 @@ def dailyPageView(request):
     # Grab today's entry for the user
     today = (DailyEntry.objects.filter(entry_date=date.today(), user__id=request.user.id)).values()
 
+    # Grab food histories
+    foodHistory = FoodHistory.objects.filter(entry__id=today[0]['id']).values()
+
+    ProteinTotal = 0
+    SodiumTotal = 0
+    PhosphateTotal = 0
+    PotassiumTotal = 0
+
+    for item in foodHistory:
+        food = Food.objects.get(id=item['food_id'])
+
+        weight = float(request.user.profile.weight)
+        
+        ProteinTotal+=(food.protein_g * item['quantity'])
+        
+        SodiumTotal+=(food.sodium_mg * item['quantity'])
+        PhosphateTotal+=(food.sodium_mg * item['quantity'])
+        PotassiumTotal+=(food.sodium_mg * item['quantity'])
+
+
+    WaterPercentage = (float(today[0]['water_intake_liters']/2.7)) * 100 if len(today) > 0 else 0
+
+    print(foodHistory)
+
     # Set water level
     context = {
-        "currentWaterLevel": float(today[0]['water_intake_liters'] if len(today) > 0 else 0)
+        "currentWaterLevel": float(today[0]['water_intake_liters'] if len(today) > 0 else 0),
+        "CurrentWaterPercentage": WaterPercentage,
+        "currentProteinLevel": float(today[0]['protein_g'] if len(today) > 0 else 0)
     }
 
     return render(request, 'tracking/daily.html', context)

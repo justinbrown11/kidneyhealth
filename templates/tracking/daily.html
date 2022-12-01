@@ -92,9 +92,32 @@
           // sample values to test functionality
           let sodiumPct = 50;
           let proteinPct = 75;
-          let waterPctF = 99;
+          //let waterPctF = 99;
           let kPct = 20;
           let phosPct = 150;
+
+          const sodiumMin = 1495;
+          const sodiumMax = 2300;
+          const protein = 0.6;
+          const water = 3.7;
+          const kMin = 2500;
+          const kMax = 3000;
+          const phosMin = 800;
+          const phosMax = 1000;
+
+          var mySodium = 2500;
+          var myProtein = .6;
+          var myWater = {{ currentWaterLevel }};
+          var myK = 2700;
+          var myPhos = 700;
+
+          // calculate current percentage
+          // let sodiumPct = (mySodium / sodiumMax) * 100;
+          // let proteinPct = (myProtein / protein) * 100;
+          let waterPctF= (myWater / water) * 100;
+          // // for now, default to female let waterPctM = (myWater / waterMale) * 100;
+          // let kPct = (myK / kMax) * 100;
+          // let phosPct = (myPhos / phosMax) * 100;
   
           // scripts to write the load bars
           var sodiumBar = new ldBar("#SodiumRing");
@@ -120,14 +143,7 @@
       </script>
       <script>
           // Constants for daily recommended amounts
-          const sodiumMin = 1495;
-          const sodiumMax = 2300;
-          const protein = 0.6;
-          const water = 3.7;
-          const kMin = 2500;
-          const kMax = 3000;
-          const phosMin = 800;
-          const phosMax = 1000;
+
   
           // // input variables for user data
           // let mySodium = parseInt(document.getElementById("SodiumValue").innerHTML);
@@ -137,19 +153,9 @@
           // let myPhos = parseInt(document.getElementById("PhosValue").innerHTML);
           // let gender = '';
   
-          var mySodium = 2500;
-          var myProtein = .6;
-          var myWater = 2.7;
-          var myK = 2700;
-          var myPhos = 700;
-  
-          // calculate current percentage
-          // let sodiumPct = (mySodium / sodiumMax) * 100;
-          // let proteinPct = (myProtein / protein) * 100;
-          // let waterPctF= (myWater / water) * 100;
-          // // for now, default to female let waterPctM = (myWater / waterMale) * 100;
-          // let kPct = (myK / kMax) * 100;
-          // let phosPct = (myPhos / phosMax) * 100;
+
+    
+
   
           // Sodium
           if (mySodium < sodiumMin) {
