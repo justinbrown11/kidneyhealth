@@ -587,7 +587,7 @@ def deleteFoodHistory(request):
         # Delete it
         food.delete()
 
-        return HttpResponse("<script>alert('Food removed successfully from today's journal!'); window.location.href='/daily'</script>")
+        return HttpResponse("<script>alert('Food removed successfully from your journal!'); window.location.href='/daily'</script>")
 
     except Exception as e:
 
@@ -632,7 +632,7 @@ def editFoodHistoryPageView(request, id, name, quantity):
     context = {
         "id": id,
         "name": name,
-        "quantity": quantity
+        "quantity": float(quantity)
     }
 
     return render(request, 'tracking/editDailyEntry.html', context)
@@ -654,7 +654,7 @@ def editFoodHistory(request):
         # save it
         food.save()
 
-        return HttpResponse("<script>alert('Food updated successfully in today's journal!'); window.location.href='/daily'</script>")
+        return HttpResponse("<script>alert('Food successfully updated in your journal!'); window.location.href='/daily'</script>")
 
     except Exception as e:
 

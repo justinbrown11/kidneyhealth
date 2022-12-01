@@ -24,7 +24,7 @@ urlpatterns = [
     path('water/save', updateWaterLevel, name = 'updateWater'),
     path('food/search/', searchFoodResultsPageView, name = 'searchFoodQuery'),
     path('food/add/', addFoodToEntry, name = 'addFoodEntry'),
-    path('food/edit/<int:id>/<str:name>/<float:quantity>', editFoodHistoryPageView, name = 'editFoodHistoryView'),
+    path('food/edit/<int:id>/<str:name>/<str:quantity>', editFoodHistoryPageView, name = 'editFoodHistoryView'),
     path('food/edit/save/', editFoodHistory, name = 'editFoodHistory'),
     path('food/remove/', deleteFoodHistory, name = 'removeFoodHistory'),
 ]

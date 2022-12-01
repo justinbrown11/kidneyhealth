@@ -127,7 +127,7 @@
     <ul>Protein: {{food.protein}}g</ul>
     <ul>Potassium: {{food.potassium}}mg</ul>
     <ul>Phosphorus: {{food.phosphorus}}mg</ul>
-    <a href="{% url 'editFoodHistoryView' id={{food.id}} name={{food.food_description}} quantity={{food.quantity}} %}"><button class = "button-17">Edit</button></a>
+    <a href="{% url 'editFoodHistoryView' id=food.id name=food.food_description quantity=food.quantity %}"><button class = "button-17">Edit</button></a>
     <form action="{% url 'removeFoodHistory' %}" method='POST'>
         {% csrf_token %}
     <input type= 'hidden' value={{ food.id }} name='id'>
