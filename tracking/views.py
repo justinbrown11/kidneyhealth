@@ -47,7 +47,7 @@ def dailyPageView(request):
 
     weight = float(request.user.profile.weight) * 0.453592
 
-    RecommendedProtein = .6 * weight
+    RecommendedProtein = round(.6 * weight, 2)
     RecommendedSodium = 2300
     RecommendedPhosphorus = 1000
     RecommendedPotassium = 3000
@@ -61,7 +61,7 @@ def dailyPageView(request):
     for item in foodHistory:
         food = Food.objects.get(id=item['food_id'])
 
-        ProteinTotal += float(food.protein_g * item['quantity'])
+        ProteinTotal += round(float(food.protein_g * item['quantity']), 2)
         SodiumTotal += float(food.sodium_mg * item['quantity'])
         PhosphorusTotal += float(food.phosphorus_mg * item['quantity'])
         PotassiumTotal += float(food.potassium_mg * item['quantity'])
