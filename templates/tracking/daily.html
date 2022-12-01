@@ -112,12 +112,11 @@
           var myPhos = 700;
 
           // calculate current percentage
-          // let sodiumPct = (mySodium / sodiumMax) * 100;
-          // let proteinPct = (myProtein / protein) * 100;
-          let waterPctF= (myWater / water) * 100;
-          // // for now, default to female let waterPctM = (myWater / waterMale) * 100;
-          // let kPct = (myK / kMax) * 100;
-          // let phosPct = (myPhos / phosMax) * 100;
+           let sodiumPct = {{ SodiumPercent }};
+           let proteinPct = {{ ProteinPercent }};
+           let waterPct= {{ WaterPercent }};
+           let kPct = {{ PotassiumPercent }};
+           let phosPct = {{ PhosphorousPercent }};
   
           // scripts to write the load bars
           var sodiumBar = new ldBar("#SodiumRing");
