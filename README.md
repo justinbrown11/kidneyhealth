@@ -52,8 +52,8 @@ Full Stack Developer<br>
 
 Ellie Richardson<br>
 Full Stack Developer<br>
-[Ellie's LinkedIn]()<br>
-[Ellie's Github]()
+[Ellie's LinkedIn](https://www.linkedin.com/in/elizabethhaws/)<br>
+[Ellie's Github](https://github.com/egrich17)
 
 Justin Brown<br>
 Full Stack Developer<br>
