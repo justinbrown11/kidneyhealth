@@ -47,12 +47,9 @@
 .ring-text-container {
   display: block;
   text-align:center;
-  /* justify-content: center;
-  align-content: center; */
-  /* margin-top: 40px; */
+  margin-top:150px;
 }
 
 .levels {
-  margin-top:150px;
   text-align:center;
 }
