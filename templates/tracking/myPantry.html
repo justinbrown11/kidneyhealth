@@ -1,15 +1,17 @@
-{% extends 'tracking/daily.html' %}
+{% extends 'base.html' %}
 {% load static %}
-{% block myPantryResults %}
+{% block content %}
 <br><br>
 <h5>My Pantry Results</h5>
 <form action="{% url 'addFoodEntry' %}" method='POST'>
     {% csrf_token %}
     {% if foods|length == 0 %}
         <p>There are no foods in your pantry that match that search. Try adding it to your pantry first.</p>
+        <br>
+        <a href= {% url 'search'%}> <button class = "button-17"> Add Food to Pantry </button></a>
     {% else %}
         {% for food in foods %}
-        <input type = 'radio' name='food' value={{ food.id }}>
+            <input type = 'radio' name='food' value={{ food.id }}>
             {% if food.brand_name != '' and food.serving_size_unit != '' %}
                 <label>{{food.food_description}} {{food.brand_name}} 1 Serving: {{ food.serving_size }}{{ food.serving_size_unit }} </label>
             {% else %}
@@ -23,9 +25,7 @@
         <button type ='submit' class = "button-17"> Submit </button>
     {% endif %}
 
-
-
-
 </form>
 {% endblock %}
+
 

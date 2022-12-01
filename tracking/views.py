@@ -211,6 +211,7 @@ def searchFoodResultsPageView(request):
         context = {
             "foods": foods
         }
+        print(context)
 
         return render(request, 'tracking/myPantry.html', context)
 
