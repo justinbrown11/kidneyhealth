@@ -17,8 +17,8 @@
       <h1>Create Account</h1>
       <form method="POST" action="{% url 'register' %}">
         {% csrf_token %}
-        {{form.as_p}}
-        {{profile_form.as_p}}
+        {{ form.as_p }}
+        {{ profile_form.as_p }}
         <input class="button-17" type="submit" value="Create New Account" />
       </form>
   </body>
