@@ -3,13 +3,13 @@
 {% block content %}
 <br><br>
 <h5>My Pantry Results</h5>
-<form action="{% url 'addFoodEntry' %}" method='POST'>
-    {% csrf_token %}
-    {% if foods|length == 0 %}
-        <p>There are no foods in your pantry that match that search. Try adding it to your pantry first.</p>
-        <br>
-        <a href= {% url 'search'%}> <button class = "button-17"> Add Food to Pantry </button></a>
-    {% else %}
+{% if foods|length == 0 %}
+    <p>There are no foods in your pantry that match that search. Try adding it to your pantry first.</p>
+    <br>
+    <a href="{% url 'apiSearch' %}"> <button class = "button-17"> Add Food to Pantry </button></a>
+{% else %}
+    <form action="{% url 'addFoodEntry' %}" method='POST'>
+        {% csrf_token %}
         {% for food in foods %}
             <input type = 'radio' name='food' value={{ food.id }}>
             {% if food.brand_name != '' and food.serving_size_unit != '' %}
@@ -25,9 +25,8 @@
         <input type = 'number' step="0.01" name='quantity'>
         <br>
         <button type ='submit' class = "button-17"> Add to Daily Entry <button>
-    {% endif %}
-
-</form>
+    </form>
+{% endif %}
 {% endblock %}
 
 
