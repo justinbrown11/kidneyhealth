@@ -12,11 +12,13 @@
     <h2 style="margin: 5px; text-align: center">
       You are about to delete your account. Are you sure you wish to proceed?
     </h2>
-    <button class="button-17" style="margin: 10px; text-align: center">
+    <a href={% url 'deleteUser' %}>
+      <button class="button-17" style="margin: 10px; text-align: center; color: red;">
       Yes, Delete
-    </button>
+      </button>
+    </a>
     <a href={% url 'userInfo' %}>
-        <button class="button-17" style="margin: 10px; text-align:center;">No, Go Back</button>
+        <button class="button-17" style="margin: 10px; text-align:center; color: green;">No, Go Back</button>
       </a>
     <br /><br />
     </div>

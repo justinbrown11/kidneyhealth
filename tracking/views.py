@@ -531,6 +531,26 @@ def updateUserInfoPageView(request):
 def deleteUserPageView(request):
     return render(request, 'tracking/deleteUser.html')
 
+
+def deleteUser(request):
+
+    try:
+        # Grab current user
+        user = User.objects.get(id=request.user.id)
+
+        # Delete it
+        user.delete()
+
+        return HttpResponse("<script>alert('Your account has been deleted successfully. Goodbye!'); window.location.href='/logout'</script>")
+
+    except Exception as e:
+
+        # Log error
+        print(e)
+
+        return HttpResponse("<script>alert('Failed to delete user, please try again'); window.location.href='/userInfo'</script>")
+
+
 def searchPageView(request):
     return render(request, 'tracking/foodApiSearch.html')
 
