@@ -38,18 +38,18 @@ def dailyPageView(request):
     PhosphorusTotal = 0
     PotassiumTotal = 0
 
-    weight = float(request.user.profile.weight) * 0.453592
+    # weight = float(request.user.profile.weight) * 0.453592
 
-    RecommendedProtein = weight * .6
+    RecommendedProtein = .6
     RecommendedSodium = 2300
     RecommendedPhosphorus = 1000
     RecommendedPotassium = 3000
-    RecommendedWater = 0.00
+    RecommendedWater = 2.70
 
-    if request.user.profile.gender.gender_description == "f":
-        RecommendedWater = 2.7
-    else :
-        RecommendedWater = 3.7
+    # if request.user.profile.gender.gender_description == "f":
+    #     RecommendedWater = 2.7
+    # else :
+    #     RecommendedWater = 3.7
 
     for item in foodHistory:
         food = Food.objects.get(id=item['food_id'])
@@ -504,4 +504,6 @@ def customFoodPageView(request):
     return render(request, 'tracking/customFood.html')
 
 def myPantryPageView(request):
+
+    
     return render(request, 'tracking/myPantry.html')

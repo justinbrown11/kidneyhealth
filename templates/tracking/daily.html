@@ -96,14 +96,14 @@
           //let kPct = 20;
           //let phosPct = 150;
 
-          const sodiumMin = 1495;
+          {% comment %} const sodiumMin = 1495;
           const sodiumMax = 2300;
           const protein = 0.6;
           const water = 3.7;
           const kMin = 2500;
           const kMax = 3000;
           const phosMin = 800;
-          const phosMax = 1000;
+          const phosMax = 1000; {% endcomment %}
 
           //var mySodium = 2500;
           //var myProtein = .6;
@@ -112,12 +112,14 @@
           //var myPhos = 700;
 
           // calculate current percentage
-           var sodiumPct = {{ currentSodiumPercent }};
-           let proteinPct = {{ currentProteinPercent }};
-           var waterPct= {{ currentWaterPercent }};
-           let kPct = {{ currentPotassiumPercent }};
-           let phosPct = {{ currentPhosphorousPercent }};
-  
+           var sodiumPct = {{ currentSodiumPercentage }};
+           var proteinPct = {{ currentProteinPercentage }};
+           var waterPct= {{ currentWaterPercentage }};
+           var kPct = {{ currentPotassiumPercentage }};
+           var phosPct = {{ currentPhosphorusPercentage }};
+
+           //console.log(sodiumPct);
+
           // scripts to write the load bars
           var sodiumBar = new ldBar("#SodiumRing");
           var bar1 = document.getElementById('SodiumRing').ldBar;
@@ -129,7 +131,7 @@
   
           var waterBar = new ldBar("#WaterRing");
           var bar3 = document.getElementById('WaterRing').ldBar;
-          waterBar.set(waterPctF);
+          waterBar.set(waterPct);
   
           var kBar = new ldBar("#PotassiumRing");
           var bar4 = document.getElementById('PotassiumRing').ldBar;
@@ -140,7 +142,7 @@
           phosBar.set(phosPct);
           
       </script>
-      <script>
+      {% comment %} <script>
           // Constants for daily recommended amounts
 
   
@@ -157,7 +159,7 @@
 
   
           // Sodium
-          if (mySodium < sodiumMin) {
+          {% comment %} if (mySodium < sodiumMin) {
               document.getElementById("#SodiumRing").style.stroke = 'gold';
               alert("Nice! Keep your sodium below 2300 to stay in range for today");
           }
@@ -186,7 +188,7 @@
   
           // Water
           if (myWater < water) {
-              document.getElementById("WaterRing").style.stroke = 'red';
+              document.getElementById("WaterRing").style.stroke = 'red'
               alert("Keep drinking! More water will help your kidneys!");
           }
           else if (myWater > water) {
@@ -224,8 +226,8 @@
           else if (myPhos > phosMin && myPhos < phosMax) {
               document.getElementById("PhosRing").style.stroke = 'green';
               alert("Look at you! Great job keeping phosphorus in a healthy range");
-          }
-      </script>
+          } 
+      </script> {% endcomment %}
 
 <body>
     

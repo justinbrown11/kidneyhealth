@@ -5,8 +5,8 @@
 <h5>My Pantry Results</h5>
 <form action="{% url 'addFoodEntry' %}" method='POST'>
     {% csrf_token %}
-    {% if food.len() == 0%}
-        <p>no results</p>
+    {% if foods|length == 0 %}
+        <p>There are no foods in your pantry that match that search. Try adding it to your pantry first.</p>
     {% else %}
         {% for food in foods %}
         <input type = 'radio' name='food' value={{ food.id }}>
