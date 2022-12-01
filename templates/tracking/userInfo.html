@@ -6,35 +6,39 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link href="{% static 'css/style.css' %}" rel="stylesheet" />
-    {% block title %} Your Info {% endblock %}
+    <link
+    rel="stylesheet"
+    href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css"
+    integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N"
+    crossorigin="anonymous"
+  />
+    {% comment %} {% block title %} Your Info {% endblock %} {% endcomment %}
   </head>
-  <div
-      style="width: 40%; margin: auto; text-align: center; padding-top: 40px"
-    >
   <body>
-    <p>
-        <h4>Username: {{ user }}</h4><br>
+    <div style="margin: auto; text-align: center; padding-top: 40px">
+        <h2>My Info</h2><br>
+        <p><b>Username:</b> {{ user }}</p>
         {% if user.is_authenticated %}
-        <h4>Email: {{user.email}}</h4><br>
-        <h4>First Name: {{user.first_name}}</h4><br>
-        <h4>Last Name: {{user.last_name}}</h4><br>
-        <h4>Phone: {{user.profile.phone}}</h4><br>
-        <h4>Birthdate: {{user.profile.birth_date}}</h4><br>
-        <h4>Weight: {{user.profile.weight}}</h4><br>
-        <h4>Height: {{user.profile.height}}</h4><br>
-        <h4>Comorbidity: {{user.profile.comorbidity}}</h4><br>
-        <h4>Race: {{user.profile.race}}</h4><br>
-        <h4>Gender: {{user.profile.gender}}</h4>
+        <p><b>Email:</b> {{user.email}}</p>
+        <p><b>First Name:</b> {{user.first_name}}</p>
+        <p><b>Last Name:</b> {{user.last_name}}</p>
+        <p><b>Phone:</b> {{user.profile.phone}}</p>
+        <p><b>Birthdate:</b> {{user.profile.birth_date}}</p>
+        <p><b>Weight:</b> {{user.profile.weight}} lbs</p>
+        <p><b>Height:</b> {{user.profile.height}} inches</p>
+        <p><b>Comorbidity:</b> {{user.profile.comorbidity}}</p>
+        <p><b>Race:</b> {{user.profile.race}}</p>
+        <p><b>Gender:</b> {{user.profile.gender}}</p>
         {% endif %}
-    </p>
-    <a href={% url 'updateUserInfo' %}>
-    <button class="button-17" style="margin: 10px">Update Account Info </button>
-    </a>
+        <a href={% url 'updateUserInfo' %}>
+          <button class="button-17" style="margin: 10px; text-align:center;">Update Account Info </button>
+        </a>
+      </div>
         <br>
         <br>
         <br>
         {% endblock %}
 
   </body>
-</div>
+
 </html>
