@@ -33,9 +33,12 @@
   </body>
 
 <script>
+  
+onload = (event) => {
     console.log('working')
-    console.log(document.getElementsByClassName('fc-daygrid-day fc-day fc-day-tue fc-day-today')[0]);
-    document.getElementsByClassName('fc-daygrid-day fc-day fc-day-tue fc-day-today')[0].style.background-color = "transparent !important;";
+    console.log(document.getElementsByClassName('fc-license-message')[0]);
+    document.getElementsByClassName('fc-license-message')[0].style.visibility = "hidden";
+  };
 </script> 
 
 
