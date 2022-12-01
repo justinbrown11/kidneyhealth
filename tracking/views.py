@@ -21,6 +21,9 @@ def dailyPageView(request):
 
     try:
 
+        # Intialize foods array
+        foods = []
+
         # Grab today's entry for the user
         today = (DailyEntry.objects.filter(entry_date=date.today(), user__id=request.user.id)).values()
 
@@ -69,6 +72,21 @@ def dailyPageView(request):
             PhosphorusTotal += float(food.phosphorus_mg * item['quantity'])
             PotassiumTotal += float(food.potassium_mg * item['quantity'])
 
+            # Initialize food dict
+            foodDict = {}
+
+            # Update attributes
+            foodDict['id'] = item['id']
+            foodDict['food_description'] = food.food_description
+            foodDict['brand_name'] = food.brand_name
+            foodDict['quantity'] = float(item['quantity'])
+            foodDict['protein'] = round(float(food.protein_g * item['quantity']), 2)
+            foodDict['sodium'] = float(food.sodium_mg * item['quantity'])
+            foodDict['phosphorus'] = float(food.phosphorus_mg * item['quantity'])
+            foodDict['potassium'] = float(food.potassium_mg * item['quantity'])
+
+            # Push to array
+            foods.append(foodDict)
 
         WaterPercentage = (float(float(today['water_intake_liters'])/RecommendedWater)) * 100
         SodiumPercentage = (float(SodiumTotal/RecommendedSodium)) * 100
@@ -92,7 +110,7 @@ def dailyPageView(request):
             "recommendedWater": RecommendedWater,
             "recommendedPhosphorus": RecommendedPhosphorus,
             "recommendedPotassium": RecommendedPotassium,
-
+            "foods": foods
         }
 
         return render(request, 'tracking/daily.html', context)
@@ -555,6 +573,29 @@ def deleteUser(request):
         return HttpResponse("<script>alert('Failed to delete user, please try again'); window.location.href='/userInfo'</script>")
 
 
+def deleteFoodHistory(request):
+
+    try:
+
+        # Grab body from request
+        body = dict(request.POST.items())
+
+        # Grab food history object
+        food = FoodHistory.objects.get(id=body['id'])
+
+        # Delete it
+        food.delete()
+
+        return HttpResponse("<script>alert('Food removed successfully from today's journal!'); window.location.href='/daily'</script>")
+
+    except Exception as e:
+
+        # Log error
+        print(e)
+
+        return HttpResponse("<script>alert('Failed to remove food, please try again'); window.location.href='/daily'</script>")
+
+
 def searchPageView(request):
     return render(request, 'tracking/foodApiSearch.html')
 
@@ -584,6 +625,42 @@ def viewLabsPageView(request):
 
         return HttpResponse("<script>alert('An error occurred'); window.location.href='/daily'</script>")
 
+
+def editFoodHistoryPageView(request, id, name, quantity):
+
+    context = {
+        "id": id,
+        "name": name,
+        "quantity": quantity
+    }
+
+    return render(request, 'tracking/editDailyEntry.html', context)
+
+
+def editFoodHistory(request):
+
+    try:
+
+        # Grab body from request
+        body = dict(request.POST.items())
+
+        # Grab food history object
+        food = FoodHistory.objects.get(id=body['id'])
+
+        # Update quantity
+        food.quantity = body['quantity']
+
+        # save it
+        food.save()
+
+        return HttpResponse("<script>alert('Food updated successfully in today's journal!'); window.location.href='/daily'</script>")
+
+    except Exception as e:
+
+        # Log error
+        print(e)
+
+        return HttpResponse("<script>alert('Failed to update food, please try again'); window.location.href='/daily'</script>")
 
 def addLabsPageView(request):
     return render(request, 'tracking/addLabs.html')
