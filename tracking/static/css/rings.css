@@ -4,7 +4,7 @@
 
 .ldBar.label-center > .ldBar-label {
   position: absolute;
-  top: 50%;
+  top: 65%;
   left: 50%;
   -webkit-transform: translate(-50%, -50%);
   transform: translate(-50%, -50%);
@@ -25,34 +25,35 @@
   font-weight: 500;
 }
 
-
 .ring {
   float:left; 
-  text-align:center;
+  text-align:left;
   position:relative;
-  top:0px;
 }
 
 .ring-text-container {
   display: block;
-  text-align:center;
+  text-align:left;
   margin-top:150px;
+  height:100px;
 }
 
 .levels {
-  text-align:center;
+  text-align:left;
 }
 
 .grid-container {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(125px, 1fr));
-  grid-auto-rows: 200px;
+  grid-auto-rows: repeat(200px,auto);
   gap: 10px;
-  /* background-color: aquamarine; */
   justify-items: center;
   align-items: center;
-  align-content:space-between;
-  justify-content:space-between;
-  /* grid-gap: 5px; */
-  /* padding: -10px; */
+  align-content: center;
+  justify-content: center;
+  margin-bottom: 50px;
+}
+
+.table-style {
+  margin-top: 50px;
 }
