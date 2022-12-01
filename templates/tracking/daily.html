@@ -233,7 +233,7 @@
         document.getElementById("sodiumLink").style.display = "block";
     }
     else if ({{ currentSodiumLevel }} > sodiumMax) {
-        document.getElementById("sodiumTip").innerHTML ="Oops! Your sodium intake is above the recommended range. Try to limit sodium for the rest of the day and tomorrow";
+        document.getElementById("sodiumTip").innerHTML ="Your sodium is above the recommended range. Try to limit sodium for the rest of the day and tomorrow";
         document.getElementById("sodiumRec").innerHTML = "Above Recommended"; 
         document.getElementById("sodiumRec").style.color = "#C21807"; 
         document.getElementById("sodiumLink").style.display = "block";
@@ -259,7 +259,7 @@
         document.getElementById("proteinLink").style.display = "block";
     }
     else if ({{ currentProteinLevel }} > {{recommendedProtein}}) {
-        document.getElementById("proteinTip").innerHTML = "Uh oh! Your protein intake is a little high for today. Try to limit protein for the rest of the day and tomorrow";
+        document.getElementById("proteinTip").innerHTML = "Your protein intake is a little high for today. Try to limit protein for the rest of the day and tomorrow";
         document.getElementById("proteinRec").innerHTML= "Above Recommended";
         document.getElementById("proteinRec").style.color = "#C21807"; 
         document.getElementById("proteinLink").style.display = "block";
@@ -309,7 +309,7 @@
         document.getElementById("potassiumLink").style.display = "block";
     } 
     else if ({{ currentPotassiumLevel }}  > kMax) {
-        document.getElementById("potassiumTip").innerHTML = "Careful! Your potassium levels are high for today. Try to limit potassium for the rest of the day and tomorrow";
+        document.getElementById("potassiumTip").innerHTML = "Careful! Your potassium is high for today. Try to limit potassium for the rest of the day and tomorrow";
         document.getElementById("potassiumRec").style.color = "#C21807";
         document.getElementById("potassiumRec").innerHTML = "Above Recommended"; 
         document.getElementById("potassiumLink").style.display = "block";
@@ -334,7 +334,7 @@
         document.getElementById("phosphorusLink").style.display = "block";
     } 
     else if ({{ currentPhosphorusLevel }}  > phosMax) {
-        document.getElementById("phosphorusTip").innerHTML = "Hmm, looks like you had a little too much phosphorus today. Try to limit phosphorus for the rest of today and tomorrow";
+        document.getElementById("phosphorusTip").innerHTML = "Hmm, looks like you had a little too much phosphorus. Try to limit phosphorus for the rest of the day";
         document.getElementById("phosphorusRec").style.color = "#C21807";
         document.getElementById("phosphorusRec").innerHTML = "Above Recommended"; 
         document.getElementById("phosphorusLink").style.display = "block";
