@@ -50,7 +50,7 @@
               labels: [{% for data in data %} '{{data.lab_date}}', {% endfor %}],
               datasets: [
               {
-                label: "Blood Pressure Trends",
+                label: "Systolic Blood Pressure Trends",
                 data: [{% for data in data %} {{data.blood_pressure}}, {% endfor %}],
                 borderColor: "rgba(255, 99, 132, 0.5)",
                 pointBackgroundColor: "rgba(255, 99, 132, 1)",
