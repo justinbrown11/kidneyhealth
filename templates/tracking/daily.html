@@ -94,38 +94,7 @@
       <br>
     </div>
 <div>
-    <div style = "display:inline; float: left; width: 49%;">
-        <h5>Add Today's Foods</h5>
-        <br>
-        <div style='display: inline;'>
-                <form action="{% url 'searchFoodQuery' %}">
-                    <label> Search My Pantry </label>
-                    <br>
-                    <input name="query" type = 'text'>
-                    <br> <br>
-                    <button type ='submit' class = "button-17"> Search </button>
-                </form>
-      </div>
-    </div>
-    <div style = "display:inline; float: left; width: 49%;">
-      <h5>Update Today's Water</h5>
-      <br>
-      <div style='display: inline;'>
-              <form action="{% url 'updateWater' %}" method='POST'>
-                {% csrf_token %}
-                  <label> Enter water intake in liters:</label>
-                  <br>
-                  <input name="water" step='0.01' type = 'number' value={{ currentWaterLevel }}>
-                  <br><br>
-                  <button type ='submit' class = "button-17"> Submit </button>
-              </form>
-       </div>
-    </div>
-
-    <br><br>
-
-</div>
-
+    
 <h5>Today's Foods</h5>
 <br>
 <table class="table table-hover">
@@ -161,6 +130,38 @@
 
 </tbody>
 </table>
+    <div style = "display:inline; float: left; width: 49%;">
+        <h5>Add Today's Foods</h5>
+        <br>
+        <div style='display: inline;'>
+                <form action="{% url 'searchFoodQuery' %}">
+                    <label> Search My Pantry </label>
+                    <br>
+                    <input name="query" type = 'text'>
+                    <br> <br>
+                    <button type ='submit' class = "button-17"> Search </button>
+                </form>
+      </div>
+    </div>
+    <div style = "display:inline; float: left; width: 49%;">
+      <h5>Update Today's Water</h5>
+      <br>
+      <div style='display: inline;'>
+              <form action="{% url 'updateWater' %}" method='POST'>
+                {% csrf_token %}
+                  <label> Enter water intake in liters:</label>
+                  <br>
+                  <input name="water" step='0.01' type = 'number' value={{ currentWaterLevel }}>
+                  <br><br>
+                  <button type ='submit' class = "button-17"> Submit </button>
+              </form>
+       </div>
+    </div>
+
+    <br><br>
+
+</div>
+
       <br><br>
       <script>
           // sample values to test functionality
