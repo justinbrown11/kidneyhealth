@@ -25,3 +25,10 @@
   font-size: 1em;
   font-weight: 500;
 }
+
+.grid-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+  /* grid-gap: 9px; */
+  /* padding: 15px; */
+}
