@@ -102,7 +102,11 @@ def dailyPageView(request):
         # log error
         print(e)
 
-        return HttpResponse("<script>alert('An error occured, please login again'); window.location.href='/logout'</script>")
+        if (type(e) == User.profile.RelatedObjectDoesNotExist):
+            return HttpResponse("<script>alert('User does not have a profile, please create one and try again.'); window.location.href='/logout'</script>")
+
+        else:
+            return HttpResponse("<script>alert('An error occured, please login again'); window.location.href='/logout'</script>")
 
 
 def updateWaterLevel(request):
