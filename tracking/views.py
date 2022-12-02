@@ -85,7 +85,7 @@ def dailyPageView(request):
             food = Food.objects.get(id=item['food_id'])
 
             # Update totals with calculations
-            ProteinTotal += round(float(food.protein_g * item['quantity']), 2)
+            ProteinTotal += float(food.protein_g * item['quantity'])
             SodiumTotal += float(food.sodium_mg * item['quantity'])
             PhosphorusTotal += float(food.phosphorus_mg * item['quantity'])
             PotassiumTotal += float(food.potassium_mg * item['quantity'])
@@ -112,6 +112,9 @@ def dailyPageView(request):
         ProteinPercentage = (float(ProteinTotal/RecommendedProtein)) * 100
         PotassiumPercentage = (float(PotassiumTotal/RecommendedPotassium)) * 100
         PhosphorusPercentage = (float(PhosphorusTotal/RecommendedPhosphorus)) * 100
+        
+        # Round protein total
+        ProteinTotal = round(ProteinTotal, 2)
 
         # Set context variable
         context = {
